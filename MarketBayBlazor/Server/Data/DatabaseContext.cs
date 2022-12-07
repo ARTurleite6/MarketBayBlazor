@@ -11,6 +11,60 @@ namespace MarketBayBlazor.Server.Data
 
         }
 
+        public void InitializeDatabase() 
+	    {
+            if(!this.Categorias.Any())
+            {
+                Console.WriteLine("Nova Categoria");
+                var categoria = new Categoria()
+                {
+                    Descricao = "Tecnologia",
+                };
+                this.Add<Categoria>(categoria);
+	        }
+
+            if(!this.Feirantes.Any())
+            {
+                var feirante = new Feirante()
+                {
+                    NIFempresarial = "256250278",
+                    Foto = "Foto de feirante",
+                    Organizador = true,
+                    Conta = new Conta()
+                    {
+                        Nome = "Artur Leite",
+                        Email = "ajcl10@hotmail.com",
+                        Password = "12345",
+                        NumeroTelemovel = null,
+                        Morada = new Morada()
+                        {
+                            Rua = "Rua de Babais",
+                            CodigoPostal = "4650-063",
+                            Localidade = "Felgueiras",
+                        },
+                    }
+                };
+                this.Feirantes.Add(feirante);
+	        }
+
+            if(!this.Feiras.Any())
+            {
+                var feira1 = new Feira()
+                {
+                    NomeFeira = "Ze do Dizes",
+                    Logotipo = "logotipo da feira",
+                    DataInicio = DateTime.Now,
+                    DataFim = DateTime.Now,
+                    PrecoAluguel = 100.00M,
+                    NumeroMaximoFeirantes = 10,
+                    Organizador = this.Feirantes.Where(feirante => feirante.NIFempresarial == "256250278").First(),
+                    Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
+                };
+                this.Feiras.Add(feira1);
+	        }
+	    }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
@@ -57,6 +111,10 @@ namespace MarketBayBlazor.Server.Data
                 .IsUnique();
 
             modelBuilder.Entity<Feirante>()
+                .HasIndex(c => c.NIFempresarial)
+                .IsUnique();
+
+            modelBuilder.Entity<Feirante>()
                 .HasIndex(f => f.NIFempresarial)
                 .IsUnique();
 
@@ -69,6 +127,11 @@ namespace MarketBayBlazor.Server.Data
                 .HasOne<Produto>()
                 .WithMany()
                 .OnDelete(DeleteBehavior.ClientCascade);
+
+            modelBuilder.Entity<Categoria>()
+                .HasIndex(categoria => categoria.Descricao)
+                .IsUnique();
+
         }
 
         public DbSet<Categoria> Categorias { get; set; }

@@ -1,0 +1,30 @@
+﻿@page "/feiras"
+@using MarketBayBlazor.Client.Shared
+@inject IFeiraService FeiraService
+
+<ul>
+    @if (feiras != null)
+    {
+        @foreach (var feira in feiras)
+        {
+            <li>
+                <FeiraComponent Nome=@feira.NomeFeira Image=@feira.Logotipo />
+            </li>
+        }
+    }
+</ul>
+
+@code {
+    private List<Feira> feiras;
+
+    protected override async Task OnInitializedAsync()
+    {
+        this.feiras = await FeiraService.GetFeiras();
+        if(this.feiras != null)
+        {
+            Console.WriteLine("Tenho as feiras");
+        }
+    }
+
+}
+

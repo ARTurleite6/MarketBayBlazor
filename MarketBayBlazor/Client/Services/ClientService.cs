@@ -6,8 +6,6 @@ namespace MarketBayBlazor.Client.Services
     {
         private readonly HttpClient _httpClient;
 
-        public List<Cliente> Clientes { get; set; } = new List<Cliente>();
-
         public ClientService(HttpClient _httpClient)
         {
             this._httpClient = _httpClient;

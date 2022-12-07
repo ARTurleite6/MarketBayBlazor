@@ -26,6 +26,6 @@ public class Feira
     [ForeignKey("Categoria")]
     public int CategoriaID{ get; set;}
     public Categoria Categoria { get; set; }
-    
-    public virtual ICollection<StandFeirante> Stands { get; set; }
+
+    public virtual ICollection<StandFeirante> Stands { get; set; } = new List<StandFeirante>();
 }

@@ -1,5 +1,4 @@
 ﻿@page "/registerclient"
-@using MarketBayBlazor.Client.Services
 @inject IClientService ClientService
 
 <h3>RegistarCliente</h3>
@@ -11,7 +10,7 @@
     <InputText id="Email" @bind-Value="cliente.Conta.Email" placeholder="Email" />
     <InputText id="Password" type="password" @bind-Value="cliente.Conta.Password" placeholder="Password" />
     <InputText id="Contacto" @bind-Value="cliente.Conta.NumeroTelemovel" placeholder="Contacto" />
-    <button type="submit" value="Regito de Conta Cliente"/>
+    <button type="submit" value="Regito de Conta Cliente"></button>
 </EditForm>
 
 @code {

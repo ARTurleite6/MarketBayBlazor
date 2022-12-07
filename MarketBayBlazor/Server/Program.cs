@@ -1,5 +1,6 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 global using MarketBayBlazor.Server.Data;
+global using MarketBayBlazor.Shared;
 using Microsoft.AspNetCore.ResponseCompression;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,12 @@ app.UseCors(cors =>
     .AllowCredentials();
 }
 );
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+    dbContext.InitializeDatabase();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -24,7 +24,6 @@ namespace MarketBayBlazor.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<Cliente>> RegistaCliente(Cliente cliente) 
     	{
-            Console.WriteLine(cliente.ID);
             var conta = cliente.Conta;
             this._context.Add(conta);
             this._context.Add(cliente);
