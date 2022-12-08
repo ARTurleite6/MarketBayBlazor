@@ -20,6 +20,35 @@ namespace MarketBayBlazor.Server.Controllers
             this._context = _context;
     	}
 
+        [HttpPost]
+        public async Task<ActionResult<Feira>> CreateFeira(Feira feira)
+        {
+            this._context.Feiras.Add(feira);
+            await this._context.SaveChangesAsync();
+            return Ok(feira);
+	    }
+
+        [HttpPost("Inscrever")]
+        public async Task<ActionResult<StandFeirante>?> InscreveFeira(int id, StandFeirante stand)
+        { 
+            if(!this._context.Feiras.Any(feira => feira.ID == id))
+            {
+                return NotFound("Feira não existente");
+	        }
+
+            //Ver se já atingiu o limite de feirantes na feira
+            var feira = this._context.Feiras.Where(feira => feira.ID == id).Include(feira => feira.Stands.Where(s => s.ativo == true)).First();
+            var numero_participantes = feira.Stands.Count;
+            if(numero_participantes >= feira.NumeroMaximoFeirantes || feira.Stands.Any(s => s.FeiranteID == stand.FeiranteID) || feira.DataFim <= DateTime.Now)
+            {
+                return null;
+	        }
+
+            await this._context.StandsFeirantes.AddAsync(stand);
+            await this._context.SaveChangesAsync();
+            return Ok(stand);
+	    }
+
         [HttpGet]
         public ActionResult<List<Feira>> Get()
         {
@@ -28,14 +57,23 @@ namespace MarketBayBlazor.Server.Controllers
                 .Include(feira => feira.Categoria));
     	}
 
-        [HttpGet("stands/{id}")]
+        [HttpGet("Stands/{id:int}")]
         public ActionResult<List<StandFeirante>> GetStands(int id)
         {
+
+            if(!this._context.Feiras.Any(feira => feira.ID == id))
+            {
+                Console.WriteLine($"Nao encontrei feira, com o id de {id}");
+                return NotFound();
+	        }
+
             var stands = _context
                 .StandsFeirantes
                 .Where(stand => stand.FeiraID == id)
                 .Include(stand => stand.Feirante)
-                .Include(stand => stand.ProdutosStands)
+                .ThenInclude(feirante => feirante.Conta)
+                .Include(stand => stand.ProdutosStands.Where(produto => produto.Destacado))
+
                 .ToList();
 
             return Ok(stands);

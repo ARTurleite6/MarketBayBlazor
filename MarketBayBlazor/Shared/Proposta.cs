@@ -27,5 +27,4 @@ public class Proposta
    public virtual Cliente Cliente { get; set; }
    [ForeignKey("StandFeirante")]
    public int StandFeiranteID { get; set; }
-   public virtual StandFeirante StandFeirante { get; set; }
 }

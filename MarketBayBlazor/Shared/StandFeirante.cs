@@ -17,9 +17,8 @@ public class StandFeirante
 
     [ForeignKey("Feira")]
     public int FeiraID { get; set; }
-    public virtual Feira Feira { get; set; }
-    
-    public virtual ICollection<ProdutoStand> ProdutosStands{get; set; }
-    public virtual ICollection<Proposta> Propostas { get; set; }
-    public virtual ICollection<Compra> Vendas { get; set; }
+
+    public virtual ICollection<ProdutoStand> ProdutosStands { get; set; } = new List<ProdutoStand>();
+    public virtual ICollection<Proposta> Propostas { get; set; } = new List<Proposta>();
+    public virtual ICollection<Compra> Vendas { get; set; } = new List<Compra>();
 }

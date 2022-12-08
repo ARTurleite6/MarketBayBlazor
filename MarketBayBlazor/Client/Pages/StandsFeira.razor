@@ -1,0 +1,27 @@
+﻿@page "/standsfeira/{ID:int}"
+@inject IFeiraService FeiraService;
+
+
+<ul>
+@foreach(var stand in stands)
+    { 
+        <img src="@stand.Feirante.Foto" />
+        <div>@stand.Feirante.Conta.Nome</div>
+    }
+</ul>
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+    private List<StandFeirante> stands = new List<StandFeirante>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var stands = await this.FeiraService.GetStandsFeira(ID);
+        if(stands != null)
+        {
+            this.stands = stands;
+        }
+    }
+}
+

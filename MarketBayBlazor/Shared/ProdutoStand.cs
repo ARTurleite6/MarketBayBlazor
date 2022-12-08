@@ -12,7 +12,10 @@ public class ProdutoStand
     public int StandFeiranteID { get; set; }
     [ForeignKey("Produto")]
     public int ProdutoID { get; set; }
+    public virtual Produto Produto { get; set; }
     [Precision(10, 2)]
     public decimal Preco { get; set; }
     public int Quantidade { get; set; }
+
+    public bool Destacado { get; set; } = false;
 }

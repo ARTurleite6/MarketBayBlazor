@@ -11,15 +11,15 @@ public class Produto
     [Key]
     public int ID { get; set; }
     [MaxLength(50)]
-    public string Nome { get; set; }
+    public string Nome { get; set; } = String.Empty;
     [MaxLength(200)]
-    public string Foto{ get; set; }
+    public string Foto { get; set; } = String.Empty;
     [MaxLength(250)]
-    public string Descricao{ get; set; }
+    public string Descricao { get; set; } = String.Empty;
     [Precision(10,2)]
     public decimal PrecoBase { get; set; }
     
     [ForeignKey("Categoria")]
     public int CategoriaID { get; set; }
-    public Categoria Categoria { get; set; }
+    public virtual Categoria Categoria { get; set; }
 }

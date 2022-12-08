@@ -21,11 +21,17 @@ namespace MarketBayBlazor.Server.Controllers
             this._context = _context;
        	}
 
+        [HttpGet]
+        public ActionResult<List<Cliente>> Get()
+        {
+            return Ok(this._context
+		        .Clientes
+	            .Include(cliente => cliente.Conta).ToList());
+	    }
+
         [HttpPost]
         public async Task<ActionResult<Cliente>> RegistaCliente(Cliente cliente) 
     	{
-            var conta = cliente.Conta;
-            this._context.Add(conta);
             this._context.Add(cliente);
             await this._context.SaveChangesAsync(); 
             return Ok(cliente);

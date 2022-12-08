@@ -9,7 +9,6 @@ public class CompraProduto
 {
     [ForeignKey("Compra")]
     public int CompraID { get; set; }
-    public virtual Compra Compra { get; set; }
     [ForeignKey("Produto")]
     public int ProdutoID { get; set; }
     public virtual Produto Produto { get; set; }

@@ -18,6 +18,21 @@ namespace MarketBayBlazor.Client.Services
                 return feiras;
             return null;
         }
+
+        public async Task<List<StandFeirante>?> GetStandsFeira(int id)
+        {
+            var stands = await _httpClient.GetFromJsonAsync<List<StandFeirante>>($"Feira/Stands/{id}");
+            if(stands != null)
+            {
+                foreach(var stand in stands)
+                {
+                    Console.WriteLine(stand.ID);
+		        }
+
+                return stands;
+	        }
+            return null;
+	    }
     }
 }
 

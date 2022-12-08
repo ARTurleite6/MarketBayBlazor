@@ -9,7 +9,7 @@ public class FormularioFeirante
     [Key]
     public int ID { get; set; }
     [MaxLength(1000)]
-    public string Descricao { get; set; }
+    public string Descricao { get; set; } = string.Empty;
 
     public bool Aceite { get; set; } = false;
 }

@@ -17,6 +17,5 @@ public class Cliente
     public virtual ICollection<Categoria> Categorias { get; set; } = new List<Categoria>();
     public virtual ICollection<FavFeirasCliente> FeirasFavoritas { get; set; } = new List<FavFeirasCliente>();
 
-    public virtual ICollection<ClassificacoesCliente> ClassificacoesFeirante { get; set; } = new List<ClassificacoesCliente>();
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
 }

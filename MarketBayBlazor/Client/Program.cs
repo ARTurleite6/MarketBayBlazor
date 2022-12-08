@@ -1,4 +1,5 @@
-﻿global using MarketBayBlazor.Shared;
+﻿global using Microsoft.AspNetCore.Components;
+global using MarketBayBlazor.Shared;
 global using System.Net.Http.Json;
 global using MarketBayBlazor.Client.Services;
 using Microsoft.AspNetCore.Components.Web;

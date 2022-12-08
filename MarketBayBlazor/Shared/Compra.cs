@@ -15,10 +15,8 @@ public class Compra
 
     [ForeignKey("Cliente")]
     public int ClienteID { get; set; }
-    public Cliente Cliente { get; set; }
     
     [ForeignKey("StandFeirante")]
     public int StandFeiranteID { get; set; }
-    public virtual StandFeirante StandFeirante { get; set; }
 }
 

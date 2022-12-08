@@ -8,21 +8,23 @@
         @foreach (var feira in feiras)
         {
             <li>
-                <FeiraComponent Nome=@feira.NomeFeira Image=@feira.Logotipo />
+                <img src="@feira.Logotipo"/>
+                <div>@feira.NomeFeira</div>
             </li>
         }
     }
 </ul>
 
 @code {
-    private List<Feira> feiras;
+    private List<Feira> feiras = new List<Feira>();
 
     protected override async Task OnInitializedAsync()
     {
-        this.feiras = await FeiraService.GetFeiras();
-        if(this.feiras != null)
+        var feiras = await FeiraService.GetFeiras();
+        if(feiras != null)
         {
             Console.WriteLine("Tenho as feiras");
+            this.feiras = feiras;
         }
     }
 

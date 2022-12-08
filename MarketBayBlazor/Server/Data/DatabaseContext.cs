@@ -2,6 +2,7 @@
 using MarketBayBlazor.Shared;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace MarketBayBlazor.Server.Data
 {
     public class DatabaseContext: DbContext
@@ -20,7 +21,8 @@ namespace MarketBayBlazor.Server.Data
                 {
                     Descricao = "Tecnologia",
                 };
-                this.Add<Categoria>(categoria);
+                this.Categorias.Add(categoria);
+                this.SaveChanges();
 	        }
 
             if(!this.Feirantes.Any())
@@ -45,6 +47,7 @@ namespace MarketBayBlazor.Server.Data
                     }
                 };
                 this.Feirantes.Add(feirante);
+                this.SaveChanges();
 	        }
 
             if(!this.Feiras.Any())
@@ -60,7 +63,21 @@ namespace MarketBayBlazor.Server.Data
                     Organizador = this.Feirantes.Where(feirante => feirante.NIFempresarial == "256250278").First(),
                     Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
                 };
+
+
                 this.Feiras.Add(feira1);
+                this.SaveChanges();
+	        }
+
+            if(!this.StandsFeirantes.Any())
+            { 
+                var stand = new StandFeirante()
+                {
+                    FeiranteID = 1,
+                    FeiraID = 1,
+                };
+                this.StandsFeirantes.Add(stand);
+                this.SaveChanges();
 	        }
 	    }
 
@@ -70,21 +87,21 @@ namespace MarketBayBlazor.Server.Data
 
             modelBuilder.Entity<StandFeirante>()
                 .HasOne<Feirante>(f => f.Feirante)
-                .WithMany(f => f.Stands)
+                .WithMany()
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Compra>()
-                .HasOne<StandFeirante>(s => s.StandFeirante)
+                .HasOne<StandFeirante>()
                 .WithMany(s => s.Vendas)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<ClassificacoesCliente>()
-                .HasOne<Feirante>(c => c.Feirante)
+                .HasOne<Feirante>()
                 .WithMany(f => f.ClassificacoesClientes)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<Proposta>()
-                .HasOne<StandFeirante>(s => s.StandFeirante)
+                .HasOne<StandFeirante>()
                 .WithMany(s => s.Propostas)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
@@ -124,7 +141,7 @@ namespace MarketBayBlazor.Server.Data
                 .OnDelete(DeleteBehavior.ClientCascade);
 
             modelBuilder.Entity<ProdutoStand>()
-                .HasOne<Produto>()
+                .HasOne<Produto>(p => p.Produto)
                 .WithMany()
                 .OnDelete(DeleteBehavior.ClientCascade);
 
