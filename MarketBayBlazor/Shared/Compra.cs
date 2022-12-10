@@ -18,5 +18,7 @@ public class Compra
     
     [ForeignKey("StandFeirante")]
     public int StandFeiranteID { get; set; }
+
+    public ICollection<CompraProduto> CompraProdutos { get; set; } = new List<CompraProduto>();
 }
 

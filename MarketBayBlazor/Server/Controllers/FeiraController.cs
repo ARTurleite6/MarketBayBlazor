@@ -63,7 +63,6 @@ namespace MarketBayBlazor.Server.Controllers
 
             if(!this._context.Feiras.Any(feira => feira.ID == id))
             {
-                Console.WriteLine($"Nao encontrei feira, com o id de {id}");
                 return NotFound();
 	        }
 
@@ -73,7 +72,6 @@ namespace MarketBayBlazor.Server.Controllers
                 .Include(stand => stand.Feirante)
                 .ThenInclude(feirante => feirante.Conta)
                 .Include(stand => stand.ProdutosStands.Where(produto => produto.Destacado))
-
                 .ToList();
 
             return Ok(stands);

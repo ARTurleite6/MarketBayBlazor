@@ -10,8 +10,6 @@ namespace MarketBayBlazor.Shared
 
         [Key]
         public int ID { get;set; }
-        [ForeignKey("Conta")]
-        public int ContaID { get; set; }
         [MaxLength(200)]
         public string Rua { get; set; }
         [MaxLength(8)]

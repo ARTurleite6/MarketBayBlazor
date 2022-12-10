@@ -95,6 +95,11 @@ namespace MarketBayBlazor.Server.Data
                 .WithMany(s => s.Vendas)
                 .OnDelete(DeleteBehavior.ClientCascade);
 
+            modelBuilder.Entity<Compra>()
+                .HasMany<CompraProduto>(compra => compra.CompraProdutos)
+                .WithOne()
+                .OnDelete(DeleteBehavior.ClientCascade);
+
             modelBuilder.Entity<ClassificacoesCliente>()
                 .HasOne<Feirante>()
                 .WithMany(f => f.ClassificacoesClientes)
@@ -148,6 +153,14 @@ namespace MarketBayBlazor.Server.Data
             modelBuilder.Entity<Categoria>()
                 .HasIndex(categoria => categoria.Descricao)
                 .IsUnique();
+
+            modelBuilder.Entity<Cliente>()
+                .HasOne<Conta>(c => c.Conta)
+                .WithOne();
+
+            modelBuilder.Entity<Feirante>()
+                .HasOne<Conta>(c => c.Conta)
+                .WithOne();
 
         }
 

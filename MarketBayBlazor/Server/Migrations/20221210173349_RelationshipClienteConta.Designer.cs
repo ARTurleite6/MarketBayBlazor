@@ -4,6 +4,7 @@ using MarketBayBlazor.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketBayBlazor.Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20221210173349_RelationshipClienteConta")]
+    partial class RelationshipClienteConta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -329,6 +332,9 @@ namespace MarketBayBlazor.Server.Migrations
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
 
+                    b.Property<int>("ContaID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Localidade")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -540,12 +546,6 @@ namespace MarketBayBlazor.Server.Migrations
 
             modelBuilder.Entity("MarketBayBlazor.Shared.CompraProduto", b =>
                 {
-                    b.HasOne("MarketBayBlazor.Shared.Compra", null)
-                        .WithMany("CompraProdutos")
-                        .HasForeignKey("CompraID")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-
                     b.HasOne("MarketBayBlazor.Shared.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoID")
@@ -692,11 +692,6 @@ namespace MarketBayBlazor.Server.Migrations
                     b.Navigation("Compras");
 
                     b.Navigation("FeirasFavoritas");
-                });
-
-            modelBuilder.Entity("MarketBayBlazor.Shared.Compra", b =>
-                {
-                    b.Navigation("CompraProdutos");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Feira", b =>

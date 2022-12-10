@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace MarketBayBlazor.Shared;
 
 [Table("Cliente")]
-public class Cliente
+public class Cliente: IUser
 {
     [Key]
     public int ID { get; set; }

@@ -12,6 +12,7 @@ public class ClassificacoesCliente
     public int FeiranteID { get; set; } 
     [ForeignKey("Cliente")]
     public int ClienteID { get; set; }
+    public Cliente Cliente { get; set; }
     
     [Range(1,5)]
     public int Valor { get; set; }

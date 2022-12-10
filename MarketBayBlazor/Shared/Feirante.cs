@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace MarketBayBlazor.Shared;
 
 [Table("Feirante")]
-public class Feirante
+public class Feirante: IUser
 {
     [Key]
     public int ID { get; set; }
@@ -16,7 +16,7 @@ public class Feirante
     
     [ForeignKey("Conta")]
     public int ContaID { get; set; }
-    public Conta? Conta { get; set; }
+    public Conta Conta { get; set; }
 
     public virtual ICollection<FormularioFeirante> Formularios { get; set; } = new List<FormularioFeirante>();
     public virtual ICollection<ClassificacoesCliente> ClassificacoesClientes { get; set; } = new List<ClassificacoesCliente>();

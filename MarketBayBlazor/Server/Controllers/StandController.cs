@@ -8,13 +8,33 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MarketBayBlazor.Server.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class StandController : Controller
     {
-        // GET: /<controller>/
-        public IActionResult Index()
+
+        private readonly DatabaseContext _context;
+
+        public StandController(DatabaseContext _context)
         {
-            return View();
-        }
+            this._context = _context;
+	    }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<StandFeirante>> Get(int id)
+        {
+            if (!this._context.StandsFeirantes.Any(stand => stand.ID == id))
+                return NotFound();
+
+            var stand = await this._context.StandsFeirantes
+                .Where(stand => stand.ID == id)
+                .Include(stand => stand.ProdutosStands)
+                .ThenInclude(produtosStand => produtosStand.Produto)
+                .ThenInclude(produto => produto.Categoria)
+                .FirstAsync();
+
+            return Ok(stand);
+	    }
     }
 }
 
