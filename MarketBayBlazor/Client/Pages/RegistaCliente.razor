@@ -1,24 +1,51 @@
 ﻿@page "/registerclient"
 @inject IClientService ClientService
 
-<h3>RegistarCliente</h3>
+<div>
+    <div class="flexbox-column">
+        <h4>MarketBay</h4>
+        <img src="~/Downloads/Imagem1-1.png" />
+    </div>
+    <ul class="flexbox-row">
+        <li>Work</li>
+        <li>Dashboard</li>
+        <li>Sobre</li>
+        <li>Contactos</li>
+    </ul>
+</div>
 
-<EditForm Model="@cliente" OnValidSubmit="@Registar">
-    <DataAnnotationsValidator/>    
-    <ValidationSummary/>
-    <InputText id="Nome" @bind-Value="cliente.Conta.Nome" placeholder="Nome Completo" />
-    <InputText id="Email" @bind-Value="cliente.Conta.Email" placeholder="Email" />
-    <InputText id="Password" type="password" @bind-Value="cliente.Conta.Password" placeholder="Password" />
-    <InputText id="Contacto" @bind-Value="cliente.Conta.NumeroTelemovel" placeholder="Contacto" />
-    <button type="submit" value="Regito de Conta Cliente"></button>
-</EditForm>
+<div class="flexbox-column">
+
+    <h3>Criar conta</h3>
+    <div class="flexbox-row">
+        <div>Já tem uma conta?</div>
+        <div>Log in</div>
+    </div>
+
+    <EditForm class="flexbox-column" Model="@cliente" OnValidSubmit="@Registar">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+        <InputText id="Nome" @bind-Value="cliente.Conta.Nome" placeholder="Nome Completo" />
+        <InputText id="Email" @bind-Value="cliente.Conta.Email" placeholder="Email" />
+        <InputText id="Password" type="password" @bind-Value="cliente.Conta.Password" placeholder="Password" />
+        <InputText id="Contacto" @bind-Value="cliente.Conta.NumeroTelemovel" placeholder="Contacto" />
+        <button type="submit" value="Registo de Conta Cliente">Sign Up</button>
+    </EditForm>
+    <div class="flexbox-row">
+        <div>É um vendedor?</div>
+        <div>Clique aqui</div>
+    </div>
+</div>
+
+<style>
+</style>
 
 @code {
 
-        private Cliente cliente = new Cliente()
-        {
-            Conta = new Conta(),
-        };
+    private Cliente cliente = new Cliente()
+    {
+        Conta = new Conta(),
+    };
 
     public async void Registar()
     {

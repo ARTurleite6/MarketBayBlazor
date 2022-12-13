@@ -1,0 +1,67 @@
+.gridbox {
+    display: grid;
+    grid-template-areas: 
+    "header main header"
+    "main main main";
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main div {
+    width: 400px;
+}
+
+.options-extra {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.options-extra li {
+    margin: 1vh;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.register-form div {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.register-form .buttons {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.register-form .buttons input {
+    margin: 10px
+}
+
+.buttons-link {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.buttons-link li {
+    margin: 5px; 
+}
+
+.buttons input{
+    width: 100%;
+}

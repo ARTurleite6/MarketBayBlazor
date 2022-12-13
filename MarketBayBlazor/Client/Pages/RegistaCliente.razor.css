@@ -1,0 +1,14 @@
+﻿.flexbox-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexbox-row {
+    display: flex;
+    flex-direction: row;
+}
+
+li {
+    list-style: none;
+    color: red;
+}
