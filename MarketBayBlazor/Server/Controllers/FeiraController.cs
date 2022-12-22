@@ -57,6 +57,26 @@ namespace MarketBayBlazor.Server.Controllers
                 .Include(feira => feira.Categoria));
     	}
 
+        [HttpGet("{id:int}")]
+        public ActionResult<List<Feira>> GetFeira(int id) 
+        {
+            if(!this._context.Feiras.Any(feira => feira.ID == id)) 
+            {
+                Console.WriteLine("Procurando feira" + id);
+                return NotFound();
+            }
+
+            Console.WriteLine("Procurando feira" + id);
+
+            var feira = _context
+                .Feiras
+                .Where(feira => feira.ID == id)
+                .Include(feira => feira.Categoria)
+                .First();
+
+            return Ok(feira);
+        }
+
         [HttpGet("Stands/{id:int}")]
         public ActionResult<List<StandFeirante>> GetStands(int id)
         {
@@ -72,6 +92,7 @@ namespace MarketBayBlazor.Server.Controllers
                 .Include(stand => stand.Feirante)
                 .ThenInclude(feirante => feirante.Conta)
                 .Include(stand => stand.ProdutosStands.Where(produto => produto.Destacado))
+                .ThenInclude(produtoStand => produtoStand.Produto)
                 .ToList();
 
             return Ok(stands);

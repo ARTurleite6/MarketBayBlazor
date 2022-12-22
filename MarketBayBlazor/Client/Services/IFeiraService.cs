@@ -7,6 +7,8 @@ namespace MarketBayBlazor.Client.Services
         public Task<List<Feira>?> GetFeiras();
         public Task<List<StandFeirante>?> GetStandsFeira(int id);
 
+        public Task<Feira?> GetFeira(int id);
+
     }
 }
 

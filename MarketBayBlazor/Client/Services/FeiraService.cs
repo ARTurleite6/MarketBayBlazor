@@ -33,6 +33,12 @@ namespace MarketBayBlazor.Client.Services
 	        }
             return null;
 	    }
+
+        public async Task<Feira?> GetFeira(int id) 
+        {
+            var feira = await this._httpClient.GetFromJsonAsync<Feira>($"Feira/{id}");
+            return feira;
+        }
     }
 }
 
