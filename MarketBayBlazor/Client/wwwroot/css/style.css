@@ -35,6 +35,8 @@
   --dl-space-space-oneandhalfunits: 24px;
 }
 .button {
+  cursor: pointer;
+  border-radius: 6px;
   color: var(--dl-color-gray-black);
   display: inline-block;
   padding: 0.5rem 1rem;

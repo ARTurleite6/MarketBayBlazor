@@ -13,6 +13,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IFeiraService, FeiraService>();
+builder.Services.AddScoped<IStandService, StandService>();
 
 await builder.Build().RunAsync();
 

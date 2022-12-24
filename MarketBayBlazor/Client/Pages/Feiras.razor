@@ -4,548 +4,1134 @@
 @inject NavigationManager NavigationManager
 
 <div>
-    <link href="./feiras.css" rel="stylesheet" />
-    <div class="feiras-container">
-        <header data-thq="thq-navbar" class="feiras-navbar-interactive">
-            <div data-thq="thq-navbar-nav" data-role="Nav" class="feiras-desktop-menu"></div>
-            <div class="feiras-container1">
-                <img alt="image" src="https://play.teleporthq.io/static/svg/default-img.svg" class="feiras-image" />
-            </div>
-            <div data-thq="thq-navbar-btn-group" class="feiras-btn-group"></div>
-            <div data-thq="thq-burger-menu" class="feiras-burger-menu">
-                <svg viewBox="0 0 1024 1024" class="feiras-icon">
-                    <path
-                        d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z">
-                    </path>
-                </svg>
-            </div>
-            <div data-thq="thq-mobile-menu" class="feiras-mobile-menu">
-                <div data-thq="thq-mobile-menu-nav" data-role="Nav" class="feiras-nav">
-                    <div class="feiras-container2">
-                        <img alt="image" src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
-                            class="feiras-image1" />
-                        <div data-thq="thq-close-menu" class="feiras-menu-close">
-                            <svg viewBox="0 0 1024 1024" class="feiras-icon02">
-                                <path
-                                    d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z">
-                                </path>
-                            </svg>
-                        </div>
+    <div class="home-container">
+        <div class="home-container01">
+            <div class="home-container02">
+                <div class="home-container03">
+                    <div data-thq="thq-dropdown" class="home-thq-dropdown list-item">
+                        <a href="/feiras" class="home-dropdown-toggle">
+                            <img alt="image" src="logo.png" class="home-image" />
+                        </a>
+                        <ul data-thq="thq-dropdown-list" class="home-dropdown-list">
+                            <li data-thq="thq-dropdown" class="home-dropdown list-item">
+                                <div data-thq="thq-dropdown-toggle" class="home-dropdown-toggle1">
+                                    <span class="home-text">Sobre nós</span>
+                                </div>
+                            </li>
+                            <li data-thq="thq-dropdown" class="home-dropdown1 list-item">
+                                <div data-thq="thq-dropdown-toggle" class="home-dropdown-toggle2">
+                                    <span class="home-text01">Ajuda</span>
+                                </div>
+                            </li>
+                            <li data-thq="thq-dropdown" class="home-dropdown2 list-item">
+                                <div data-thq="thq-dropdown-toggle" class="home-dropdown-toggle3">
+                                    <span class="home-text02">Definições</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div class="feiras-icon-group">
-                    <svg viewBox="0 0 950.8571428571428 1024" class="feiras-icon04">
-                        <path
-                            d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z">
-                        </path>
-                    </svg><svg viewBox="0 0 877.7142857142857 1024" class="feiras-icon06">
-                        <path
-                            d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z">
-                        </path>
-                    </svg><svg viewBox="0 0 602.2582857142856 1024" class="feiras-icon08">
-                        <path
-                            d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z">
-                        </path>
-                    </svg>
+            </div>
+            <div class="home-container04">
+                <div class="home-container05">
+                    <button class="home-button button">
+                        <span class="home-text03">
+                            <span>Filter</span>
+                            <br />
+                        </span>
+                    </button>
+                </div>
+                <div class="home-container06">
+                    <input type="text" placeholder="Pesquisa" class="home-textinput input" />
                 </div>
             </div>
-            <div class="feiras-container4">
-                <input type="text" placeholder="Pesquisa" class="input" />
+        </div>
+        <div style="display: flex; width: 100%; height: 87px">
+            <div class="date-container" style="font-weight: bold; width: 219px; margin-right: 4px; font-size: 17px; display: flex; justify-content: center; align-items: center;">
+                Calendario:
             </div>
-        </header>
-        <header data-thq="thq-navbar" class="feiras-navbar-interactive1">
-            @foreach (var date in datas)
+            <div class="date-container">
+                @foreach (var data in this.datas)
+                {
+                    <div class="home-container08">
+                        <button class="date-button button">
+                            <span class="home-text06">
+                                <span>@culture.DateTimeFormat.GetDayName(@data.DayOfWeek)</span>
+                                <br />
+                                <span>@data.Day/@data.Month</span>
+                                <br />
+                            </span>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+        @foreach(var group in this.feirasAgrupadas)
+        {
+        <div class="feiras-row">
+            @foreach(var feira in group)
             {
-                <button class="feiras-button button">@date.DayOfWeek<br>@date.Day/@date.Month</button>
-            }
-            @* <button class="feiras-button1 button">@DateTime.Today.DayOfWeek<br>@DateTime.Today.Day/@DateTime.Today.</button>
-            <button class="feiras-button button">@DateTime.Today.AddDays(1).DayOfWeek<br></button>
-            <button class="feiras-button button">@DateTime.Today.AddDays(2).DayOfWeek</button>
-            <button class="feiras-button button">@DateTime.Today.AddDays(3).DayOfWeek</button>
-            <button class="feiras-button button">@DateTime.Today.AddDays(4).DayOfWeek</button>
-            <button class="feiras-button button">@DateTime.Today.AddDays(5).DayOfWeek</button> *@
-        </header>
-        <main class="feiras-container7"></main>
-        <div class="feiras-gallery">
-            @foreach (var feira in feiras)
-            {
-                <button class="gallery-card11-gallery-card gallery-card11-root-class-name" onclick="@(() => this.GoToStand(@feira.ID))">
+            <div class="home-container15">
+                <button class="imagem-feira" onclick="@(() => GoToFeira(feira.ID))">
                     <img alt="image"
-                    src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDEyfHxmb3Jlc3R8ZW58MHx8fHwxNjI2MjUxMjg4&ixlib=rb-1.2.1&h=1200"
-                    class="gallery-card11-image" />
-                    <h2 class="gallery-card11-text"><span>@feira.NomeFeira</span></h2>
+                        src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400"
+                        class="home-image01" />
                 </button>
+                <div class="home-container17">
+                    <span class="home-text36">
+                        @feira.NomeFeira
+                    </span>
+                    <button class="home-button07 button">
+                        <svg viewBox="0 0 1024 1024" class="home-icon">
+                            <path
+                                d="M550.272 66.432c-3.925-8.064-10.581-15.019-19.371-19.371-21.12-10.411-46.72-1.749-57.131 19.371l-121.941 246.997-272.683 39.893c-8.875 1.237-17.536 5.419-24.363 12.416-16.469 16.896-16.085 43.904 0.768 60.331l197.248 192.128-46.549 271.445c-1.536 8.832-0.256 18.389 4.309 27.051 10.965 20.864 36.779 28.885 57.643 17.92l243.797-128.213 243.84 128.213c7.936 4.224 17.408 5.931 27.051 4.309 23.211-3.968 38.827-26.027 34.859-49.28l-46.549-271.445 197.248-192.128c6.443-6.229 11.051-14.677 12.459-24.405 3.413-23.296-12.715-44.971-36.053-48.384l-272.64-39.851zM512 181.717l93.568 189.611c6.443 13.013 18.603 21.291 32.085 23.339l209.323 30.592-151.424 147.499c-10.411 10.155-14.549 24.277-12.288 37.76l35.712 208.341-187.136-98.432c-12.843-6.741-27.605-6.315-39.723 0l-187.136 98.432 35.712-208.341c2.475-14.336-2.517-28.203-12.288-37.76l-151.424-147.499 209.365-30.635c14.336-2.091 25.984-11.093 32.085-23.296z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
             }
         </div>
+        }
     </div>
 </div>
 
 <style>
-
-    .feiras-gallery .gallery-card11-gallery-card {
-        cursor: pointer;
-    }
-
-    .gallery-card11-gallery-card {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .gallery-card11-image {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .gallery-card11-text {
-        align-self: flex-start;
-        margin-top: var(--dl-space-space-halfunit);
-        font-weight: 600;
-        margin-bottom: var(--dl-space-space-halfunit);
-    }
-
-    .gallery-card11-text1 {
-        color: var(--dl-color-gray-500);
-        align-self: flex-start;
-    }
-
-
-
-    @@media(max-width:767px) {
-        .gallery-card11-gallery-card {
-            flex-direction: column;
-        }
-    }
-
-    @@media(max-width:479px) {
-        .gallery-card11-image {
-            height: 10rem;
-        }
-    }
-
-    .feiras-container {
+    .home-container {
         width: 100%;
         display: flex;
         overflow: auto;
         min-height: 100vh;
         align-items: center;
         flex-direction: column;
+        background-color: #ebc39c;
     }
 
-    .feiras-navbar-interactive {
+    .home-container01 {
         width: 100%;
-        height: 107px;
+        height: 100%;
         display: flex;
         position: relative;
-        align-self: flex-start;
+        align-items: flex-start;
+        background-color: #0f8a82;
+        border-color: #ebc39c;
+        border-bottom-width: 5px;
+    }
+
+    .home-container02 {
+        flex: 0 0 auto;
+        width: 219px;
+        height: 77px;
+        display: flex;
+        align-self: center;
         align-items: center;
+        justify-content: center;
+    }
+
+    .home-container03 {
+        flex: 0 0 auto;
+        width: 181px;
+        display: flex;
+        align-self: center;
+        margin-top: 0px;
+        align-items: center;
+        flex-direction: column;
         justify-content: flex-start;
     }
 
-    .feiras-desktop-menu {
-        display: flex;
+    .home-thq-dropdown {
+        width: 149px;
+        cursor: pointer;
+        height: 80px;
+        display: inline-block;
+        position: relative;
+        align-self: center;
+        border-radius: var(--dl-radius-radius-radius2);
     }
 
-    .feiras-container1 {
-        flex: 0 0 auto;
-        width: auto;
-        height: auto;
-        display: flex;
-        align-items: space-between;
-        flex-direction: column;
+    .home-dropdown-toggle {
+        fill: #595959;
+        color: #595959;
+        width: 135px;
+        height: 94px;
+        display: inline-flex;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius2);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+        justify-content: center;
     }
 
-    .feiras-image {
-        width: 100px;
+    .home-image {
+        width: 88px;
+        height: 82px;
         object-fit: cover;
     }
 
-    .feiras-btn-group {
-        display: flex;
-        align-items: center;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    .feiras-burger-menu {
+    .home-dropdown-list {
+        left: 0%;
+        width: max-content;
         display: none;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .feiras-icon {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-    }
-
-    .feiras-mobile-menu {
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: 100vh;
-        display: none;
-        padding: 32px;
         z-index: 100;
-        position: fixed;
+        position: absolute;
+        min-width: 100%;
+        transition: 0.3s;
+        align-items: stretch;
+        border-color: #D9D9D9;
+        border-width: 1px;
+        border-radius: var(--dl-radius-radius-radius4);
         flex-direction: column;
-        justify-content: space-between;
-        background-color: #fff;
+        list-style-type: none;
+        background-color: var(--dl-color-gray-white);
+        list-style-position: inside;
     }
 
-    .feiras-nav {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .feiras-container2 {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        margin-bottom: var(--dl-space-space-threeunits);
-        justify-content: space-between;
-    }
-
-    .feiras-image1 {
-        height: 2rem;
-    }
-
-    .feiras-menu-close {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .feiras-icon02 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-    }
-
-    .feiras-nav1 {
-        flex: 0 0 auto;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .feiras-text {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text01 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text02 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text03 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text04 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-container3 {
-        flex: 0 0 auto;
-        width: auto;
-        display: flex;
-        margin-top: var(--dl-space-space-unit);
-        align-items: center;
-        flex-direction: row;
-    }
-
-    .feiras-login {
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon-group {
-        display: flex;
-    }
-
-    .feiras-icon04 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon06 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon08 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-    }
-
-    .feiras-container4 {
-        flex: 1;
-        width: 200px;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: row;
-        justify-content: center;
-    }
-
-    .feiras-navbar-interactive1 {
-        gap: var(--dl-space-space-halfunit);
-        width: 100%;
-        height: auto;
-        display: flex;
-        padding: var(--dl-space-space-unit);
+    .home-dropdown {
+        cursor: pointer;
+        display: inline-block;
         position: relative;
-        flex-wrap: wrap;
-        align-items: center;
-        padding-top: 0px;
-        padding-left: 0px;
-        padding-right: 0px;
-        padding-bottom: 0px;
-        justify-content: center;
+        border-radius: var(--dl-radius-radius-radius2);
     }
 
-    .feiras-button {
-        margin-left: var(--dl-space-space-threeunits);
-        margin-right: var(--dl-space-space-threeunits);
-    }
-
-    .feiras-burger-menu1 {
-        display: none;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .feiras-icon10 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-    }
-
-    .feiras-mobile-menu1 {
-        top: 0px;
-        left: 0px;
+    .home-dropdown-toggle1 {
+        fill: #595959;
+        color: #595959;
         width: 100%;
-        height: 100vh;
-        display: none;
-        padding: 32px;
-        z-index: 100;
-        position: fixed;
-        flex-direction: column;
-        justify-content: space-between;
-        background-color: #fff;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
     }
 
-    .feiras-nav2 {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
+    .home-dropdown-toggle1:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
     }
 
-    .feiras-container5 {
+    .home-text {
         width: 100%;
+        cursor: pointer;
         display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .home-dropdown1 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .home-dropdown-toggle2 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
         align-items: center;
-        margin-bottom: var(--dl-space-space-threeunits);
-        justify-content: space-between;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
     }
 
-    .feiras-image2 {
-        height: 2rem;
+    .home-dropdown-toggle2:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
     }
 
-    .feiras-menu-close1 {
+    .home-text01 {
+        width: 100%;
+        cursor: pointer;
         display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .home-dropdown2 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .home-dropdown-toggle3 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        display: inline-flex;
+        transition: 0.3s;
         align-items: center;
-        justify-content: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
     }
 
-    .feiras-icon12 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
+    .home-dropdown-toggle3:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
     }
 
-    .feiras-nav3 {
+    .home-text02 {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+    }
+
+    .home-container04 {
         flex: 0 0 auto;
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-    }
-
-    .feiras-text05 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text06 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text07 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text08 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-text09 {
-        margin-bottom: var(--dl-space-space-unit);
-    }
-
-    .feiras-container6 {
-        flex: 0 0 auto;
-        width: auto;
-        display: flex;
-        margin-top: var(--dl-space-space-unit);
-        align-items: center;
-        flex-direction: row;
-    }
-
-    .feiras-login1 {
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon-group1 {
-        display: flex;
-    }
-
-    .feiras-icon14 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon16 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-        margin-right: var(--dl-space-space-twounits);
-    }
-
-    .feiras-icon18 {
-        width: var(--dl-size-size-xsmall);
-        height: var(--dl-size-size-xsmall);
-    }
-
-    .feiras-button1 {
-        margin-left: var(--dl-space-space-threeunits);
-        margin-right: var(--dl-space-space-threeunits);
-    }
-
-    .feiras-button2 {
-        margin-left: var(--dl-space-space-threeunits);
-        margin-right: var(--dl-space-space-threeunits);
-    }
-
-    .feiras-button3 {
-        margin-left: var(--dl-space-space-threeunits);
-        margin-right: var(--dl-space-space-threeunits);
-    }
-
-    .feiras-button4 {
-        width: 85px;
-        margin-left: var(--dl-space-space-threeunits);
-        margin-right: var(--dl-space-space-threeunits);
-    }
-
-    .feiras-container7 {
-        width: 100%;
-        border: 2px dashed rgba(120, 120, 120, 0.4);
+        width: 75%;
         height: 100%;
         display: flex;
+        align-self: center;
+        align-items: flex-start;
+        border-color: #ebc39c;
+        border-left-width: 5px;
+        border-right-width: 5px;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-container05 {
+        width: 457px;
+        height: 100px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button {
+        color: var(--dl-color-gray-white);
+        align-self: flex-end;
+        transition: 0.3s;
+        background-color: #562a2a;
+    }
+
+    .home-button:hover {
+        color: #e5412a;
+        border-color: var(--dl-color-gray-white);
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text03 {
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .home-container06 {
+        width: 303px;
+        height: 100px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-textinput {
+        width: 294px;
+        height: 34px;
+        font-size: 16px;
+        align-self: center;
+    }
+
+    .date-container {
+        width: calc(100% - 219px);
+        padding: 3px;
+        display: flex;
+        align-items: center;
+        border-color: #0f8a82;
+        border-style: dashed;
+        border-width: 3px;
+        justify-content: space-between;
+    }
+
+    .home-container08 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .date-button{
+        color: #562a2a;
+        width: 100%;
+        height: auto;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .date-button:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text06 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-container09 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button02 {
+        color: #562a2a;
+        width: 100%;
+        height: 77px;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .home-button02:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text11 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-container10 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button03 {
+        color: #562a2a;
+        width: 100%;
+        height: 77px;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc69c;
+    }
+
+    .home-button03:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text16 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-container11 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button04 {
+        color: #562a2a;
+        width: 100%;
+        height: 77px;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .home-button04:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text21 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-container12 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button05 {
+        color: #562a2a;
+        width: 100%;
+        height: 77px;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .home-button05:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text26 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-container13 {
+        flex: 0 0 auto;
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-self: stretch;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .home-button06 {
+        color: #562a2a;
+        width: 100%;
+        height: 77px;
+        font-size: 25px;
+        align-self: center;
+        text-align: center;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .home-button06:hover {
+        color: #e5412a;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .home-text31 {
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .feiras-row {
+        width: 100%;
+        height: 261px;
+        display: flex;
+        align-self: flex-start;
+        margin-top: var(--dl-space-space-unit);
+        align-items: flex-start;
+        flex-direction: row;
+    }
+
+    .home-container15 {
+        width: 490px;
+        height: 261px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .imagem-feira {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+        cursor: pointer;
+    }
+
+    .home-image01 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container17 {
+        flex: 0 0 auto;
+        width: 396px;
+        height: 43px;
+        display: flex;
         align-items: flex-start;
         justify-content: center;
     }
 
-    .feiras-gallery {
+    .home-text36 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button07 {
+        height: 100%;
+        display: flex;
+        transition: 0.3s;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon {
+        fill: #ffff00;
         width: 100%;
-        display: grid;
-        padding: var(--dl-space-space-threeunits);
-        grid-gap: var(--dl-space-space-unit);
-        max-width: var(--dl-size-size-maxwidth);
-        grid-template-columns: 1fr 1fr 1fr;
+        height: 100%;
     }
 
-    @@media(max-width:991px) {
-        .feiras-gallery {
-            grid-template-columns: 1fr 1fr;
-        }
+    .home-container18 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
     }
 
-    @@media(max-width:767px) {
-        .feiras-navbar-interactive {
-            padding-left: var(--dl-space-space-twounits);
-            padding-right: var(--dl-space-space-twounits);
-        }
-
-        .feiras-desktop-menu {
-            display: none;
-        }
-
-        .feiras-btn-group {
-            display: none;
-        }
-
-        .feiras-burger-menu {
-            display: flex;
-        }
-
-        .feiras-navbar-interactive1 {
-            padding-left: var(--dl-space-space-twounits);
-            padding-right: var(--dl-space-space-twounits);
-        }
-
-        .feiras-burger-menu1 {
-            display: flex;
-        }
-
-        .feiras-gallery {
-            padding-left: var(--dl-space-space-twounits);
-            padding-right: var(--dl-space-space-twounits);
-        }
+    .home-container19 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
     }
 
-    @@media(max-width:479px) {
-        .feiras-navbar-interactive {
-            padding: var(--dl-space-space-unit);
-        }
+    .home-image02 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 
-        .feiras-mobile-menu {
-            padding: 16px;
-        }
+    .home-container20 {
+        flex: 0 0 auto;
+        width: 399px;
+        height: 46px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
 
-        .feiras-navbar-interactive1 {
-            padding: var(--dl-space-space-unit);
-        }
+    .home-text37 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
 
-        .feiras-mobile-menu1 {
-            padding: 16px;
-        }
+    .home-button08 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
 
-        .feiras-gallery {
-            padding-top: var(--dl-space-space-twounits);
-            padding-left: var(--dl-space-space-unit);
-            padding-right: var(--dl-space-space-unit);
-            padding-bottom: var(--dl-space-space-twounits);
-        }
+    .home-icon02 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container21 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container22 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image03 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container23 {
+        flex: 0 0 auto;
+        width: 401px;
+        height: 48px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text38 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button09 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon04 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container24 {
+        width: 100%;
+        height: 255px;
+        display: flex;
+        align-self: flex-start;
+        margin-top: var(--dl-space-space-unit);
+        align-items: flex-start;
+        flex-direction: row;
+    }
+
+    .home-container25 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container26 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image04 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container27 {
+        flex: 0 0 auto;
+        width: 400px;
+        height: 44px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text39 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button10 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon06 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container28 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container29 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image05 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container30 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 42px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text40 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button11 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon08 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container31 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container32 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image06 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container33 {
+        flex: 0 0 auto;
+        width: 399px;
+        height: 43px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text41 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button12 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon10 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container34 {
+        width: 100%;
+        height: 255px;
+        display: flex;
+        align-self: flex-start;
+        margin-top: var(--dl-space-space-unit);
+        align-items: flex-start;
+        flex-direction: row;
+    }
+
+    .home-container35 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container36 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image07 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container37 {
+        flex: 0 0 auto;
+        width: 400px;
+        height: 44px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text42 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button13 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon12 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container38 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container39 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image08 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container40 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 42px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text43 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button14 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon14 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
+    }
+
+    .home-container41 {
+        width: 503px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .home-container42 {
+        flex: 0 0 auto;
+        width: 397px;
+        height: 210px;
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .home-image09 {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .home-container43 {
+        flex: 0 0 auto;
+        width: 399px;
+        height: 43px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .home-text44 {
+        color: #562a2a;
+        align-self: center;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+    }
+
+    .home-button15 {
+        height: 100%;
+        display: flex;
+        border-color: #ebc39c;
+        flex-direction: row;
+        background-color: #ebc39c;
+    }
+
+    .home-icon16 {
+        fill: #ffff00;
+        width: 100%;
+        height: 100%;
     }
 </style>
 
 
 @code {
+
+    System.Globalization.CultureInfo culture = new System.Globalization.CultureInfo("pt-PT");
+
     private List<Feira> feiras = new List<Feira>();
     private List<DateTime> datas = new List<DateTime>()
     {
-        DateTime.Now,
-        DateTime.Now.AddDays(1),
-        DateTime.Now.AddDays(2),
-        DateTime.Now.AddDays(3),
-        DateTime.Now.AddDays(4),
-        DateTime.Now.AddDays(5),
+    DateTime.Now,
+    DateTime.Now.AddDays(1),
+    DateTime.Now.AddDays(2),
+    DateTime.Now.AddDays(3),
+    DateTime.Now.AddDays(4),
+    DateTime.Now.AddDays(5),
     };
+
+    private List<IGrouping<int, Feira>> feirasAgrupadas;
 
     protected override async Task OnInitializedAsync()
     {
@@ -554,10 +1140,16 @@
         {
             Console.WriteLine("Tenho as feiras");
             this.feiras = feiras;
+
+            this.feirasAgrupadas = this.feiras.Zip(Enumerable.Range(0, this.feiras.Count()),
+                    (s, r) => new {Group = r / 4, Item = s })
+                .GroupBy(i => i.Group, g => g.Item)
+                .ToList();
         }
     }
 
-    private void GoToStand(int feiraID) {
+    private void GoToFeira(int feiraID)
+    {
         NavigationManager.NavigateTo($"/standsfeira/{feiraID}");
     }
 

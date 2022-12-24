@@ -28,6 +28,8 @@ namespace MarketBayBlazor.Server.Controllers
 
             var stand = await this._context.StandsFeirantes
                 .Where(stand => stand.ID == id)
+                .Include(stand => stand.Feirante)
+                .ThenInclude(feirante => feirante.Conta)
                 .Include(stand => stand.ProdutosStands)
                 .ThenInclude(produtosStand => produtosStand.Produto)
                 .ThenInclude(produto => produto.Categoria)

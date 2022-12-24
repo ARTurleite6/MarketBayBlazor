@@ -64,8 +64,21 @@ namespace MarketBayBlazor.Server.Data
                     Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
                 };
 
+                var feira2 = new Feira() 
+                {
+                    NomeFeira = "Semana de Engenharia Informática",
+                    Logotipo = "Logotipo da feira",
+                    DataInicio = DateTime.Now,
+                    DataFim = DateTime.Now,
+                    PrecoAluguel = 100.00M,
+                    NumeroMaximoFeirantes = 10,
+                    Organizador = this.Feirantes.Where(feirante => feirante.NIFempresarial == "256250278").First(),
+                    Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
+                };
+
 
                 this.Feiras.Add(feira1);
+                this.Feiras.Add(feira2);
                 this.SaveChanges();
 	        }
 
@@ -74,11 +87,59 @@ namespace MarketBayBlazor.Server.Data
                 var stand = new StandFeirante()
                 {
                     FeiranteID = 1,
-                    FeiraID = 1,
+                    FeiraID = 2,
                 };
                 this.StandsFeirantes.Add(stand);
                 this.SaveChanges();
 	        }
+
+            if(!this.Produtos.Any())
+            {
+                this.Produtos.Add(new Produto()
+                {
+                    Nome = "Caneca CESIUM",
+                    Foto = "Foto de Produto",
+                    Descricao = "Caneca para beber",
+                    PrecoBase = 10M,
+                    Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
+                });
+                this.Produtos.Add(new Produto()
+                {
+                    Nome = "Computador",
+                    Foto = "Foto de Produto",
+                    Descricao = "MacBook",
+                    PrecoBase = 1000.00M,
+                    Categoria = this.Categorias.Where(categoria => categoria.Descricao == "Tecnologia").First(),
+                }
+                );
+                this.SaveChanges();
+            }
+
+            if(!this.ProdutosStands.Where(produto => produto.StandFeiranteID == 5).Any()) 
+            {
+                this.ProdutosStands.Add(
+                    new ProdutoStand()
+                    {
+                        StandFeiranteID = 5,
+                        ProdutoID = 2,
+                        Preco = 500.00M,
+                        Quantidade = 20,
+                        Destacado = true,
+                    }
+                );
+
+                this.ProdutosStands.Add(
+                    new ProdutoStand()
+                    {
+                        StandFeiranteID = 5,
+                        ProdutoID = 1,
+                        Preco = 5.00M,
+                        Quantidade = 100,
+                        Destacado = true,
+                    }
+                );
+                this.SaveChanges();
+            }
 	    }
 
 

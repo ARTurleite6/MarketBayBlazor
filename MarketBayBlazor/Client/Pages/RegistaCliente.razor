@@ -1,147 +1,166 @@
 ﻿@page "/registerclient"
+@using MarketBayBlazor.Client.ViewModels
 @inject IClientService ClientService
 @inject NavigationManager NavigationManager
 
 <div>
-  <div class="home-container">
-    <header data-thq="thq-navbar" class="home-navbar-interactive">
-      <div class="home-container01">
-        <div class="home-container02">
-          <div class="home-container03">
-            <h1 class="home-text">
-              <span>Market Bay</span>
-              <br />
-              <br />
-            </h1>
-            <img alt="logo" src="public/playground/imagem1-1-200h.png" class="home-logo" />
-          </div>
+  <div class="log-in-container">
+    <header data-thq="thq-navbar" class="log-in-navbar-interactive">
+      <div class="log-in-container01">
+        <div class="log-in-container02">
+          <h1 class="log-in-text">MarketBay</h1>
+          <img
+            alt="image"
+            src="logo.png"
+            class="log-in-image"
+          />
         </div>
       </div>
-      <div data-thq="thq-navbar-nav" data-role="Nav" class="home-desktop-menu">
-        <nav data-thq="thq-navbar-nav-links" data-role="Nav" class="home-nav">
-          <span>
-            <span>Work</span>
-            <br />
-          </span>
-          <span class="home-text07">
-            <span class="home-text08">DashBoard</span>
-            <br />
-          </span>
-          <span class="home-text10">Sobre</span>
-          <span class="home-text11">
-            <span class="home-text12">Contactos</span>
-            <br />
-          </span>
+      <div
+        data-thq="thq-navbar-nav"
+        data-role="Nav"
+        class="log-in-desktop-menu"
+      >
+        <nav data-thq="thq-navbar-nav-links" data-role="Nav" class="log-in-nav">
+          <span class="log-in-text01">Work</span>
+          <span class="log-in-text02">Dashboard</span>
+          <span class="log-in-text03">Sobre</span>
+          <span class="log-in-text04">Contactos</span>
         </nav>
       </div>
-      <div data-thq="thq-mobile-menu" class="home-mobile-menu">
-        <div data-thq="thq-mobile-menu-nav" data-role="Nav" class="home-nav1">
-          <div class="home-container05">
-            <button class="home-login button">Login</button>
-            <button class="button">Register</button>
+      <div data-thq="thq-burger-menu" class="log-in-burger-menu">
+        <svg viewBox="0 0 1024 1024" class="log-in-icon">
+          <path
+            d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
+          ></path>
+        </svg>
+      </div>
+      <div data-thq="thq-mobile-menu" class="log-in-mobile-menu">
+        <div data-thq="thq-mobile-menu-nav" data-role="Nav" class="log-in-nav1">
+          <div class="log-in-container03">
+            <h1 class="log-in-heading">MarketBay</h1>
+            <div data-thq="thq-close-menu" class="log-in-menu-close">
+              <svg viewBox="0 0 1024 1024" class="log-in-icon2">
+                <path
+                  d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
+                ></path>
+              </svg>
+            </div>
           </div>
+          <nav
+            data-thq="thq-mobile-menu-nav-links"
+            data-role="Nav"
+            class="log-in-nav2"
+          >
+            <span class="log-in-text05">Sobre nós</span>
+            <span class="log-in-text06">Ajuda</span>
+            <span class="log-in-text07">Definições</span>
+          </nav>
         </div>
       </div>
     </header>
-    <div class="home-container06">
-      <div class="home-container07">
-        <div class="home-container08">
-          <div class="home-container09">
-            <h1 class="home-text19">
-              <span>Criar Conta</span>
-              <br />
-              <br />
-            </h1>
-            <div class="home-container10">
-              <span>
-                <span>Já&nbsp; tem Conta</span>
-                <br />
-                <br />
-              </span>
-              <a href="/login" target="_self" rel="noreferrer noopener">
-                <span>&nbsp;Log in?</span>
-                <br />
-                <br />
-              </a>
-            </div>
+    <div class="log-in-container04">
+      <div class="log-in-container05">
+        <div class="log-in-container06">
+          <div class="log-in-container07">
+            <h1 class="log-in-text08">Criar Conta</h1>
           </div>
+        </div>
+        <div class="log-in-container08">
+          <span class="log-in-text09">
+            <span class="log-in-text10">Já tem conta?</span>
+            <span></span>
+            <span class="log-in-text12">Log In</span>
+            <span> </span>
+          </span>
         </div>
       </div>
     </div>
-    <div class="home-container11">
-      <EditForm class="home-form" Model="@cliente" OnValidSubmit="@Registar">
-        <div class="home-container12">
-          <div class="home-container13">
-            <h2 class="home-text30">
-              <span>Nome Completo</span>
-              <br />
-            </h2>
-            <InputText class="home-textinput input" placeholder="Nome Completo" @bind-Value="cliente.Conta.Nome" />
+    <div class="log-in-container09">
+      <EditForm Model="@clienteEntry" class="log-in-form" OnValidSubmit="@Registar">
+        <div class="log-in-container10">
+          <h1 class="log-in-text14">
+            <span class="log-in-text15">Nome</span>
+            <span></span>
+            <span class="log-in-text17">*</span>
+          </h1>
+          <InputText
+            @bind-Value="clienteEntry.Name"
+            placeholder="Awesome Name"
+            class="log-in-textinput input"
+          />
+        </div>
+        <div class="log-in-container11">
+          <h1 class="log-in-text18">
+            <span class="log-in-text19">Email</span>
+            <span> </span>
+            <span class="log-in-text21">*</span>
+          </h1>
+          <InputText
+            @bind-Value="clienteEntry.Email"
+            placeholder="awesomeemail@gmail.com"
+            class="log-in-textinput1 input"
+          />
+        </div>
+        <div class="log-in-container12">
+          <h1 class="log-in-text22">
+            <span class="log-in-text23">Palavra-Passe</span>
+            <span class="log-in-text24"> </span>
+            <span class="log-in-text25">*</span>
+          </h1>
+          <InputText
+            @bind-Value="clienteEntry.Password"
+            placeholder="placeholder"
+            class="log-in-textinput2 input"
+          />
+        </div>
+        <div class="log-in-container13">
+          <h1 class="log-in-text26">Método de Pagamento</h1>
+          <InputText
+            @bind-Value="clienteEntry.MetodoPagamento"
+            placeholder="placeholder"
+            class="log-in-textinput3 input"
+          />
+        </div>
+        <div class="log-in-container14">
+          <h1 class="log-in-text27">Rua</h1>
+          <InputText
+            @bind-Value="clienteEntry.Rua"
+            placeholder="placeholder"
+            class="log-in-textinput4 input"
+          />
+        </div>
+        <div class="log-in-container15">
+          <h1 class="log-in-text28">Código Postal</h1>
+          <InputText
+            @bind-Value="clienteEntry.CodigoPostal"
+            placeholder="placeholder"
+            class="log-in-textinput5 input"
+          />
+        </div>
+        <div class="log-in-container16">
+          <h1 class="log-in-text29">
+            <span>Localidade</span>
+            <br />
+          </h1>
+          <InputText
+            @bind-Value="clienteEntry.Localidade"
+            type="text"
+            placeholder="placeholder"
+            class="log-in-textinput6 input"
+          />
+        </div>
+        <div class="log-in-container17">
+          <div class="log-in-container18">
+            <button class="log-in-button button " onclick="@(() => NavigationManager.NavigateTo("/feiras"))">Fazer mais tarde</button>
+            <button type="submit" class="log-in-button1 button">Sign up</button>
           </div>
-          <div class="home-container14">
-            <h2 class="home-text33">
-              <span>Email</span>
-              <br />
-            </h2>
-            <InputText placeholder="amazingemail@gmail.com" class="input" @bind-Value="cliente.Conta.Email" />
-          </div>
-          <div class="home-container15">
-            <h2 class="home-text36">
-              <span>Palavra-Passe</span>
-              <br />
-            </h2>
-            <InputText placeholder="Palavra-Passe" class="input" @bind-Value="cliente.Conta.Password" />
-          </div>
-          <div class="home-container16">
-            <h2 class="home-text39">
-              <span>Metodo de Pagamento</span>
-              <br />
-            </h2>
-            <InputText placeholder="999-999-999" class="input" @bind-Value="cliente.Conta.NumeroTelemovel"/>
-          </div>
-          <div class="home-container17">
-            <h2 class="home-text42">
-              <span>Rua</span>
-              <br />
-            </h2>
-            <InputText placeholder="Rua" class="input" @bind-Value="cliente.Conta.Morada.Rua" />
-          </div>
-          <div class="home-container18">
-            <h2 class="home-text45">
-              <span>Código Postal</span>
-              <br />
-            </h2>
-            <InputText placeholder="9999-999" class="input" @bind-Value="cliente.Conta.Morada.CodigoPostal"/>
-          </div>
-          <div class="home-container19">
-            <h2 class="home-text48">Localidade</h2>
-            <InputText placeholder="placeholder" class="input" @bind-Value="cliente.Conta.Morada.Localidade"/>
-          </div>
-          <div class="home-container20">
-            <div class="home-container21">
-              <button class="home-button button" onclick="@(() => @NavigationManager.NavigateTo("/feiras"))">
-                <span>
-                  <span>Fazer mais tarde</span>
-                  <br />
-                </span>
-              </button>
-              <button class="home-button1 button" type="submit">
-                <span>
-                  <span>Sign Up</span>
-                  <br />
-                </span>
-              </button>
-            </div>
-            <div class="home-container22">
-              <span>
-                <span>É um vendedor?</span>
-                <br />
-              </span>
-              <a href="https://example.com" target="_blank" rel="noreferrer noopener">
-                <span>&nbsp;Clique Aqui</span>
-                <br />
-              </a>
-            </div>
+          <div class="log-in-container19">
+            <span class="log-in-text32">
+              <span class="log-in-text33">É vendedor?</span>
+              <span></span>
+              <span class="log-in-text35">Clique Aqui</span>
+            </span>
           </div>
         </div>
       </EditForm>
@@ -149,19 +168,22 @@
   </div>
 </div>
 
+
+
 <style>
-  .home-container {
+  .log-in-container {
     width: 100%;
     display: flex;
     overflow: auto;
     min-height: 100vh;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
-    justify-content: flex-start;
+    background-color: #ebc39c;
   }
 
-  .home-navbar-interactive {
+  .log-in-navbar-interactive {
     width: 100%;
+    height: 90px;
     display: flex;
     position: relative;
     align-items: center;
@@ -172,90 +194,98 @@
     justify-content: space-between;
   }
 
-  .home-container01 {
+  .log-in-container01 {
     flex: 0 0 auto;
-    width: 200px;
+    width: 178px;
+    height: 129px;
     display: flex;
+    align-self: flex-start;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log-in-container02 {
+    flex: 0 0 auto;
+    width: 144px;
+    height: 115px;
+    display: flex;
+    align-self: flex-start;
+    margin-top: 0px;
     align-items: center;
     flex-direction: column;
     justify-content: flex-start;
   }
 
-  .home-container02 {
-    flex: 0 0 auto;
-    width: 100%;
+  .log-in-text {
+    color: #562a2a;
+    font-size: 1.2em;
+    align-self: center;
+  }
+
+  .log-in-image {
+    width: 95px;
+    height: 87px;
+    object-fit: cover;
+  }
+
+  .log-in-desktop-menu {
     display: flex;
-    align-items: flex-end;
-    justify-content: center;
   }
 
-  .home-container03 {
-    flex: 0 0 auto;
-    width: 100%;
-    height: 102px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .home-text {
-    height: 46px;
-  }
-
-  .home-logo {
-    width: var(--dl-size-size-medium);
-    height: var(--dl-size-size-medium);
-  }
-
-  .home-desktop-menu {
-    display: flex;
-    position: relative;
-  }
-
-  .home-nav {
+  .log-in-nav {
     flex: 0 0 auto;
     display: flex;
     align-items: center;
     flex-direction: row;
-    justify-content: flex-end;
   }
 
-  .home-text07 {
+  .log-in-text01 {
+    color: #562a2a;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .log-in-text02 {
+    color: #562a2a;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
     margin-left: var(--dl-space-space-twounits);
   }
 
-  .home-text10 {
+  .log-in-text03 {
+    color: #562a2a;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
     margin-left: var(--dl-space-space-twounits);
   }
 
-  .home-text11 {
+  .log-in-text04 {
+    color: #562a2a;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
     margin-left: var(--dl-space-space-twounits);
   }
 
-  .home-btn-group {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .home-burger-menu {
+  .log-in-burger-menu {
     display: none;
     align-items: center;
     justify-content: center;
   }
 
-  .home-icon {
+  .log-in-icon {
     width: var(--dl-size-size-xsmall);
     height: var(--dl-size-size-xsmall);
   }
 
-  .home-mobile-menu {
+  .log-in-mobile-menu {
     top: 0px;
     left: 0px;
-    width: 100%;
-    height: 100vh;
+    width: 386px;
+    height: 338px;
     display: none;
     padding: 32px;
     z-index: 100;
@@ -265,13 +295,14 @@
     background-color: #fff;
   }
 
-  .home-nav1 {
+  .log-in-nav1 {
+    height: 372px;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .home-container04 {
+  .log-in-container03 {
     width: 100%;
     display: flex;
     align-items: center;
@@ -279,338 +310,434 @@
     justify-content: space-between;
   }
 
-  .home-image {
-    height: 2rem;
+  .log-in-heading {
+    font-size: 1.8em;
   }
 
-  .home-menu-close {
+  .log-in-menu-close {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
-  .home-icon02 {
+  .log-in-icon2 {
     width: var(--dl-size-size-xsmall);
     height: var(--dl-size-size-xsmall);
   }
 
-  .home-nav2 {
+  .log-in-nav2 {
     flex: 0 0 auto;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
   }
 
-  .home-text14 {
+  .log-in-text05 {
+    color: #562a2a;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
     margin-bottom: var(--dl-space-space-unit);
   }
 
-  .home-text15 {
+  .log-in-text06 {
+    color: #562a2a;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
     margin-bottom: var(--dl-space-space-unit);
   }
 
-  .home-text16 {
+  .log-in-text07 {
+    color: #562a2a;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
     margin-bottom: var(--dl-space-space-unit);
   }
 
-  .home-text17 {
-    margin-bottom: var(--dl-space-space-unit);
+  .log-in-container04 {
+    width: 100%;
+    height: 118px;
+    display: flex;
+    align-self: center;
+    align-items: flex-start;
+    justify-content: center;
   }
 
-  .home-text18 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
-
-  .home-container05 {
+  .log-in-container05 {
     flex: 0 0 auto;
-    width: auto;
+    width: 292px;
+    height: 104px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .log-in-container06 {
+    flex: 0 0 auto;
+    width: 252px;
+    height: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .log-in-container07 {
+    width: 362px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log-in-text08 {
+    color: #562a2a;
+    font-size: 2.5em;
+    align-self: center;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .log-in-container08 {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log-in-text09 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  .log-in-text10 {
+    color: #0f8a82;
+  }
+
+  .log-in-text12 {
+    color: #e5412a;
+  }
+
+  .log-in-container09 {
+    width: 100%;
+    height: 893px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .log-in-form {
+    width: 495px;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .log-in-container10 {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .log-in-text14 {
+    font-size: 1.5em;
+    align-self: flex-start;
+  }
+
+  .log-in-text15 {
+    color: #562a2a;
+  }
+
+  .log-in-text17 {
+    color: #e5412a;
+  }
+
+  .log-in-textinput {
+    width: 453px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container11 {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    margin-top: var(--dl-space-space-halfunit);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .log-in-text18 {
+    font-size: 1.5em;
+    align-self: flex-start;
+  }
+
+  .log-in-text19 {
+    color: #562a2a;
+  }
+
+  .log-in-text21 {
+    color: #e5412a;
+  }
+
+  .log-in-textinput1 {
+    width: 453px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container12 {
+    width: 100%;
+    height: 100px;
     display: flex;
     margin-top: var(--dl-space-space-unit);
     align-items: center;
-    flex-direction: row;
-  }
-
-  .home-login {
-    margin-right: var(--dl-space-space-twounits);
-  }
-
-  .home-icon-group {
-    display: flex;
-  }
-
-  .home-icon04 {
-    width: var(--dl-size-size-xsmall);
-    height: var(--dl-size-size-xsmall);
-    margin-right: var(--dl-space-space-twounits);
-  }
-
-  .home-icon06 {
-    width: var(--dl-size-size-xsmall);
-    height: var(--dl-size-size-xsmall);
-    margin-right: var(--dl-space-space-twounits);
-  }
-
-  .home-icon08 {
-    width: var(--dl-size-size-xsmall);
-    height: var(--dl-size-size-xsmall);
-  }
-
-  .home-container06 {
-    flex: 0 0 auto;
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-  }
-
-  .home-container07 {
-    flex: 0 0 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .home-container08 {
-    flex: 0 0 auto;
-    width: 200px;
-    display: flex;
-    align-items: center;
     flex-direction: column;
     justify-content: center;
   }
 
-  .home-container09 {
-    flex: 0 0 auto;
-    width: 279px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  .log-in-text22 {
+    color: rgb(0, 0, 0);
+    font-size: 1.5em;
+    align-self: flex-start;
   }
 
-  .home-text19 {
-    width: 195px;
-    height: 42px;
+  .log-in-text23 {
+    color: #562a2a;
   }
 
-  .home-container10 {
-    flex: 0 0 auto;
-    width: auto;
-    height: auto;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+  .log-in-text24 {
+    color: var(--dl-color-gray-black);
   }
 
-  .home-container11 {
-    width: 100%;
-    height: 748px;
-    display: flex;
+  .log-in-text25 {
+    color: #e5412a;
+  }
+
+  .log-in-textinput2 {
+    width: 467px;
+    height: var(--dl-size-size-small);
+    font-size: 16px;
     align-self: center;
+  }
+
+  .log-in-container13 {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
     align-items: center;
+    flex-direction: column;
     justify-content: center;
   }
 
-  .home-form {
-    width: 50%;
-    height: 719px;
-    display: flex;
-    background-color: red;
+  .log-in-text26 {
+    color: #562a2a;
+    font-size: 1.5em;
+    align-self: flex-start;
   }
 
-  .home-container12 {
-    flex: 0 0 auto;
+  .log-in-textinput3 {
+    width: 467px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container14 {
     width: 100%;
+    height: 100px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .log-in-text27 {
+    color: rgb(86, 42, 42);
+    font-size: 1.5em;
+    align-self: flex-start;
+  }
+
+  .log-in-textinput4 {
+    width: 467px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container15 {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .log-in-text28 {
+    color: rgb(86, 42, 42);
+    font-size: 1.5em;
+    align-self: flex-start;
+  }
+
+  .log-in-textinput5 {
+    width: 467px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container16 {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .log-in-text29 {
+    color: rgb(86, 42, 42);
+    font-size: 1.5em;
+    align-self: flex-start;
+  }
+
+  .log-in-textinput6 {
+    width: 467px;
+    height: 46px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .log-in-container17 {
+    width: 100%;
+    height: 309px;
+    display: flex;
+    margin-top: 0px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .log-in-container18 {
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .log-in-button {
+    color: #0f8a82;
+    width: 262px;
+    height: 62px;
+    font-size: 25px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 700;
+    border-color: #562a2a;
+    background-color: #562a2a;
+  }
+
+  .log-in-button:hover {
+    color: #e5412a;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .log-in-button1 {
+    color: #562a2a;
+    width: 179px;
+    height: 62px;
+    font-size: 25px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 800;
+    border-color: #0f8a82;
+    background-color: #0f8a82;
+  }
+
+  .log-in-button1:hover {
+    color: #0f8a82;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .log-in-container19 {
+    width: 100%;
+    height: 37px;
     display: flex;
     align-self: flex-start;
     align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .home-container13 {
-    width: 100%;
-    height: 73px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .home-text30 {
-    width: 280px;
-    height: 29px;
-    align-self: center;
-  }
-
-  .home-textinput {
-    width: 280px;
-  }
-
-  .home-container14 {
-    width: 100%;
-    height: 87px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-
-  .home-text33 {
-    width: 284px;
-  }
-
-  .home-container15 {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    margin-top: 0px;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .home-text36 {
-    width: 286px;
-  }
-
-  .home-container16 {
-    width: 100%;
-    height: 80px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .home-text39 {
-    width: 276px;
-  }
-
-  .home-container17 {
-    width: 100%;
-    height: 82px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .home-text42 {
-    width: 279px;
-    height: 33px;
-  }
-
-  .home-container18 {
-    width: 100%;
-    height: 82px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .home-text45 {
-    width: 281px;
-    height: 34px;
-    align-self: center;
-  }
-
-  .home-container19 {
-    width: 100%;
-    height: 84px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .home-text48 {
-    width: 285px;
-    height: 38px;
-  }
-
-  .home-container20 {
-    flex: 0 0 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
     justify-content: center;
   }
 
-  .home-container21 {
-    width: 100%;
-    height: 57px;
-    display: flex;
-    margin-top: 32px;
-    align-items: flex-start;
-    padding-top: 2px;
-    flex-direction: row;
-    justify-content: center;
+  .log-in-text32 {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
   }
 
-  .home-button {
-    width: 164px;
-    margin-left: 28px;
-    margin-right: 34px;
+  .log-in-text33 {
+    color: #0f8a82;
   }
 
-  .home-button1 {
-    width: 199px;
-    margin-left: var(--dl-space-space-threeunits);
+  .log-in-text35 {
+    color: #e5412a;
   }
 
-  .home-container22 {
-    width: 100%;
-    height: 49px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  @@media(max-width:767px) {
-    .home-navbar-interactive {
+  @@media(max-width: 767px) {
+    .log-in-navbar-interactive {
       padding-left: var(--dl-space-space-twounits);
       padding-right: var(--dl-space-space-twounits);
     }
 
-    .home-desktop-menu {
+    .log-in-desktop-menu {
       display: none;
     }
 
-    .home-text07 {
+    .log-in-text02 {
       margin-left: var(--dl-space-space-unit);
     }
 
-    .home-text08 {
+    .log-in-text03 {
       margin-left: var(--dl-space-space-unit);
     }
 
-    .home-text10 {
+    .log-in-text04 {
       margin-left: var(--dl-space-space-unit);
     }
 
-    .home-text11 {
-      margin-left: var(--dl-space-space-unit);
-    }
-
-    .home-text12 {
-      margin-left: var(--dl-space-space-unit);
-    }
-
-    .home-btn-group {
-      display: none;
-    }
-
-    .home-burger-menu {
+    .log-in-burger-menu {
       display: flex;
     }
   }
 
-  @@media(max-width:479px) {
-    .home-navbar-interactive {
+  @@media(max-width: 479px) {
+    .log-in-navbar-interactive {
       padding: var(--dl-space-space-unit);
     }
 
-    .home-mobile-menu {
+    .log-in-mobile-menu {
       padding: 16px;
     }
   }
@@ -618,16 +745,32 @@
 
 @code {
 
-  private Cliente cliente = new Cliente()
-  {
-    Conta = new Conta(){
-      Morada = new Morada(),
-    },
-  };
+  private ClienteEntry clienteEntry = new ClienteEntry();
 
   public async void Registar()
   {
-    Console.WriteLine(cliente.Conta.Nome);
-    await ClientService.RegistaCliente(this.cliente);
+
+    Morada? morada = null;
+    if(clienteEntry.CodigoPostal != null && clienteEntry.Localidade != null && clienteEntry.Rua != null) {
+      morada = new Morada() 
+      {
+        CodigoPostal = clienteEntry.CodigoPostal,
+        Localidade = clienteEntry.Localidade,
+        Rua = clienteEntry.Localidade,
+      };
+    }
+
+    var cliente = new Cliente() {
+      Conta = new Conta() 
+      {
+        Nome = clienteEntry.Name,
+        Email = clienteEntry.Email,
+        Password = clienteEntry.Password,
+        NumeroTelemovel = clienteEntry.MetodoPagamento,
+        Morada = morada, 
+      }
+    };
+    await ClientService.RegistaCliente(cliente);
+    NavigationManager.NavigateTo("/login");
   }
 }

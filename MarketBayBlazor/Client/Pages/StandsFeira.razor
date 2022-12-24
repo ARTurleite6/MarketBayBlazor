@@ -1,183 +1,190 @@
 ﻿@page "/standsfeira/{ID:int}"
 @inject IFeiraService FeiraService;
+@inject NavigationManager NavigationManager
 
 
 <div>
-  <div class="stands-feira-container">
-    <div class="navbar-container navbar-root-class-name">
-      <header data-thq="thq-navbar" class="navbar-navbar-interactive">
-        <img
-          src="https://play.teleporthq.io/static/svg/default-img.svg"
-          alt="image"
-          class="navbar-image"
-        />
-        <div class="navbar-container1">
-          <input type="text" placeholder="Pesquisa" class="input" />
-        </div>
-      </header>
-    </div>
-    <div class="stands-feira-container1">
-      <h2>
-        <span>@feira.NomeFeira</span>
-        <br />
-      </h2>
-      <h2>
-        <span>@feira.DataInicio.Day/@feira.DataInicio.Month</span>
-        <br />
-      </h2>
-    </div>
-    <div class="stands-feira-stands">
-      <div class="stands-feira-linha">
-        <div class="stands-feira-stand">
-          <div class="stands-feira-logo">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand"
-            />
-            <h2>
-              <span>Cesium</span>
-              <br />
-            </h2>
-          </div>
-          <div class="stands-feira-produtos-destacados">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
-          </div>
-        </div>
-        <div class="stands-feira-stand1">
-          <div class="stands-feira-logo1">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand1"
-            />
-            <h2>
-              <span>Cesium</span>
-              <br />
-            </h2>
-          </div>
-          <div class="stands-feira-produtos-destacados1">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
-          </div>
-        </div>
-        <div class="stands-feira-stand2">
-          <div class="stands-feira-logo2">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand2"
-            />
-            <h2>
-              <span>Cesium</span>
-              <br />
-            </h2>
-          </div>
-          <div class="stands-feira-produtos-destacados2">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
+  <div class="feira-container">
+    <div class="feira-container01">
+      <div class="feira-container02">
+        <div class="feira-container03">
+          <div data-thq="thq-dropdown" class="feira-thq-dropdown list-item">
+            <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle">
+              <img alt="image" src="logo.png" class="feira-image" />
+            </div>
+            <ul data-thq="thq-dropdown-list" class="feira-dropdown-list">
+              <li data-thq="thq-dropdown" class="feira-dropdown list-item">
+                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle1">
+                  <span class="feira-text">Sobre nós</span>
+                </div>
+              </li>
+              <li data-thq="thq-dropdown" class="feira-dropdown1 list-item">
+                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle2">
+                  <span class="feira-text01">Ajuda</span>
+                </div>
+              </li>
+              <li data-thq="thq-dropdown" class="feira-dropdown2 list-item">
+                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle3">
+                  <span class="feira-text02">Definições</span>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="stands-feira-linha1">
-        <div class="stands-feira-stand3">
-          <div class="stands-feira-logo3">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand3"
-            />
-            <h2>
-              <span>Cesium</span>
+      <div class="feira-container04">
+        <div class="feira-container05">
+          <button class="feira-button button">
+            <span class="feira-text03">
+              <span>Filter</span>
               <br />
-            </h2>
+            </span>
+          </button>
+        </div>
+        <div class="feira-container06">
+          <input type="text" placeholder="Pesquisa" class="feira-textinput input" />
+        </div>
+      </div>
+      <div class="feira-container07">
+        <button class="feira-button1 button">
+          <svg viewBox="0 0 1024 1024" class="feira-icon">
+            <path
+              d="M550.272 66.432c-3.925-8.064-10.581-15.019-19.371-19.371-21.12-10.411-46.72-1.749-57.131 19.371l-121.941 246.997-272.683 39.893c-8.875 1.237-17.536 5.419-24.363 12.416-16.469 16.896-16.085 43.904 0.768 60.331l197.248 192.128-46.549 271.445c-1.536 8.832-0.256 18.389 4.309 27.051 10.965 20.864 36.779 28.885 57.643 17.92l243.797-128.213 243.84 128.213c7.936 4.224 17.408 5.931 27.051 4.309 23.211-3.968 38.827-26.027 34.859-49.28l-46.549-271.445 197.248-192.128c6.443-6.229 11.051-14.677 12.459-24.405 3.413-23.296-12.715-44.971-36.053-48.384l-272.64-39.851zM512 181.717l93.568 189.611c6.443 13.013 18.603 21.291 32.085 23.339l209.323 30.592-151.424 147.499c-10.411 10.155-14.549 24.277-12.288 37.76l35.712 208.341-187.136-98.432c-12.843-6.741-27.605-6.315-39.723 0l-187.136 98.432 35.712-208.341c2.475-14.336-2.517-28.203-12.288-37.76l-151.424-147.499 209.365-30.635c14.336-2.091 25.984-11.093 32.085-23.296z">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="feira-container08">
+      <div class="feira-container09">
+        <h1 class="feira-text06">@feira.NomeFeira</h1>
+      </div>
+      <div class="feira-container10">
+        <h1 class="feira-text07">@feira.DataInicio.Day/@feira.DataInicio.Month</h1>
+      </div>
+    </div>
+    @foreach (var group in this.standsGroup)
+    {
+      <div class="stand-row">
+        @foreach (var stand in group)
+        {
+          <div class="feira-container12">
+            <div class="feira-container13">
+              <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
+                <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image1" />
+              </div>
+              <div class="feira-container15">
+                <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
+              </div>
+            </div>
+            <div class="feira-container16">
+              @foreach (var produto in stand.ProdutosStands)
+              {
+                <div class="feira-container17">
+                  <h1 class="feira-text09">@produto.Produto.Nome</h1>
+                </div>
+              }
+            </div>
           </div>
-          <div class="stands-feira-produtos-destacados3">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
+        }
+      </div>
+    }
+    <div class="feira-container30">
+      <div class="feira-container31">
+        <div class="feira-container32">
+          <div class="feira-container33">
+            <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image3" />
+          </div>
+          <div class="feira-container34">
+            <h1 class="feira-text18">CESIUM</h1>
           </div>
         </div>
-        <div class="stands-feira-stand4">
-          <div class="stands-feira-logo4">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand4"
-            />
-            <h2>
-              <span>Cesium</span>
-              <br />
-            </h2>
+        <div class="feira-container35">
+          <div class="feira-container36">
+            <h1 class="feira-text19">Caneca</h1>
           </div>
-          <div class="stands-feira-produtos-destacados4">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
+          <div class="feira-container37">
+            <h1 class="feira-text20">Workshop</h1>
+          </div>
+          <div class="feira-container38">
+            <h1 class="feira-text21">Stickers</h1>
+          </div>
+          <div class="feira-container39">
+            <h1 class="feira-text22">Ted Talk</h1>
           </div>
         </div>
-        <div class="stands-feira-stand5">
-          <div class="stands-feira-logo5">
-            <img
-              src="https://play.teleporthq.io/static/svg/default-img.svg"
-              alt="image"
-              class="stands-feira-imagem-stand5"
-            />
-            <h2>
-              <span>Cesium</span>
-              <br />
-            </h2>
+      </div>
+      <div class="feira-container40">
+        <div class="feira-container41">
+          <div class="feira-container42">
+            <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image4" />
           </div>
-          <div class="stands-feira-produtos-destacados5">
-            <h3>Caneca</h3>
-            <h3>Workshop</h3>
-            <h3>
-              <span>Stickers</span>
-              <br />
-            </h3>
-            <h3>
-              <span>Ted Talk</span>
-              <br />
-            </h3>
+          <div class="feira-container43">
+            <h1 class="feira-text23">CESIUM</h1>
+          </div>
+        </div>
+        <div class="feira-container44">
+          <div class="feira-container45">
+            <h1 class="feira-text24">Caneca</h1>
+          </div>
+          <div class="feira-container46">
+            <h1 class="feira-text25">Workshop</h1>
+          </div>
+          <div class="feira-container47">
+            <h1 class="feira-text26">Stickers</h1>
+          </div>
+          <div class="feira-container48">
+            <h1 class="feira-text27">Ted Talk</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="feira-container49">
+      <div class="feira-container50">
+        <div class="feira-container51">
+          <div class="feira-container52">
+            <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image5" />
+          </div>
+          <div class="feira-container53">
+            <h1 class="feira-text28">CESIUM</h1>
+          </div>
+        </div>
+        <div class="feira-container54">
+          <div class="feira-container55">
+            <h1 class="feira-text29">Caneca</h1>
+          </div>
+          <div class="feira-container56">
+            <h1 class="feira-text30">Workshop</h1>
+          </div>
+          <div class="feira-container57">
+            <h1 class="feira-text31">Stickers</h1>
+          </div>
+          <div class="feira-container58">
+            <h1 class="feira-text32">Ted Talk</h1>
+          </div>
+        </div>
+      </div>
+      <div class="feira-container59">
+        <div class="feira-container60">
+          <div class="feira-container61">
+            <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image6" />
+          </div>
+          <div class="feira-container62">
+            <h1 class="feira-text33">CESIUM</h1>
+          </div>
+        </div>
+        <div class="feira-container63">
+          <div class="feira-container64">
+            <h1 class="feira-text34">Caneca</h1>
+          </div>
+          <div class="feira-container65">
+            <h1 class="feira-text35">Workshop</h1>
+          </div>
+          <div class="feira-container66">
+            <h1 class="feira-text36">Stickers</h1>
+          </div>
+          <div class="feira-container67">
+            <h1 class="feira-text37">Ted Talk</h1>
           </div>
         </div>
       </div>
@@ -186,303 +193,1075 @@
 </div>
 
 <style>
-    .navbar-container {
-  width: 100%;
-  height: auto;
-  display: flex;
-  position: relative;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.navbar-navbar-interactive {
-  width: 100%;
-  display: flex;
-  padding: 0px;
-  position: relative;
-  align-items: center;
-  padding-top: auto;
-  padding-left: auto;
-  padding-right: auto;
-  padding-bottom: auto;
-  justify-content: space-between;
-}
-.navbar-image {
-  width: 100px;
-  object-fit: cover;
-}
-.navbar-container1 {
-  flex: 1;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  padding-top: var(--dl-space-space-unit);
-  flex-direction: row;
-  padding-bottom: var(--dl-space-space-unit);
-  justify-content: center;
-}
-
-@@media(max-width: 767px) {
-  .navbar-navbar-interactive {
-    padding-left: var(--dl-space-space-twounits);
-    padding-right: var(--dl-space-space-twounits);
+  .feira-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ebc39c;
   }
-}
-@@media(max-width: 479px) {
-  .navbar-navbar-interactive {
-    padding: var(--dl-space-space-unit);
+
+  .feira-container01 {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    background-color: #0f8a82;
   }
-}
 
-.stands-feira-container {
-  width: 100%;
-  display: flex;
-  overflow: auto;
-  min-height: 100vh;
-  align-items: center;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.stands-feira-container1 {
-  gap: 30%;
-  flex: initial;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-stands {
-  flex: 1;
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-}
-.stands-feira-linha {
-  gap: 10%;
-  flex: 1;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: var(--dl-space-space-oneandhalfunits);
-  align-items: center;
-  margin-bottom: var(--dl-space-space-oneandhalfunits);
-  justify-content: center;
-}
-.stands-feira-stand {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.stands-feira-stand1 {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo1 {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand1 {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados1 {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.stands-feira-stand2 {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo2 {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand2 {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados2 {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.stands-feira-linha1 {
-  gap: 10%;
-  flex: 1;
-  width: 100%;
-  height: auto;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: var(--dl-space-space-twounits);
-  align-items: center;
-  margin-bottom: var(--dl-space-space-twounits);
-  justify-content: center;
-}
-.stands-feira-stand3 {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo3 {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand3 {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados3 {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.stands-feira-stand4 {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-self: center;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo4 {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand4 {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados4 {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.stands-feira-stand5 {
-  flex: 0 0 auto;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: center;
-}
-.stands-feira-logo5 {
-  flex: 0 0 auto;
-  width: auto;
-  display: flex;
-  align-items: flex-start;
-  margin-right: var(--dl-space-space-oneandhalfunits);
-  flex-direction: column;
-}
-.stands-feira-imagem-stand5 {
-  width: 100px;
-  object-fit: cover;
-}
-.stands-feira-produtos-destacados5 {
-  flex: 0 0 auto;
-  width: 200px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
+  .feira-container02 {
+    flex: 0 0 auto;
+    width: 219px;
+    height: 77px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+  }
 
+  .feira-container03 {
+    flex: 0 0 auto;
+    width: 181px;
+    display: flex;
+    align-self: center;
+    margin-top: 0px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-thq-dropdown {
+    width: 149px;
+    cursor: pointer;
+    height: 80px;
+    display: inline-block;
+    position: relative;
+    align-self: center;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .feira-dropdown-toggle {
+    fill: #595959;
+    color: #595959;
+    width: 135px;
+    height: 94px;
+    display: inline-flex;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius2);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+    justify-content: center;
+  }
+
+  .feira-image {
+    width: 88px;
+    height: 82px;
+    object-fit: cover;
+  }
+
+  .feira-dropdown-list {
+    left: 0%;
+    width: max-content;
+    display: none;
+    z-index: 100;
+    position: absolute;
+    min-width: 100%;
+    transition: 0.3s;
+    align-items: stretch;
+    border-color: #D9D9D9;
+    border-width: 1px;
+    border-radius: var(--dl-radius-radius-radius4);
+    flex-direction: column;
+    list-style-type: none;
+    background-color: var(--dl-color-gray-white);
+    list-style-position: inside;
+  }
+
+  .feira-dropdown {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .feira-dropdown-toggle1 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .feira-dropdown-toggle1:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .feira-text {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .feira-dropdown1 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .feira-dropdown-toggle2 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .feira-dropdown-toggle2:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .feira-text01 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .feira-dropdown2 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .feira-dropdown-toggle3 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .feira-dropdown-toggle3:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .feira-text02 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .feira-container04 {
+    flex: 0 0 auto;
+    width: 75%;
+    height: 109px;
+    display: flex;
+    align-self: center;
+    align-items: flex-start;
+    border-color: #ebc39c;
+    border-width: 5px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container05 {
+    width: 45%;
+    height: 100px;
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-button {
+    color: var(--dl-color-gray-white);
+    align-self: flex-end;
+    transition: 0.3s;
+    background-color: #562a2a;
+  }
+
+  .feira-button:hover {
+    color: #e5412a;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .feira-text03 {
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .feira-container06 {
+    width: 303px;
+    height: 100px;
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-textinput {
+    width: 294px;
+    height: 34px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .feira-container07 {
+    flex: 0 0 auto;
+    width: 188px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    margin-left: var(--dl-space-space-halfunit);
+    flex-direction: column;
+  }
+
+  .feira-button1 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    border-color: #0f8a82;
+    flex-direction: row;
+    background-color: #0f8a82;
+  }
+
+  .feira-icon {
+    fill: #ffff00;
+    width: 100%;
+    height: 100%;
+  }
+
+  .feira-container08 {
+    width: 100%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    border-color: #0f8a82;
+    border-style: dashed;
+    border-width: 3px;
+    justify-content: center;
+  }
+
+  .feira-container09 {
+    flex: 0 0 auto;
+    width: 360px;
+    height: 23px;
+    display: flex;
+    align-items: flex-start;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+  }
+
+  .feira-text06 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container10 {
+    flex: 0 0 auto;
+    width: 58px;
+    height: 23px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .feira-text07 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .stand-row {
+    width: 1322px;
+    height: 301px;
+    display: flex;
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    align-items: flex-start;
+    margin-left: 0px;
+  }
+
+  .feira-container12 {
+    flex: 0 0 auto;
+    width: 760px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container13 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container14 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .feira-image1 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container15 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text08 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container16 {
+    width: 178px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container17 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text09 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container18 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text10 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container19 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text11 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container20 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text12 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container21 {
+    flex: 0 0 auto;
+    width: 423px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container22 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container23 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-image2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container24 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text13 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container25 {
+    width: 176px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container26 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text14 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container27 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text15 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container28 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text16 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container29 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text17 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container30 {
+    width: 1322px;
+    height: 301px;
+    display: flex;
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    align-items: flex-start;
+    margin-left: 0px;
+  }
+
+  .feira-container31 {
+    flex: 0 0 auto;
+    width: 760px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container32 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container33 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-image3 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container34 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text18 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container35 {
+    width: 178px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container36 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text19 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container37 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text20 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container38 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text21 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container39 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text22 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container40 {
+    flex: 0 0 auto;
+    width: 423px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container41 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container42 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-image4 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container43 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text23 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container44 {
+    width: 176px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container45 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text24 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container46 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text25 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container47 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text26 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container48 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text27 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container49 {
+    width: 1322px;
+    height: 301px;
+    display: flex;
+    margin-top: var(--dl-space-space-oneandhalfunits);
+    align-items: flex-start;
+    margin-left: 0px;
+  }
+
+  .feira-container50 {
+    flex: 0 0 auto;
+    width: 760px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container51 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container52 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-image5 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container53 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text28 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container54 {
+    width: 178px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container55 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text29 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container56 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text30 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container57 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text31 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container58 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text32 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container59 {
+    flex: 0 0 auto;
+    width: 423px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .feira-container60 {
+    flex: 0 0 auto;
+    width: 279px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .feira-container61 {
+    width: 264px;
+    height: 257px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-image6 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .feira-container62 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .feira-text33 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .feira-container63 {
+    width: 176px;
+    height: 266px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .feira-container64 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text34 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container65 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text35 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container66 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text36 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .feira-container67 {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .feira-text37 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  @@media(max-width: 1200px) {
+    .feira-container04 {
+      width: 981px;
+    }
+
+    .feira-container08 {
+      width: 100%;
+    }
+  }
 </style>
 
 @code {
-    [Parameter]
-    public int ID { get; set; }
-    private List<StandFeirante> stands = new List<StandFeirante>();
-    private Feira feira = new Feira() {
-        NomeFeira = "Feira Não Encontrada",
-    };
+  [Parameter]
+  public int ID { get; set; }
+  private List<StandFeirante> stands = new List<StandFeirante>();
+  private List<IGrouping<int, StandFeirante>> standsGroup;
+  private Feira feira = new Feira()
+  {
+    NomeFeira = "Feira Não Encontrada",
+  };
 
-    protected override async Task OnInitializedAsync()
+  protected override async Task OnInitializedAsync()
+  {
+
+    Console.WriteLine("Procurando feira com " + ID);
+    var feira = await this.FeiraService.GetFeira(ID);
+    if (feira != null)
     {
+      Console.WriteLine("Feira Encontrada");
+      this.feira = feira;
 
-        Console.WriteLine("Procurando feira com " + ID);
-        var feira = await this.FeiraService.GetFeira(ID);
-        if(feira != null)
-        {
-            Console.WriteLine("Feira Encontrada");
-            this.feira = feira;
-        }
-        var stands = await this.FeiraService.GetStandsFeira(ID);
-        if(stands != null)
-        {
-            this.stands = stands;
-        }
     }
-}
+    var stands = await this.FeiraService.GetStandsFeira(ID);
+    if (stands != null)
+    {
+      this.stands = stands;
+      this.standsGroup = this.stands.Zip(
+      Enumerable.Range(0, this.stands.Count()),
+      (stand, nr) => new { Group = nr / 2, Item = stand }
+      )
+      .GroupBy(i => i.Group, g => g.Item)
+      .ToList();
+    }
+  }
 
+  private void GoToStand(int ID) 
+  {
+    NavigationManager.NavigateTo($"/standfeira/{this.ID}/{ID}");
+  }
+}
