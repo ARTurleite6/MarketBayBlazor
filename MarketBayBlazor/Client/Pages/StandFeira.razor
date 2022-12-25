@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        @foreach(var produto in this.stand.ProdutosStands)
+        @foreach (var produto in this.stand.ProdutosStands)
         {
             <div class="stand-container13">
                 <div class="stand-container14">
@@ -95,27 +95,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="stand-container24">
-                    <div class="stand-container25">
-                        <svg viewBox="0 0 1024 1024" class="stand-icon">
-                            <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
-                            </path>
-                        </svg>
-                    </div>
-                    <div class="stand-container26">
-                        <svg viewBox="0 0 1024 1024" class="stand-icon2">
-                            <path
-                            d="M932 550l-114 262q-26 42-74 42h-346q-40 0-70-30t-30-70v-334q0-36 26-62l274-272 18 20q24 24 38 52 6 14 4 28l-40 198h236q34 0 59 26t25 60v46q0 18-6 34zM86 854v-470h84q18 0 31 12t13 30v384q0 18-13 31t-31 13h-84z">
-                            </path>
-                        </svg><svg viewBox="0 0 1024 1024" class="stand-icon4">
-                            <path
-                            d="M92 474l114-262q26-42 74-42h346q42 0 71 29t29 71v334q0 36-26 62l-274 272-18-20q-24-24-38-52-6-14-4-28l40-198h-236q-34 0-59-26t-25-60v-46q0-20 6-34zM938 170v470h-84q-18 0-31-12t-13-30v-384q0-18 13-31t31-13h84z">
-                            </path>
-                        </svg>
-                    </div>
-                </div>
+
             </div>
         }
+    </div>
+    <div class="stand-container24">
+        <div class="stand-container25">
+            <svg viewBox="0 0 1024 1024" class="stand-icon">
+                <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
+                </path>
+            </svg>
+        </div>
+        <div class="stand-container26">
+            <svg viewBox="0 0 1024 1024" class="stand-icon2">
+                <path
+                    d="M932 550l-114 262q-26 42-74 42h-346q-40 0-70-30t-30-70v-334q0-36 26-62l274-272 18 20q24 24 38 52 6 14 4 28l-40 198h236q34 0 59 26t25 60v46q0 18-6 34zM86 854v-470h84q18 0 31 12t13 30v384q0 18-13 31t-31 13h-84z">
+                </path>
+            </svg><svg viewBox="0 0 1024 1024" class="stand-icon4">
+                <path
+                    d="M92 474l114-262q26-42 74-42h346q42 0 71 29t29 71v334q0 36-26 62l-274 272-18-20q-24-24-38-52-6-14-4-28l40-198h-236q-34 0-59-26t-25-60v-46q0-20 6-34zM938 170v470h-84q-18 0-31-12t-13-30v-384q0-18 13-31t31-13h84z">
+                </path>
+            </svg>
+        </div>
     </div>
 </div>
 
@@ -472,7 +473,6 @@
         border-color: #ebc39c;
         border-style: dashed;
         border-width: 0px;
-        background-color: #562a2a;
     }
 
     .stand-container15 {
@@ -546,10 +546,10 @@
         height: 63px;
         display: flex;
         align-items: center;
-        margin-left: var(--dl-space-space-fourunits);
+        padding: 20px;
         flex-direction: row;
         justify-content: center;
-        background-color: #ebc39c;
+        background-color: wheat;
         border-radius: 5px;
     }
 
@@ -577,7 +577,7 @@
     }
 
     .stand-button1 {
-        color: #562a2a;
+        color: white;
         width: 252px;
         height: 46px;
         font-size: 20px;
@@ -590,7 +590,7 @@
     }
 
     .stand-button1:hover {
-        color: #e5412a;
+        color: #0f8a82;
         border-color: var(--dl-color-gray-white);
         background-color: var(--dl-color-gray-white);
     }
@@ -606,7 +606,7 @@
     }
 
     .stand-button2 {
-        color: #0f8a82;
+        color: white;
         width: 252px;
         height: 46px;
         font-size: 20px;
@@ -615,11 +615,11 @@
         transition: 0.3s;
         font-weight: 700;
         border-color: #ebc39c;
-        background-color: #ebc39c;
+        background-color: #562a2a;
     }
 
     .stand-button2:hover {
-        color: #e5412a;
+        color: #562a2a;
         border-color: var(--dl-color-gray-white);
         background-color: var(--dl-color-gray-white);
     }
@@ -630,8 +630,11 @@
         height: 136px;
         display: flex;
         align-items: flex-start;
-        margin-left: var(--dl-space-space-threeunits);
         flex-direction: column;
+        position: fixed;
+        z-index: 100000;
+        bottom: 20px;
+        right: 20px;
     }
 
     .stand-container25 {
@@ -1053,7 +1056,7 @@
     [Parameter]
     public int ID { get; set; }
     [Parameter]
-    public int FeiraID{get; set;}
+    public int FeiraID { get; set; }
 
     private Feira feira;
 
@@ -1063,21 +1066,21 @@
 
     protected override async Task OnInitializedAsync()
     {
-    var feira = await FeiraService.GetFeira(this.FeiraID);
-    if (feira != null)
-    {
-        this.feira = feira;
-    }
+        var feira = await FeiraService.GetFeira(this.FeiraID);
+        if (feira != null)
+        {
+            this.feira = feira;
+        }
 
-    var stand = await StandService.GetStand(this.ID);
-    if (stand != null)
-    {
-        Console.WriteLine("Encontrei o stand");
-        this.stand = stand;
-        Console.WriteLine(stand.ID);
-        Console.WriteLine(stand.FeiranteID);
-        Console.WriteLine(stand.Feirante != null);
-        Console.WriteLine(stand.Feirante.Conta.Nome);
-    }
+        var stand = await StandService.GetStand(this.ID);
+        if (stand != null)
+        {
+            Console.WriteLine("Encontrei o stand");
+            this.stand = stand;
+            Console.WriteLine(stand.ID);
+            Console.WriteLine(stand.FeiranteID);
+            Console.WriteLine(stand.Feirante != null);
+            Console.WriteLine(stand.Feirante.Conta.Nome);
+        }
     }
 }
