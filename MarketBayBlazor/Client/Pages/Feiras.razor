@@ -47,9 +47,6 @@
             </div>
         </div>
         <div style="display: flex; width: 100%; height: 87px">
-            <div class="date-container" style="font-weight: bold; width: 219px; margin-right: 4px; font-size: 17px; display: flex; justify-content: center; align-items: center;">
-                Calendario:
-            </div>
             <div class="date-container">
                 @foreach (var data in this.datas)
                 {
@@ -98,7 +95,6 @@
 
 <style>
     .home-container {
-        width: 100%;
         display: flex;
         overflow: auto;
         min-height: 100vh;
@@ -120,7 +116,6 @@
 
     .home-container02 {
         flex: 0 0 auto;
-        width: 219px;
         height: 77px;
         display: flex;
         align-self: center;
@@ -313,7 +308,7 @@
     }
 
     .home-container05 {
-        width: 457px;
+        width: 25%;
         height: 100px;
         display: flex;
         align-self: flex-start;
@@ -358,7 +353,7 @@
     }
 
     .date-container {
-        width: calc(100% - 219px);
+        width: 100%;
         padding: 3px;
         display: flex;
         align-items: center;
@@ -1142,7 +1137,7 @@
             this.feiras = feiras;
 
             this.feirasAgrupadas = this.feiras.Zip(Enumerable.Range(0, this.feiras.Count()),
-                    (s, r) => new {Group = r / 4, Item = s })
+                    (s, r) => new {Group = r / 3, Item = s })
                 .GroupBy(i => i.Group, g => g.Item)
                 .ToList();
         }
