@@ -1,6 +1,7 @@
 @page "/standfeira/{feiraid:int}/{id:int}"
 @inject IFeiraService FeiraService
 @inject IStandService StandService
+@inject NavigationManager Navigator
 
 <div>
     <div class="stand-container">
@@ -41,7 +42,7 @@
                     </button>
                 </div>
                 <div class="stand-container06">
-                    <input type="text" placeholder="Pesquisa" class="stand-textinput input" />
+                    <input type="text" placeholder="Pesquisa" @bind="@filterParam" class="stand-textinput input" />
                 </div>
             </div>
         </div>
@@ -64,7 +65,7 @@
                 </div>
             </div>
         </div>
-        @foreach (var produto in this.stand.ProdutosStands)
+        @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.Contains(this.filterParam)))
         {
             <div class="stand-container13">
                 <div class="stand-container14">
@@ -90,7 +91,7 @@
                                 <button class="stand-button1 button">Comprar</button>
                             </div>
                             <div class="stand-container23">
-                                <button class="stand-button2 button">Regatear</button>
+                                <button class="stand-button2 button" onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
                             </div>
                         </div>
                     </div>
@@ -1062,6 +1063,7 @@
 
     private StandFeirante stand;
 
+    private string filterParam = string.Empty;
 
 
     protected override async Task OnInitializedAsync()
@@ -1082,5 +1084,10 @@
             Console.WriteLine(stand.Feirante != null);
             Console.WriteLine(stand.Feirante.Conta.Nome);
         }
+    }
+
+    private void GoToNegotiation(int produtoID)
+    {
+        Navigator.NavigateTo($"/proposta/{this.FeiraID}/{this.ID}/{produtoID}");
     }
 }

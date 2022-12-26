@@ -21,7 +21,7 @@ namespace MarketBayBlazor.Client.Services
             throw new NotImplementedException();
         }
 
-        public async Task RegistaCliente(Cliente cliente)
+        public async Task RegistaCliente(ClienteEntry cliente)
         {
             await _httpClient.PostAsJsonAsync("Cliente", cliente);
         }

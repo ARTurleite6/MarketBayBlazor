@@ -54,6 +54,7 @@ namespace MarketBayBlazor.Server.Controllers
         {
             return Ok(_context
                 .Feiras
+                .Where(feira => feira.DataFim < DateTime.Now)
                 .Include(feira => feira.Categoria));
     	}
 

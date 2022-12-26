@@ -42,7 +42,7 @@
                     </button>
                 </div>
                 <div class="home-container06">
-                    <input type="text" placeholder="Pesquisa" class="home-textinput input" />
+                    <input @bind="@filterParam" type="text" placeholder="Pesquisa" class="home-textinput input" />
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
             </div>
         </div>
             <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        @foreach(var feira in this.feiras)
+        @foreach(var feira in this.feiras.Where(feira => feira.NomeFeira.Contains(filterParam)))
         {
                 <div class="home-container15">
                     <button class="imagem-feira" onclick="@(() => GoToFeira(feira.ID))">
@@ -304,7 +304,7 @@
     }
 
     .home-container05 {
-        width: 25%;
+        width: 45%;
         height: 100px;
         display: flex;
         align-self: flex-start;
@@ -1122,6 +1122,8 @@
     DateTime.Now.AddDays(4),
     DateTime.Now.AddDays(5),
     };
+
+    string filterParam = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {

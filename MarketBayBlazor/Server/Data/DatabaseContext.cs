@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography;
 using MarketBayBlazor.Shared;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,15 @@ namespace MarketBayBlazor.Server.Data
 
             if(!this.Feirantes.Any())
             {
+
+                var password = "1234";
+                byte[] passwordSalt;
+                byte[] passwordHash;
+                using(var hmac = new HMACSHA512())
+                {
+                    passwordSalt = hmac.Key;
+                    passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                }
                 var feirante = new Feirante()
                 {
                     NIFempresarial = "256250278",
@@ -36,7 +46,8 @@ namespace MarketBayBlazor.Server.Data
                     {
                         Nome = "Artur Leite",
                         Email = "ajcl10@hotmail.com",
-                        Password = "12345",
+                        Password = passwordHash,
+                        PasswordSalt = passwordSalt,
                         NumeroTelemovel = null,
                         Morada = new Morada()
                         {
@@ -86,7 +97,7 @@ namespace MarketBayBlazor.Server.Data
             { 
                 var stand = new StandFeirante()
                 {
-                    FeiranteID = 1,
+                    FeiranteID = 3,
                     FeiraID = 2,
                 };
                 this.StandsFeirantes.Add(stand);
@@ -115,12 +126,12 @@ namespace MarketBayBlazor.Server.Data
                 this.SaveChanges();
             }
 
-            if(!this.ProdutosStands.Where(produto => produto.StandFeiranteID == 5).Any()) 
+            if(!this.ProdutosStands.Where(produto => produto.StandFeiranteID == 1).Any()) 
             {
                 this.ProdutosStands.Add(
                     new ProdutoStand()
                     {
-                        StandFeiranteID = 5,
+                        StandFeiranteID = 1,
                         ProdutoID = 2,
                         Preco = 500.00M,
                         Quantidade = 20,
@@ -131,7 +142,7 @@ namespace MarketBayBlazor.Server.Data
                 this.ProdutosStands.Add(
                     new ProdutoStand()
                     {
-                        StandFeiranteID = 5,
+                        StandFeiranteID = 1,
                         ProdutoID = 1,
                         Preco = 5.00M,
                         Quantidade = 100,

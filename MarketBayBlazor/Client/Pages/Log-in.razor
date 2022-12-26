@@ -1,5 +1,14 @@
 @page "/login"
+@inject AuthenticationStateProvider AuthStateProvider;
+@inject HttpClient http;
 @inject NavigationManager navigator;
+@inject ILocalStorageService LocalStorage;
+
+<AuthorizeView Roles="Cliente">
+  <Authorized>
+    @context.User.Identity.Name
+  </Authorized>
+</AuthorizeView>
 
 <div>
     <div class="login-container">
@@ -84,17 +93,17 @@
             </div>
         </header>
         <main class="login-container07">
-            <form class="login-form">
+            <EditForm Model="@dto" class="login-form" OnValidSubmit="@HandleLogin">
                 <div class="login-email">
                     <div class="login-container08">
                         <h2>Email</h2>
-                        <input type="text" placeholder="Email" class="input" />
+                        <InputText @bind-Value ="dto.Email" placeholder="Email" class="input" />
                     </div>
                 </div>
                 <div class="login-password">
                     <div class="login-container09">
                         <h2>Password</h2>
-                        <input type="text" placeholder="Password" class="input" />
+                        <InputText @bind-Value="dto.Password" placeholder="Password" class="input" />
                     </div>
                 </div>
                 <div class="login-container10">
@@ -111,7 +120,7 @@
                         </span>
                     </button>
                 </div>
-            </form>
+            </EditForm>
         </main>
     </div>
 </div>
@@ -380,5 +389,18 @@
 </style>
 
 @code {
+  private UserLoginDTO dto = new UserLoginDTO();
 
+  private async Task HandleLogin()
+  {
+    var result = await http.PostAsJsonAsync("auth", dto);
+    if(result.IsSuccessStatusCode)
+    {
+      var token = await result.Content.ReadAsStringAsync();
+      Console.WriteLine(token);
+      await LocalStorage.SetItemAsync("token", token);
+      await AuthStateProvider.GetAuthenticationStateAsync();
+      navigator.NavigateTo("/feiras");
+    }
+  }
 }

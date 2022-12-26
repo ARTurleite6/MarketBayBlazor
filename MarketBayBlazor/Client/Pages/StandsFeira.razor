@@ -42,7 +42,7 @@
           </button>
         </div>
         <div class="feira-container06">
-          <input type="text" placeholder="Pesquisa" class="feira-textinput input" />
+          <input @bind="@filterParam" type="text" placeholder="Pesquisa" class="feira-textinput input" />
         </div>
       </div>
       <div class="feira-container07">
@@ -64,7 +64,7 @@
       </div>
     </div>
       <div style="display:flex; flex-wrap: wrap; justify-content: center;">
-    @foreach (var stand in this.stands)
+    @foreach (var stand in this.stands.Where(stand1 => stand1.Feirante.Conta.Nome.Contains(this.filterParam)))
     {
           <div class="feira-container12">
             <div class="feira-container13">
@@ -1129,6 +1129,8 @@
   {
     NomeFeira = "Feira Não Encontrada",
   };
+
+  private string filterParam = string.Empty;
 
   protected override async Task OnInitializedAsync()
   {

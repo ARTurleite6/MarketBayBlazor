@@ -15,13 +15,14 @@ public class Conta
     public string Nome { get; set; }
     [MaxLength(100)]
     public string Email { get; set; }
-    [MaxLength(50)]
-    public string Password { get; set; }
+    public byte[] Password { get; set; }
+    public byte[] PasswordSalt { get; set; }
     [MaxLength(9)]
     public string? NumeroTelemovel { get; set; }
     
     [ForeignKey("Morada")]
     public int? MoradaID { get; set; }
     public Morada? Morada { get; set; }
+
 }
 

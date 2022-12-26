@@ -1,7 +1,7 @@
 ﻿@page "/registerclient"
-@using MarketBayBlazor.Client.ViewModels
 @inject IClientService ClientService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthProvider
 
 <div>
   <div class="log-in-container">
@@ -9,18 +9,10 @@
       <div class="log-in-container01">
         <div class="log-in-container02">
           <h1 class="log-in-text">MarketBay</h1>
-          <img
-            alt="image"
-            src="logo.png"
-            class="log-in-image"
-          />
+          <img alt="image" src="logo.png" class="log-in-image" />
         </div>
       </div>
-      <div
-        data-thq="thq-navbar-nav"
-        data-role="Nav"
-        class="log-in-desktop-menu"
-      >
+      <div data-thq="thq-navbar-nav" data-role="Nav" class="log-in-desktop-menu">
         <nav data-thq="thq-navbar-nav-links" data-role="Nav" class="log-in-nav">
           <span class="log-in-text01">Work</span>
           <span class="log-in-text02">Dashboard</span>
@@ -31,8 +23,8 @@
       <div data-thq="thq-burger-menu" class="log-in-burger-menu">
         <svg viewBox="0 0 1024 1024" class="log-in-icon">
           <path
-            d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"
-          ></path>
+            d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z">
+          </path>
         </svg>
       </div>
       <div data-thq="thq-mobile-menu" class="log-in-mobile-menu">
@@ -41,17 +33,12 @@
             <h1 class="log-in-heading">MarketBay</h1>
             <div data-thq="thq-close-menu" class="log-in-menu-close">
               <svg viewBox="0 0 1024 1024" class="log-in-icon2">
-                <path
-                  d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"
-                ></path>
+                <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z">
+                </path>
               </svg>
             </div>
           </div>
-          <nav
-            data-thq="thq-mobile-menu-nav-links"
-            data-role="Nav"
-            class="log-in-nav2"
-          >
+          <nav data-thq="thq-mobile-menu-nav-links" data-role="Nav" class="log-in-nav2">
             <span class="log-in-text05">Sobre nós</span>
             <span class="log-in-text06">Ajuda</span>
             <span class="log-in-text07">Definições</span>
@@ -84,11 +71,7 @@
             <span></span>
             <span class="log-in-text17">*</span>
           </h1>
-          <InputText
-            @bind-Value="clienteEntry.Name"
-            placeholder="Awesome Name"
-            class="log-in-textinput input"
-          />
+          <InputText @bind-Value="clienteEntry.Name" placeholder="Awesome Name" class="log-in-textinput input" />
         </div>
         <div class="log-in-container11">
           <h1 class="log-in-text18">
@@ -96,11 +79,8 @@
             <span> </span>
             <span class="log-in-text21">*</span>
           </h1>
-          <InputText
-            @bind-Value="clienteEntry.Email"
-            placeholder="awesomeemail@gmail.com"
-            class="log-in-textinput1 input"
-          />
+          <InputText @bind-Value="clienteEntry.Email" placeholder="awesomeemail@gmail.com"
+            class="log-in-textinput1 input" />
         </div>
         <div class="log-in-container12">
           <h1 class="log-in-text22">
@@ -108,51 +88,34 @@
             <span class="log-in-text24"> </span>
             <span class="log-in-text25">*</span>
           </h1>
-          <InputText
-            @bind-Value="clienteEntry.Password"
-            placeholder="placeholder"
-            class="log-in-textinput2 input"
-          />
+          <InputText @bind-Value="clienteEntry.Password" type="password" placeholder="placeholder" class="log-in-textinput2 input" />
         </div>
         <div class="log-in-container13">
           <h1 class="log-in-text26">Método de Pagamento</h1>
-          <InputText
-            @bind-Value="clienteEntry.MetodoPagamento"
-            placeholder="placeholder"
-            class="log-in-textinput3 input"
-          />
+          <InputText @bind-Value="clienteEntry.MetodoPagamento" placeholder="placeholder"
+            class="log-in-textinput3 input" />
         </div>
         <div class="log-in-container14">
           <h1 class="log-in-text27">Rua</h1>
-          <InputText
-            @bind-Value="clienteEntry.Rua"
-            placeholder="placeholder"
-            class="log-in-textinput4 input"
-          />
+          <InputText @bind-Value="clienteEntry.Rua" placeholder="placeholder" class="log-in-textinput4 input" />
         </div>
         <div class="log-in-container15">
           <h1 class="log-in-text28">Código Postal</h1>
-          <InputText
-            @bind-Value="clienteEntry.CodigoPostal"
-            placeholder="placeholder"
-            class="log-in-textinput5 input"
-          />
+          <InputText @bind-Value="clienteEntry.CodigoPostal" placeholder="placeholder"
+            class="log-in-textinput5 input" />
         </div>
         <div class="log-in-container16">
           <h1 class="log-in-text29">
             <span>Localidade</span>
             <br />
           </h1>
-          <InputText
-            @bind-Value="clienteEntry.Localidade"
-            type="text"
-            placeholder="placeholder"
-            class="log-in-textinput6 input"
-          />
+          <InputText @bind-Value="clienteEntry.Localidade" type="text" placeholder="placeholder"
+            class="log-in-textinput6 input" />
         </div>
         <div class="log-in-container17">
           <div class="log-in-container18">
-            <button class="log-in-button button " onclick="@(() => NavigationManager.NavigateTo("/feiras"))">Fazer mais tarde</button>
+            <button class="log-in-button button " onclick="@(() => NavigationManager.NavigateTo("/feiras"))">Fazer
+              mais tarde</button>
             <button type="submit" class="log-in-button1 button">Sign up</button>
           </div>
           <div class="log-in-container19">
@@ -749,28 +712,7 @@
 
   public async void Registar()
   {
-
-    Morada? morada = null;
-    if(clienteEntry.CodigoPostal != null && clienteEntry.Localidade != null && clienteEntry.Rua != null) {
-      morada = new Morada() 
-      {
-        CodigoPostal = clienteEntry.CodigoPostal,
-        Localidade = clienteEntry.Localidade,
-        Rua = clienteEntry.Localidade,
-      };
-    }
-
-    var cliente = new Cliente() {
-      Conta = new Conta() 
-      {
-        Nome = clienteEntry.Name,
-        Email = clienteEntry.Email,
-        Password = clienteEntry.Password,
-        NumeroTelemovel = clienteEntry.MetodoPagamento,
-        Morada = morada, 
-      }
-    };
-    await ClientService.RegistaCliente(cliente);
+    await ClientService.RegistaCliente(this.clienteEntry);
     NavigationManager.NavigateTo("/login");
   }
 }

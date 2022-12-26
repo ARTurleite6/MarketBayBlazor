@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MarketBayBlazor.Server.Migrations
 {
     /// <inheritdoc />
-    public partial class CreateDatabase : Migration
+    public partial class DatabaseCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,6 @@ namespace MarketBayBlazor.Server.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContaID = table.Column<int>(type: "int", nullable: false),
                     Rua = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CodigoPostal = table.Column<string>(type: "nvarchar(8)", maxLength: 8, nullable: false),
                     Localidade = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
@@ -71,7 +70,8 @@ namespace MarketBayBlazor.Server.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Password = table.Column<byte[]>(type: "varbinary(50)", maxLength: 50, nullable: false),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
                     NumeroTelemovel = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: true),
                     MoradaID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -311,7 +311,8 @@ namespace MarketBayBlazor.Server.Migrations
                     StandFeiranteID = table.Column<int>(type: "int", nullable: false),
                     ProdutoID = table.Column<int>(type: "int", nullable: false),
                     Preco = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
-                    Quantidade = table.Column<int>(type: "int", nullable: false)
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    Destacado = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -381,8 +382,7 @@ namespace MarketBayBlazor.Server.Migrations
                         name: "FK_CompraProduto_Compra_CompraID",
                         column: x => x.CompraID,
                         principalTable: "Compra",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                     table.ForeignKey(
                         name: "FK_CompraProduto_Produto_ProdutoID",
                         column: x => x.ProdutoID,
@@ -390,6 +390,12 @@ namespace MarketBayBlazor.Server.Migrations
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categoria_Descricao",
+                table: "Categoria",
+                column: "Descricao",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_CategoriaCliente_ClienteID",
@@ -404,7 +410,8 @@ namespace MarketBayBlazor.Server.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Cliente_ContaID",
                 table: "Cliente",
-                column: "ContaID");
+                column: "ContaID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Compra_ClienteID",
@@ -452,7 +459,8 @@ namespace MarketBayBlazor.Server.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Feirante_ContaID",
                 table: "Feirante",
-                column: "ContaID");
+                column: "ContaID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feirante_NIFempresarial",

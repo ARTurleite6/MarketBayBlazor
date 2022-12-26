@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MarketBayBlazor.Server.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221206005344_CreateDatabase")]
-    partial class CreateDatabase
+    [Migration("20221226140309_passwordlength")]
+    partial class passwordlength
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -54,6 +54,9 @@ namespace MarketBayBlazor.Server.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Descricao")
+                        .IsUnique();
 
                     b.ToTable("Categoria");
                 });
@@ -94,7 +97,8 @@ namespace MarketBayBlazor.Server.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ContaID");
+                    b.HasIndex("ContaID")
+                        .IsUnique();
 
                     b.ToTable("Cliente");
                 });
@@ -176,10 +180,13 @@ namespace MarketBayBlazor.Server.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<string>("Password")
+                    b.Property<byte[]>("Password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<byte[]>("PasswordSalt")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
 
                     b.HasKey("ID");
 
@@ -280,7 +287,8 @@ namespace MarketBayBlazor.Server.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ContaID");
+                    b.HasIndex("ContaID")
+                        .IsUnique();
 
                     b.HasIndex("NIFempresarial")
                         .IsUnique();
@@ -326,9 +334,6 @@ namespace MarketBayBlazor.Server.Migrations
                         .IsRequired()
                         .HasMaxLength(8)
                         .HasColumnType("nvarchar(8)");
-
-                    b.Property<int>("ContaID")
-                        .HasColumnType("int");
 
                     b.Property<string>("Localidade")
                         .IsRequired()
@@ -389,6 +394,9 @@ namespace MarketBayBlazor.Server.Migrations
 
                     b.Property<int>("ProdutoID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("Destacado")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("Preco")
                         .HasPrecision(10, 2)
@@ -496,27 +504,25 @@ namespace MarketBayBlazor.Server.Migrations
             modelBuilder.Entity("MarketBayBlazor.Shared.ClassificacoesCliente", b =>
                 {
                     b.HasOne("MarketBayBlazor.Shared.Cliente", "Cliente")
-                        .WithMany("ClassificacoesFeirante")
+                        .WithMany()
                         .HasForeignKey("ClienteID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketBayBlazor.Shared.Feirante", "Feirante")
+                    b.HasOne("MarketBayBlazor.Shared.Feirante", null)
                         .WithMany("ClassificacoesClientes")
                         .HasForeignKey("FeiranteID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Cliente");
-
-                    b.Navigation("Feirante");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Cliente", b =>
                 {
                     b.HasOne("MarketBayBlazor.Shared.Conta", "Conta")
-                        .WithMany()
-                        .HasForeignKey("ContaID")
+                        .WithOne()
+                        .HasForeignKey("MarketBayBlazor.Shared.Cliente", "ContaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -525,29 +531,25 @@ namespace MarketBayBlazor.Server.Migrations
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Compra", b =>
                 {
-                    b.HasOne("MarketBayBlazor.Shared.Cliente", "Cliente")
+                    b.HasOne("MarketBayBlazor.Shared.Cliente", null)
                         .WithMany("Compras")
                         .HasForeignKey("ClienteID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketBayBlazor.Shared.StandFeirante", "StandFeirante")
+                    b.HasOne("MarketBayBlazor.Shared.StandFeirante", null)
                         .WithMany("Vendas")
                         .HasForeignKey("StandFeiranteID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("StandFeirante");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.CompraProduto", b =>
                 {
-                    b.HasOne("MarketBayBlazor.Shared.Compra", "Compra")
-                        .WithMany()
+                    b.HasOne("MarketBayBlazor.Shared.Compra", null)
+                        .WithMany("CompraProdutos")
                         .HasForeignKey("CompraID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.HasOne("MarketBayBlazor.Shared.Produto", "Produto")
@@ -555,8 +557,6 @@ namespace MarketBayBlazor.Server.Migrations
                         .HasForeignKey("ProdutoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Compra");
 
                     b.Navigation("Produto");
                 });
@@ -608,8 +608,8 @@ namespace MarketBayBlazor.Server.Migrations
             modelBuilder.Entity("MarketBayBlazor.Shared.Feirante", b =>
                 {
                     b.HasOne("MarketBayBlazor.Shared.Conta", "Conta")
-                        .WithMany()
-                        .HasForeignKey("ContaID")
+                        .WithOne()
+                        .HasForeignKey("MarketBayBlazor.Shared.Feirante", "ContaID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -636,7 +636,7 @@ namespace MarketBayBlazor.Server.Migrations
 
             modelBuilder.Entity("MarketBayBlazor.Shared.ProdutoStand", b =>
                 {
-                    b.HasOne("MarketBayBlazor.Shared.Produto", null)
+                    b.HasOne("MarketBayBlazor.Shared.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoID")
                         .OnDelete(DeleteBehavior.ClientCascade)
@@ -647,6 +647,8 @@ namespace MarketBayBlazor.Server.Migrations
                         .HasForeignKey("StandFeiranteID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
+
+                    b.Navigation("Produto");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Proposta", b =>
@@ -663,7 +665,7 @@ namespace MarketBayBlazor.Server.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MarketBayBlazor.Shared.StandFeirante", "StandFeirante")
+                    b.HasOne("MarketBayBlazor.Shared.StandFeirante", null)
                         .WithMany("Propostas")
                         .HasForeignKey("StandFeiranteID")
                         .OnDelete(DeleteBehavior.ClientCascade)
@@ -672,36 +674,35 @@ namespace MarketBayBlazor.Server.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Produto");
-
-                    b.Navigation("StandFeirante");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.StandFeirante", b =>
                 {
-                    b.HasOne("MarketBayBlazor.Shared.Feira", "Feira")
+                    b.HasOne("MarketBayBlazor.Shared.Feira", null)
                         .WithMany("Stands")
                         .HasForeignKey("FeiraID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MarketBayBlazor.Shared.Feirante", "Feirante")
-                        .WithMany("Stands")
+                        .WithMany()
                         .HasForeignKey("FeiranteID")
                         .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
-
-                    b.Navigation("Feira");
 
                     b.Navigation("Feirante");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Cliente", b =>
                 {
-                    b.Navigation("ClassificacoesFeirante");
-
                     b.Navigation("Compras");
 
                     b.Navigation("FeirasFavoritas");
+                });
+
+            modelBuilder.Entity("MarketBayBlazor.Shared.Compra", b =>
+                {
+                    b.Navigation("CompraProdutos");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.Feira", b =>
@@ -714,8 +715,6 @@ namespace MarketBayBlazor.Server.Migrations
                     b.Navigation("ClassificacoesClientes");
 
                     b.Navigation("Formularios");
-
-                    b.Navigation("Stands");
                 });
 
             modelBuilder.Entity("MarketBayBlazor.Shared.StandFeirante", b =>

@@ -1,4 +1,11 @@
-@page "/proposta"
+@page "/proposta/{feiraid:int}/{standid:int}/{id:int}"
+@using System.Security.Claims
+@attribute [Authorize(Roles = "Cliente")]
+@inject IStandService StandService
+@inject IFeiraService FeiraService
+@inject IPropostaService PropostaService
+@inject NavigationManager Navigator
+
 
 <div class="proposta-container">
     <div class="proposta-container01">
@@ -48,7 +55,7 @@
         <div class="proposta-container08">
             <div class="proposta-container09">
                 <h1 class="proposta-text06">
-                    SEI - Semana de Engenharia Informática
+                    @this.feira.NomeFeira
                 </h1>
             </div>
             <div class="proposta-container10">
@@ -58,14 +65,14 @@
         <div class="proposta-container11">
             <div class="proposta-container12">
                 <h1 class="proposta-text08">
-                    <span>CESIUM</span>
+                    <span>@this.Stand.Feirante.Conta.Nome.ToUpper()</span>
                     <br />
                     <br />
                 </h1>
             </div>
         </div>
     </div>
-    <div class="proposta-container13">
+    <EditForm Model="@proposta" class="proposta-container13">
         <div class="proposta-container14">
             <div class="proposta-container15">
                 <form class="proposta-form">
@@ -80,7 +87,7 @@
                                 <h1 class="proposta-text12">Quantidade:</h1>
                             </div>
                             <div class="proposta-container20">
-                                <input type="text" placeholder="placeholder" class="proposta-textinput1 input" />
+                                <InputNumber @bind-Value="@proposta.Quantidade" placeholder="placeholder" class="proposta-textinput1 input" />
                             </div>
                         </div>
                         <div class="proposta-container21">
@@ -88,7 +95,7 @@
                                 <h1 class="proposta-text13">Preço:</h1>
                             </div>
                             <div class="proposta-container23">
-                                <input type="text" placeholder="placeholder" class="proposta-textinput2 input" />
+                                <InputNumber @bind-Value="@proposta.Preco" placeholder="placeholder" class="proposta-textinput2 input" />
                             </div>
                         </div>
                     </div>
@@ -97,17 +104,17 @@
             <div class="proposta-container24">
                 <div class="proposta-container25">
                     <div class="proposta-container26">
-                        <h1 class="proposta-text14">Caneca CESIUM</h1>
+                        <h1 class="proposta-text14">@this.Produto.Nome</h1>
                     </div>
                 </div>
                 <div class="proposta-container27">
-                    <textarea placeholder="placeholder" class="proposta-textarea textarea"></textarea>
+                    <InputText @bind-Value="proposta.Descricao" placeholder="placeholder" class="proposta-textarea textarea" />
                 </div>
             </div>
         </div>
         <div class="proposta-container28">
             <div class="proposta-container29">
-                <button class="proposta-button1 button">Publicar</button>
+                <button type="submit" class="proposta-button1 button" onclick="@SendProposta">Publicar</button>
             </div>
             <div class="proposta-container30">
                 <button class="proposta-button2 button">
@@ -118,7 +125,7 @@
                 </button>
             </div>
             <div class="proposta-container31">
-                <button class="proposta-button3 button">
+                <button class="proposta-button3 button" onclick="@GoToStand">
                     <span>
                         <span>Eliminar</span>
                         <br />
@@ -126,7 +133,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </EditForm>
 </div>
 
 <style>
@@ -343,7 +350,7 @@
     }
 
     .proposta-container05 {
-        width: 457px;
+        width: 45%;
         height: 100px;
         display: flex;
         align-self: flex-start;
@@ -634,6 +641,7 @@
     .proposta-text14 {
         color: rgb(15, 138, 130);
         font-size: 1em;
+        margin-left: 5px;
     }
 
     .proposta-container27 {
@@ -755,3 +763,83 @@
         }
     }
 </style>
+
+@code {
+    [Parameter]
+    public int FeiraID{ get; set; }
+    [Parameter]
+    public int StandID{ get; set; }
+    [Parameter]
+    public int ID { get; set; }
+
+    private Produto Produto;
+    private StandFeirante Stand;
+    private Feira feira;
+
+    [CascadingParameter]
+    private Task<AuthenticationState> authenticationState {get; set;}
+
+
+    private Proposta proposta = new Proposta();
+
+        protected override async Task OnInitializedAsync()
+        {
+            var feira = await FeiraService.GetFeira(this.FeiraID); 
+            if(feira != null)
+            {
+                this.feira = feira;
+            }
+
+            var stand = await StandService.GetStand(this.StandID);
+            if(stand != null)
+            {
+                this.Stand = stand;
+            }
+
+            if(stand.ProdutosStands.Any(produtoStand => produtoStand.ProdutoID == ID))
+            {
+                this.Produto = stand.ProdutosStands.Where(produtoStand => produtoStand.ProdutoID == ID).First().Produto;
+                Console.WriteLine($"Produto com id {ID} encontrado");
+            }
+        }
+
+
+    private async Task SendProposta()
+    {
+        var authState = await authenticationState;
+        var user = authState.User;
+
+        string? id = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+
+        if(this.proposta.Preco == 0 && this.proposta.Quantidade == 0)
+        {
+            Console.WriteLine("Precisa de inserir alguma coisa");
+            return;
+        }
+
+        if(id != null)
+        {
+            this.proposta.ProdutoID = ID;
+            this.proposta.StandFeiranteID = this.StandID;
+            this.proposta.ClienteID = Int32.Parse(id);
+            var answer = PropostaService.SendProposta(this.proposta);
+            if(answer != null)
+            {
+                Console.WriteLine("Proposta enviada com sucesso");
+            }
+            else
+            {
+                Console.WriteLine("Proposta não conseguiu ser enviada com sucesso");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Error finding the id of the logged user");
+        }
+    }
+
+    private void GoToStand()
+    {
+        Navigator.NavigateTo($"/standfeira/{this.FeiraID}/{this.StandID}");
+    }
+}

@@ -13,7 +13,7 @@ public class Proposta
    [Precision(10, 2)]
    public decimal Preco { get; set; }
    [MaxLength(1000)]
-   public string Descricao { get; set; }
+   public string Descricao { get; set; } = string.Empty;
    public int Quantidade { get; set; }
    [MaxLength(50)]
    public string Estado{ get; set; } = "Pendente";
@@ -21,10 +21,10 @@ public class Proposta
    
    [ForeignKey("Produto")]
    public int ProdutoID { get; set; } 
-   public virtual Produto Produto { get; set; }
+   public virtual Produto? Produto { get; set; }
    [ForeignKey("Cliente")]
    public int ClienteID { get; set; }
-   public virtual Cliente Cliente { get; set; }
+   public virtual Cliente? Cliente { get; set; }
    [ForeignKey("StandFeirante")]
    public int StandFeiranteID { get; set; }
 }

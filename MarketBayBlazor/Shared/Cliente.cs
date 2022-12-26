@@ -18,4 +18,5 @@ public class Cliente: IUser
     public virtual ICollection<FavFeirasCliente> FeirasFavoritas { get; set; } = new List<FavFeirasCliente>();
 
     public virtual ICollection<Compra> Compras { get; set; } = new List<Compra>();
+
 }
