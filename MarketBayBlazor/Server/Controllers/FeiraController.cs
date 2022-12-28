@@ -10,7 +10,7 @@ using MarketBayBlazor.Shared;
 namespace MarketBayBlazor.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class FeiraController : Controller
     {
         private readonly DatabaseContext _context;
@@ -52,9 +52,11 @@ namespace MarketBayBlazor.Server.Controllers
         [HttpGet]
         public ActionResult<List<Feira>> Get()
         {
+            var compareDate = DateTime.Now;            
+
             return Ok(_context
                 .Feiras
-                .Where(feira => feira.DataFim < DateTime.Now)
+                // .Where(feira => feira.DataFim > compareDate)
                 .Include(feira => feira.Categoria));
     	}
 

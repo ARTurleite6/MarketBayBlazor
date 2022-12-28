@@ -1,0 +1,1327 @@
+@page "/inscreverfeira/{id:int}"
+@using System.Security.Claims
+@inject IProdutoService ProdutoService
+@inject IFeiraService FeiraService
+@attribute [Authorize(Roles = "Feirante")]
+
+<AuthorizeView>
+<div class="por-produto-em-feira-container">
+  <div class="por-produto-em-feira-container01">
+    <div class="por-produto-em-feira-container02">
+      <div class="por-produto-em-feira-container03">
+        <div data-thq="thq-dropdown" class="por-produto-em-feira-thq-dropdown list-item">
+          <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle" href="/feiras">
+            <a href="/feiras">
+              <img alt="image" src="logo.png" class="por-produto-em-feira-image">
+            </a>
+          </div>
+          <ul data-thq="thq-dropdown-list" class="por-produto-em-feira-dropdown-list">
+            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown list-item">
+              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle1">
+                <span class="por-produto-em-feira-text">Sobre nós</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown1 list-item">
+              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle2">
+                <span class="por-produto-em-feira-text01">Ajuda</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown2 list-item">
+              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle3">
+                <span class="por-produto-em-feira-text02">Definições</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="por-produto-em-feira-container04">
+      <div class="por-produto-em-feira-container05">
+        <button class="por-produto-em-feira-button button">
+          <span class="por-produto-em-feira-text03">
+            <span>Filter</span>
+            <br />
+          </span>
+        </button>
+      </div>
+      <div class="por-produto-em-feira-container06">
+        <input type="text" placeholder="Pesquisa" class="por-produto-em-feira-textinput input" />
+      </div>
+    </div>
+  </div>
+  <div class="por-produto-em-feira-container07">
+    <div class="por-produto-em-feira-container08">
+      <h1 class="por-produto-em-feira-text06">
+        @feira.NomeFeira
+      </h1>
+    </div>
+    <div class="por-produto-em-feira-container09">
+      <h1 class="por-produto-em-feira-text07">@DateTime.Now.Day/@DateTime.Now.Month</h1>
+    </div>
+  </div>
+  <div class="por-produto-em-feira-container10">
+    <div class="por-produto-em-feira-container11">
+      <div class="por-produto-em-feira-container12">
+        <div class="por-produto-em-feira-container13">
+          <img alt="image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400" class="por-produto-em-feira-textarea textarea"/>
+        </div>
+        <div class="por-produto-em-feira-container14">
+          <h1 class="por-produto-em-feira-text08">@context.User.Identity.Name.ToUpper()</h1>
+        </div>
+      </div>
+    </div>
+    <div class="por-produto-em-feira-container15">
+      <div class="por-produto-em-feira-container16">
+        <h1 class="por-produto-em-feira-text09">
+          Indicar produtos de stand:
+        </h1>
+      </div>
+
+      @foreach (var produto in this.produtos)
+      {
+            <div class="por-produto-em-feira-container17">
+              <div class="por-produto-em-feira-container18">
+                <img alt="image"
+                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+                class="por-produto-em-feira-image1" />
+              </div>
+              <div class="por-produto-em-feira-container19">
+                <div class="por-produto-em-feira-container20">
+                  <h1 class="por-produto-em-feira-text10">@produto.Nome</h1>
+                </div>
+              </div>
+              <div class="por-produto-em-feira-container21">
+                <div class="por-produto-em-feira-container22">
+                  <div class="por-produto-em-feira-container23">
+                    <h1 class="por-produto-em-feira-text11">Adicionar:</h1>
+                  </div>
+                  <div class="por-produto-em-feira-container24">
+                    <div class="por-produto-em-feira-container25">
+                      <input type="checkbox" class="por-produto-em-feira-checkbox" />
+                    </div>
+                  </div>
+                </div>
+                <div class="por-produto-em-feira-container26">
+                  <div class="por-produto-em-feira-container27">
+                    <h1 class="por-produto-em-feira-text12">Destacar:</h1>
+                  </div>
+                  <div class="por-produto-em-feira-container28">
+                    <div class="por-produto-em-feira-container29">
+                      <input type="checkbox" class="por-produto-em-feira-checkbox1" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      }
+
+      <div class="por-produto-em-feira-container17">
+        <div class="por-produto-em-feira-container18">
+          <img alt="image"
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+            class="por-produto-em-feira-image1" />
+        </div>
+        <div class="por-produto-em-feira-container19">
+          <div class="por-produto-em-feira-container20">
+            <h1 class="por-produto-em-feira-text10">Computador</h1>
+          </div>
+        </div>
+        <div class="por-produto-em-feira-container21">
+          <div class="por-produto-em-feira-container22">
+            <div class="por-produto-em-feira-container23">
+              <h1 class="por-produto-em-feira-text11">Adicionar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container24">
+              <div class="por-produto-em-feira-container25">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox" />
+              </div>
+            </div>
+          </div>
+          <div class="por-produto-em-feira-container26">
+            <div class="por-produto-em-feira-container27">
+              <h1 class="por-produto-em-feira-text12">Destacar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container28">
+              <div class="por-produto-em-feira-container29">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox1" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="por-produto-em-feira-container30">
+        <div class="por-produto-em-feira-container31">
+          <img alt="image"
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+            class="por-produto-em-feira-image2" />
+        </div>
+        <div class="por-produto-em-feira-container32">
+          <div class="por-produto-em-feira-container33">
+            <h1 class="por-produto-em-feira-text13">Computador</h1>
+          </div>
+        </div>
+        <div class="por-produto-em-feira-container34">
+          <div class="por-produto-em-feira-container35">
+            <div class="por-produto-em-feira-container36">
+              <h1 class="por-produto-em-feira-text14">Adicionar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container37">
+              <div class="por-produto-em-feira-container38">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox2" />
+              </div>
+            </div>
+          </div>
+          <div class="por-produto-em-feira-container39">
+            <div class="por-produto-em-feira-container40">
+              <h1 class="por-produto-em-feira-text15">Destacar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container41">
+              <div class="por-produto-em-feira-container42">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox3" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="por-produto-em-feira-container43">
+        <div class="por-produto-em-feira-container44">
+          <img alt="image"
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+            class="por-produto-em-feira-image3" />
+        </div>
+        <div class="por-produto-em-feira-container45">
+          <div class="por-produto-em-feira-container46">
+            <h1 class="por-produto-em-feira-text16">Computador</h1>
+          </div>
+        </div>
+        <div class="por-produto-em-feira-container47">
+          <div class="por-produto-em-feira-container48">
+            <div class="por-produto-em-feira-container49">
+              <h1 class="por-produto-em-feira-text17">Adicionar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container50">
+              <div class="por-produto-em-feira-container51">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox4" />
+              </div>
+            </div>
+          </div>
+          <div class="por-produto-em-feira-container52">
+            <div class="por-produto-em-feira-container53">
+              <h1 class="por-produto-em-feira-text18">Destacar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container54">
+              <div class="por-produto-em-feira-container55">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="por-produto-em-feira-container56">
+        <div class="por-produto-em-feira-container57">
+          <img alt="image"
+            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+            class="por-produto-em-feira-image4" />
+        </div>
+        <div class="por-produto-em-feira-container58">
+          <div class="por-produto-em-feira-container59">
+            <h1 class="por-produto-em-feira-text19">Computador</h1>
+          </div>
+        </div>
+        <div class="por-produto-em-feira-container60">
+          <div class="por-produto-em-feira-container61">
+            <div class="por-produto-em-feira-container62">
+              <h1 class="por-produto-em-feira-text20">Adicionar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container63">
+              <div class="por-produto-em-feira-container64">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox6" />
+              </div>
+            </div>
+          </div>
+          <div class="por-produto-em-feira-container65">
+            <div class="por-produto-em-feira-container66">
+              <h1 class="por-produto-em-feira-text21">Destacar:</h1>
+            </div>
+            <div class="por-produto-em-feira-container67">
+              <div class="por-produto-em-feira-container68">
+                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox7" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</AuthorizeView>
+
+<style>
+  .por-produto-em-feira-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    background-color: #ebc39c;
+  }
+
+  .por-produto-em-feira-container01 {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    background-color: #0f8a82;
+  }
+
+  .por-produto-em-feira-container02 {
+    flex: 0 0 auto;
+    height: 77px;
+    display: flex;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container03 {
+    flex: 0 0 auto;
+    width: 181px;
+    display: flex;
+    align-self: center;
+    margin-top: 0px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-thq-dropdown {
+    width: 149px;
+    cursor: pointer;
+    height: 80px;
+    display: inline-block;
+    position: relative;
+    align-self: center;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .por-produto-em-feira-dropdown-toggle {
+    fill: #595959;
+    color: #595959;
+    width: 135px;
+    height: 94px;
+    display: inline-flex;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius2);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-image {
+    width: 88px;
+    height: 82px;
+    object-fit: cover;
+  }
+
+  .por-produto-em-feira-dropdown-list {
+    left: 0%;
+    width: max-content;
+    display: none;
+    z-index: 100;
+    position: absolute;
+    min-width: 100%;
+    transition: 0.3s;
+    align-items: stretch;
+    border-color: #D9D9D9;
+    border-width: 1px;
+    border-radius: var(--dl-radius-radius-radius4);
+    flex-direction: column;
+    list-style-type: none;
+    background-color: var(--dl-color-gray-white);
+    list-style-position: inside;
+  }
+
+  .por-produto-em-feira-dropdown {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .por-produto-em-feira-dropdown-toggle1 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-dropdown-toggle1:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .por-produto-em-feira-text {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .por-produto-em-feira-dropdown1 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .por-produto-em-feira-dropdown-toggle2 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-dropdown-toggle2:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .por-produto-em-feira-text01 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .por-produto-em-feira-dropdown2 {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    border-radius: var(--dl-radius-radius-radius2);
+  }
+
+  .por-produto-em-feira-dropdown-toggle3 {
+    fill: #595959;
+    color: #595959;
+    width: 100%;
+    display: inline-flex;
+    transition: 0.3s;
+    align-items: center;
+    padding-top: var(--dl-space-space-halfunit);
+    padding-left: var(--dl-space-space-unit);
+    border-radius: var(--dl-radius-radius-radius4);
+    padding-right: var(--dl-space-space-unit);
+    padding-bottom: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-dropdown-toggle3:hover {
+    fill: #fff;
+    color: #fff;
+    background-color: #595959;
+  }
+
+  .por-produto-em-feira-text02 {
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  .por-produto-em-feira-container04 {
+    flex: 0 0 auto;
+    width: 75%;
+    height: 109px;
+    display: flex;
+    align-self: center;
+    align-items: flex-start;
+    border-color: #ebc39c;
+    border-width: 5px;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container05 {
+    width: 45%;
+    height: 100px;
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-button {
+    color: var(--dl-color-gray-white);
+    align-self: flex-end;
+    transition: 0.3s;
+    background-color: #562a2a;
+  }
+
+  .por-produto-em-feira-button:hover {
+    color: #e5412a;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .por-produto-em-feira-text03 {
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  .por-produto-em-feira-container06 {
+    width: 303px;
+    height: 100px;
+    display: flex;
+    align-self: flex-start;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-textinput {
+    width: 294px;
+    height: 34px;
+    font-size: 16px;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container07 {
+    width: 100%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    border-color: #0f8a82;
+    border-style: dashed;
+    border-width: 3px;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container08 {
+    flex: 0 0 auto;
+    width: 360px;
+    height: 23px;
+    display: flex;
+    align-items: flex-start;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-text06 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .por-produto-em-feira-container09 {
+    flex: 0 0 auto;
+    width: 58px;
+    height: 23px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-text07 {
+    color: #562a2a;
+    font-size: 1em;
+  }
+
+  .por-produto-em-feira-container10 {
+    width: 100%;
+    height: 898px;
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container11 {
+    flex: 0 0 auto;
+    width: 270px;
+    height: 258px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container12 {
+    flex: 0 0 auto;
+    width: 206px;
+    height: 190px;
+    display: flex;
+    align-items: center;
+    margin-left: 0px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container13 {
+    width: 100%;
+    height: 169px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+  }
+
+  .por-produto-em-feira-container14 {
+    width: 185px;
+    height: 36px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text08 {
+    color: rgb(86, 42, 42);
+    font-size: 1em;
+  }
+
+  .por-produto-em-feira-container15 {
+    flex: 0 0 auto;
+    width: 860px;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    margin-top: var(--dl-space-space-unit);
+    align-items: flex-start;
+    margin-left: var(--dl-space-space-fourunits);
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container16 {
+    width: 428px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    margin-bottom: var(--dl-space-space-halfunit);
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-text09 {
+    color: #562a2a;
+    font-size: 1.5em;
+  }
+
+  .por-produto-em-feira-container17 {
+    width: 100%;
+    height: 189px;
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .por-produto-em-feira-container18 {
+    flex: 0 0 auto;
+    width: 246px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-image1 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .por-produto-em-feira-container19 {
+    flex: 0 0 auto;
+    width: 173px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container20 {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-text10 {
+    color: var(--dl-color-gray-black);
+    font-size: 1em;
+    margin-left: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-container21 {
+    flex: 0 0 auto;
+    width: 309px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container22 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container23 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text11 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container24 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container25 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container26 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container27 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text12 {
+    color: rgb(86, 42, 42);
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container28 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container29 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox1 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container30 {
+    width: 100%;
+    height: 189px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: flex-start;
+  }
+
+  .por-produto-em-feira-container31 {
+    flex: 0 0 auto;
+    width: 246px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-image2 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .por-produto-em-feira-container32 {
+    flex: 0 0 auto;
+    width: 173px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container33 {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-text13 {
+    color: var(--dl-color-gray-black);
+    font-size: 1em;
+    margin-left: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-container34 {
+    flex: 0 0 auto;
+    width: 309px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container35 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container36 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text14 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container37 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container38 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox2 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container39 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container40 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text15 {
+    color: rgb(86, 42, 42);
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container41 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container42 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox3 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container43 {
+    width: 100%;
+    height: 189px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: flex-start;
+  }
+
+  .por-produto-em-feira-container44 {
+    flex: 0 0 auto;
+    width: 246px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-image3 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .por-produto-em-feira-container45 {
+    flex: 0 0 auto;
+    width: 173px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container46 {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-text16 {
+    color: var(--dl-color-gray-black);
+    font-size: 1em;
+    margin-left: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-container47 {
+    flex: 0 0 auto;
+    width: 309px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container48 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container49 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text17 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container50 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container51 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox4 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container52 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container53 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text18 {
+    color: rgb(86, 42, 42);
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container54 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container55 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox5 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container56 {
+    width: 100%;
+    height: 189px;
+    display: flex;
+    margin-top: var(--dl-space-space-unit);
+    align-items: flex-start;
+  }
+
+  .por-produto-em-feira-container57 {
+    flex: 0 0 auto;
+    width: 246px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: var(--dl-space-space-unit);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-image4 {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .por-produto-em-feira-container58 {
+    flex: 0 0 auto;
+    width: 173px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container59 {
+    width: 100%;
+    height: 34px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-text19 {
+    color: var(--dl-color-gray-black);
+    font-size: 1em;
+    margin-left: var(--dl-space-space-halfunit);
+  }
+
+  .por-produto-em-feira-container60 {
+    flex: 0 0 auto;
+    width: 309px;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .por-produto-em-feira-container61 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container62 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text20 {
+    color: #562a2a;
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container63 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container64 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox6 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  .por-produto-em-feira-container65 {
+    flex: 0 0 auto;
+    width: 145px;
+    height: 192px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .por-produto-em-feira-container66 {
+    width: 100%;
+    height: 81px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-text21 {
+    color: rgb(86, 42, 42);
+    font-size: 1.2em;
+  }
+
+  .por-produto-em-feira-container67 {
+    flex: 0 0 auto;
+    width: 100%;
+    display: flex;
+    align-self: flex-start;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-container68 {
+    flex: 0 0 auto;
+    width: 31px;
+    height: 68px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .por-produto-em-feira-checkbox7 {
+    width: 100%;
+    height: 100%;
+    align-self: center;
+  }
+
+  @@media(max-width: 1200px) {
+    .por-produto-em-feira-container04 {
+      width: 981px;
+    }
+
+    .por-produto-em-feira-container07 {
+      width: 100%;
+    }
+  }
+</style>
+
+@code {
+  [Parameter]
+  public int ID { get; set; }
+  [CascadingParameter]
+  public Task<AuthenticationState> authState { get; set; }
+  public Feira feira { get; set; } = new Feira()
+  {
+    NomeFeira = "Feira Não Encontrada",
+  };
+
+  private List<Produto> produtos = new List<Produto>();
+
+  private FeiraSubmitDTO dto;
+
+  protected override async Task OnInitializedAsync()
+  {
+
+    var feira = await FeiraService.GetFeira(ID);
+    if (feira != null)
+    {
+      this.feira = feira;
+      Console.WriteLine("Categoria da feira" + this.feira.CategoriaID);
+      var produtos = await ProdutoService.GetProdutos(this.feira.CategoriaID);
+
+      Console.WriteLine("Procurando produtos");
+      if(produtos != null)
+      {
+        this.produtos = produtos;
+
+        var auth = await this.authState;
+        var user = auth.User;
+        int id = Int32.Parse(user.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1");
+
+        if(id != -1)
+        {
+          this.dto = new FeiraSubmitDTO()
+          {
+            FeiraID = this.ID,
+            FeiranteID = id,
+          };
+        }
+      }
+    }
+  }
+
+  private void OnCheckedProduct(int produto, object checkValue)
+  {
+    if((bool)checkValue)
+    {
+
+      this.dto.Produtos.Add(produto);
+    }
+    else
+    {
+      this.dto.Produtos.Remove(produto);
+      this.dto.ProdutosDestacados.Remove(produto);
+      this.dto.ProdutoPreco.Remove(produto);
+      this.dto.QuantidadeProduto.Remove(produto);
+    }
+  }
+}

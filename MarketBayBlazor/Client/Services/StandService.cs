@@ -11,6 +11,6 @@ public class StandService : IStandService
 
     public async Task<StandFeirante?> GetStand(int ID)
     {
-        return await this._httpClient.GetFromJsonAsync<StandFeirante>($"stand/{ID}");
+        return await this._httpClient.GetFromJsonAsync<StandFeirante>($"api/stand/{ID}");
     }
 }

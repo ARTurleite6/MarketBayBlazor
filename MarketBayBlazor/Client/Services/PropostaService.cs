@@ -12,7 +12,7 @@ public class PropostaService : IPropostaService
 
     public async Task<Proposta?> SendProposta(Proposta proposta)
     {
-        var response = await this._http.PostAsJsonAsync("Proposta", proposta);
+        var response = await this._http.PostAsJsonAsync("api/Proposta", proposta);
         if(response.IsSuccessStatusCode)
         {
             return proposta;

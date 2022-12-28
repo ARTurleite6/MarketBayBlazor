@@ -11,7 +11,7 @@ using System.Security.Cryptography;
 namespace MarketBayBlazor.Server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class ClienteController : Controller
     {
 

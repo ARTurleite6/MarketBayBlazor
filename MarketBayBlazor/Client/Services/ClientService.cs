@@ -23,7 +23,7 @@ namespace MarketBayBlazor.Client.Services
 
         public async Task RegistaCliente(ClienteEntry cliente)
         {
-            await _httpClient.PostAsJsonAsync("Cliente", cliente);
+            await _httpClient.PostAsJsonAsync("api/Cliente", cliente);
         }
     }
 }

@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace MarketBayBlazor.Server;
+namespace MarketBayBlazor.Server.Controllers;
 
-[Route("[controller]")]
 [ApiController]
+[Route("api/[controller]")]
 public class AuthController: ControllerBase
 {
     
@@ -23,6 +23,7 @@ public class AuthController: ControllerBase
     [HttpPost]
     public async Task<ActionResult<string>> Login(UserLoginDTO request)
     {
+        Console.WriteLine(request.Email);
         if(!this._context.Contas.Any(conta => conta.Email == request.Email))
         {
             return BadRequest("User not found");
@@ -45,6 +46,7 @@ public class AuthController: ControllerBase
         {
             id = this._context.Feirantes.Where(feirante => feirante.ContaID == conta.ID).Select(feirante => feirante.ID).First();
             tipo = "Feirante";
+            Console.WriteLine("Sou um feirate");
         }
 
         if(id == -1)

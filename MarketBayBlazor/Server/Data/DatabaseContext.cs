@@ -61,6 +61,40 @@ namespace MarketBayBlazor.Server.Data
                 this.SaveChanges();
 	        }
 
+            if(!this.Feirantes.Any(feirante => feirante.Conta.Email == "feirante@hotmail.com"))
+            {
+                var password = "1234";
+                byte[] passwordSalt;
+                byte[] passwordHash;
+                using(var hmac = new HMACSHA512())
+                {
+                    passwordSalt = hmac.Key;
+                    passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                }
+                var feirante = new Feirante()
+                {
+                    NIFempresarial = "157158159",
+                    Foto = "Foto de feirante",
+                    Organizador = true,
+                    Conta = new Conta()
+                    {
+                        Nome = "CESIUM",
+                        Email = "feirante@hotmail.com",
+                        Password = passwordHash,
+                        PasswordSalt = passwordSalt,
+                        NumeroTelemovel = null,
+                        Morada = new Morada()
+                        {
+                            Rua = "Rua de Babais",
+                            CodigoPostal = "4650-063",
+                            Localidade = "Felgueiras",
+                        },
+                    }
+                };
+                this.Feirantes.Add(feirante);
+                this.SaveChanges();
+            }
+
             if(!this.Feiras.Any())
             {
                 var feira1 = new Feira()

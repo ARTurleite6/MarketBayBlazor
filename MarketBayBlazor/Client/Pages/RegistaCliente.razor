@@ -56,9 +56,7 @@
         <div class="log-in-container08">
           <span class="log-in-text09">
             <span class="log-in-text10">Já tem conta?</span>
-            <span></span>
-            <span class="log-in-text12">Log In</span>
-            <span> </span>
+            <span class="log-in-text12"><a href="/login">Log In</a></span>
           </span>
         </div>
       </div>
@@ -68,7 +66,6 @@
         <div class="log-in-container10">
           <h1 class="log-in-text14">
             <span class="log-in-text15">Nome</span>
-            <span></span>
             <span class="log-in-text17">*</span>
           </h1>
           <InputText @bind-Value="clienteEntry.Name" placeholder="Awesome Name" class="log-in-textinput input" />
@@ -76,7 +73,6 @@
         <div class="log-in-container11">
           <h1 class="log-in-text18">
             <span class="log-in-text19">Email</span>
-            <span> </span>
             <span class="log-in-text21">*</span>
           </h1>
           <InputText @bind-Value="clienteEntry.Email" placeholder="awesomeemail@gmail.com"
@@ -88,20 +84,20 @@
             <span class="log-in-text24"> </span>
             <span class="log-in-text25">*</span>
           </h1>
-          <InputText @bind-Value="clienteEntry.Password" type="password" placeholder="placeholder" class="log-in-textinput2 input" />
+          <InputText @bind-Value="clienteEntry.Password" type="password" placeholder="Amazing Password" class="log-in-textinput2 input" />
         </div>
         <div class="log-in-container13">
           <h1 class="log-in-text26">Método de Pagamento</h1>
-          <InputText @bind-Value="clienteEntry.MetodoPagamento" placeholder="placeholder"
+          <InputText @bind-Value="clienteEntry.MetodoPagamento" placeholder="999999999"
             class="log-in-textinput3 input" />
         </div>
         <div class="log-in-container14">
           <h1 class="log-in-text27">Rua</h1>
-          <InputText @bind-Value="clienteEntry.Rua" placeholder="placeholder" class="log-in-textinput4 input" />
+          <InputText @bind-Value="clienteEntry.Rua" placeholder="Rua" class="log-in-textinput4 input" />
         </div>
         <div class="log-in-container15">
           <h1 class="log-in-text28">Código Postal</h1>
-          <InputText @bind-Value="clienteEntry.CodigoPostal" placeholder="placeholder"
+          <InputText @bind-Value="clienteEntry.CodigoPostal" placeholder="9999-999"
             class="log-in-textinput5 input" />
         </div>
         <div class="log-in-container16">
@@ -109,7 +105,7 @@
             <span>Localidade</span>
             <br />
           </h1>
-          <InputText @bind-Value="clienteEntry.Localidade" type="text" placeholder="placeholder"
+          <InputText @bind-Value="clienteEntry.Localidade" type="text" placeholder="Localidade"
             class="log-in-textinput6 input" />
         </div>
         <div class="log-in-container17">
@@ -121,7 +117,6 @@
           <div class="log-in-container19">
             <span class="log-in-text32">
               <span class="log-in-text33">É vendedor?</span>
-              <span></span>
               <span class="log-in-text35">Clique Aqui</span>
             </span>
           </div>

@@ -4,7 +4,7 @@
 @inject NavigationManager navigator;
 @inject ILocalStorageService LocalStorage;
 
-<AuthorizeView Roles="Cliente">
+<AuthorizeView Roles="Feirante">
   <Authorized>
     @context.User.Identity.Name
   </Authorized>
@@ -393,7 +393,7 @@
 
   private async Task HandleLogin()
   {
-    var result = await http.PostAsJsonAsync("auth", dto);
+    var result = await http.PostAsJsonAsync("api/auth", dto);
     if(result.IsSuccessStatusCode)
     {
       var token = await result.Content.ReadAsStringAsync();

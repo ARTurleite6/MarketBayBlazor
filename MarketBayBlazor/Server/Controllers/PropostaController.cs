@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace MarketBayBlazor.Server
+namespace MarketBayBlazor.Server.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
-    public class PropostaController : Controller
+    public class PropostaController : ControllerBase
     {
 
         private readonly DatabaseContext _context;
