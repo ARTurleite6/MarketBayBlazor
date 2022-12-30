@@ -35,11 +35,29 @@ namespace MarketBayBlazor.Server.Controllers
             await this._context.Propostas.AddAsync(proposta);
             try {
                 await this._context.SaveChangesAsync();
-            } catch(DbUpdateException exc) {
+            } catch (DbUpdateException)
+            {
                 return BadRequest("Erro na inserção da proposta");
             }
 
             return Ok();
+        }
+
+        [HttpGet("{standID:int}")]
+        public async Task<ActionResult<List<Proposta>>> GetPropostasStand(int standID)
+        {
+            if(!this._context.StandsFeirantes.Any(stand => stand.ID == standID))
+            {
+                return NotFound("Could not found a stand with id = " + standID);
+            }
+
+            return Ok(await this._context.Propostas
+            .Where(proposta => proposta.StandFeiranteID == standID)
+            .OrderByDescending(proposta => proposta.data)
+            .Include(proposta => proposta.Produto)
+            .Include(proposta => proposta.Cliente)
+            .ThenInclude(cliente => cliente.Conta)
+            .ToListAsync<Proposta>());
         }
 
     }

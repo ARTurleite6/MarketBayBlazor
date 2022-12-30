@@ -1,0 +1,1135 @@
+@page "/chatroom/{feiraid:int}/{standid:int}"
+@inject IStandService StandService
+@inject IFeiraService FeiraService
+@inject IPropostaService PropostaService
+
+<div class="chat-room-container">
+    <div class="chat-room-container01">
+        <div class="chat-room-container02">
+            <div class="chat-room-container03">
+                <div data-thq="thq-dropdown" class="chat-room-thq-dropdown list-item">
+                    <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle">
+                        <a href="/feiras">
+                            <img alt="image" src="logo.png" class="chat-room-image" />
+                        </a>
+                    </div>
+                    <ul data-thq="thq-dropdown-list" class="chat-room-dropdown-list">
+                        <li data-thq="thq-dropdown" class="chat-room-dropdown list-item">
+                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle1">
+                                <span class="chat-room-text">Sobre nós</span>
+                            </div>
+                        </li>
+                        <li data-thq="thq-dropdown" class="chat-room-dropdown1 list-item">
+                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle2">
+                                <span class="chat-room-text01">Ajuda</span>
+                            </div>
+                        </li>
+                        <li data-thq="thq-dropdown" class="chat-room-dropdown2 list-item">
+                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle3">
+                                <span class="chat-room-text02">Definições</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="chat-room-container04">
+            <div class="chat-room-container05">
+                <button class="chat-room-button button">
+                    <span class="chat-room-text03">
+                        <span>Filter</span>
+                        <br />
+                    </span>
+                </button>
+            </div>
+            <div class="chat-room-container06">
+                <input type="text" placeholder="Pesquisa" class="chat-room-textinput input" />
+            </div>
+        </div>
+    </div>
+    <div class="chat-room-container07">
+        <div class="chat-room-container08">
+            <div class="chat-room-container09">
+                <h1 class="chat-room-text06">
+                    @feira.NomeFeira
+                </h1>
+            </div>
+            <div class="chat-room-container10">
+                <h1 class="chat-room-text07">@DateTime.Now.Day/@DateTime.Now.Month</h1>
+            </div>
+        </div>
+        <div class="chat-room-container11">
+            <div class="chat-room-container12">
+                <h1 class="chat-room-text08">
+                    <span>@stand.Feirante.Conta.Nome</span>
+                    <br />
+                    <br />
+                </h1>
+            </div>
+        </div>
+    </div>
+
+
+    @foreach (var proposta in this.propostas ?? new List<Proposta>())
+    {
+        <div class="chat-room-container13">
+            <div class="@ClassProposta(proposta)">
+                <div class="chat-room-container15">
+                    <form class="chat-room-form">
+                        <div class="chat-room-container16">
+                            <img alt="image"
+                            src="https://images.unsplash.com/photo-1586005309510-fee1ad863c04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDQ5fHxtdWdzfGVufDB8fHx8MTY3MTczMTY1NA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+                            class="chat-room-image1" />
+                        </div>
+                        <div class="chat-room-container17">
+                            <div class="chat-room-container18">
+                                <div class="chat-room-container19">
+                                    <h1 class="chat-room-text12">Quantidade:</h1>
+                                </div>
+                                <div class="chat-room-container20">
+                                    <h1 class="chat-room-text13">@proposta.Quantidade</h1>
+                                </div>
+                            </div>
+                            <div class="chat-room-container21">
+                                <div class="chat-room-container22">
+                                    <h1 class="chat-room-text14">Preço:</h1>
+                                </div>
+                                <div class="chat-room-container23">
+                                    <h1 class="chat-room-text15">@proposta.Preco€</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="chat-room-container24">
+                    <div class="chat-room-container25">
+                        <div class="chat-room-container26">
+                            <h1 class="chat-room-text16">@(proposta.Produto?.Nome ?? "Produto Não Carregado")</h1>
+                        </div>
+                    </div>
+                    @if (proposta.Estado == "Aceite")
+                    {
+                        <div class="chat-room-container27">
+                            <button class="chat-room-button1 button">Resgatar Proposta</button>
+                        </div>
+                    }
+                    else if (proposta.Estado == "Pendente")
+                    {
+                        <div class="chat-room-container58">
+                            <h1 class="chat-room-text28">@proposta.Descricao</h1>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="chat-room-container43">
+                            <h1 class="chat-room-text22">Proposta Recusada</h1>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+<style>
+    .chat-room-container {
+        width: 100%;
+        display: flex;
+        overflow: auto;
+        min-height: 100vh;
+        align-items: center;
+        flex-direction: column;
+        background-color: #ebc39c;
+    }
+
+    .chat-room-container01 {
+        width: 100%;
+        height: 96px;
+        display: flex;
+        position: relative;
+        align-items: flex-start;
+        background-color: #0f8a82;
+    }
+
+    .chat-room-container02 {
+        flex: 0 0 auto;
+        height: 77px;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chat-room-container03 {
+        flex: 0 0 auto;
+        display: flex;
+        align-self: center;
+        margin-top: 0px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .chat-room-thq-dropdown {
+        width: 149px;
+        cursor: pointer;
+        height: 80px;
+        display: inline-block;
+        position: relative;
+        align-self: center;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .chat-room-dropdown-toggle {
+        fill: #595959;
+        color: #595959;
+        width: 135px;
+        height: 94px;
+        display: inline-flex;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius2);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+        justify-content: center;
+    }
+
+    .chat-room-image {
+        width: 88px;
+        height: 82px;
+        object-fit: cover;
+    }
+
+    .chat-room-dropdown-list {
+        left: 0%;
+        width: max-content;
+        display: none;
+        z-index: 100;
+        position: absolute;
+        min-width: 100%;
+        transition: 0.3s;
+        align-items: stretch;
+        border-color: #D9D9D9;
+        border-width: 1px;
+        border-radius: var(--dl-radius-radius-radius4);
+        flex-direction: column;
+        list-style-type: none;
+        background-color: var(--dl-color-gray-white);
+        list-style-position: inside;
+    }
+
+    .chat-room-dropdown {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .chat-room-dropdown-toggle1 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-dropdown-toggle1:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .chat-room-text {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .chat-room-dropdown1 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .chat-room-dropdown-toggle2 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-dropdown-toggle2:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .chat-room-text01 {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .chat-room-dropdown2 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .chat-room-dropdown-toggle3 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-dropdown-toggle3:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .chat-room-text02 {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+    }
+
+    .chat-room-container04 {
+        flex: 0 0 auto;
+        width: 75%;
+        height: 109px;
+        display: flex;
+        align-self: center;
+        align-items: flex-start;
+        border-color: #ebc39c;
+        border-width: 5px;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container05 {
+        width: 45%;
+        height: 100px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-button {
+        color: var(--dl-color-gray-white);
+        align-self: flex-end;
+        transition: 0.3s;
+        background-color: #562a2a;
+    }
+
+    .chat-room-button:hover {
+        color: #e5412a;
+        border-color: var(--dl-color-gray-white);
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .chat-room-text03 {
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .chat-room-container06 {
+        width: 303px;
+        height: 100px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-textinput {
+        width: 294px;
+        height: 34px;
+        font-size: 16px;
+        align-self: center;
+    }
+
+    .chat-room-container07 {
+        width: 100%;
+        height: 72px;
+        display: flex;
+        align-items: center;
+        border-color: #0f8a82;
+        border-style: dashed;
+        border-width: 3px;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container08 {
+        flex: 0 0 auto;
+        width: 422px;
+        height: 22px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container09 {
+        flex: 0 0 auto;
+        width: 333px;
+        height: 50%;
+        display: flex;
+        align-items: flex-start;
+        margin-left: var(--dl-space-space-unit);
+        flex-direction: column;
+    }
+
+    .chat-room-text06 {
+        color: #562a2a;
+        font-size: 1em;
+    }
+
+    .chat-room-container10 {
+        flex: 0 0 auto;
+        width: 58px;
+        height: 23px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-text07 {
+        color: #562a2a;
+        font-size: 1em;
+    }
+
+    .chat-room-container11 {
+        width: 75%;
+        height: 19px;
+        display: flex;
+        align-items: flex-end;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .chat-room-container12 {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-self: flex-end;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-text08 {
+        color: rgb(229, 65, 42);
+    @*width:83px;*@height: 19px;
+        font-size: 1em;
+        align-self: flex-end;
+        margin-right: 25px
+    }
+
+    .chat-room-container13 {
+    @*width:100%;*@height: 260px;
+        display: flex;
+        margin-top: var(--dl-space-space-halfunit);
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container14 {
+    @*width:1051px;*@height: 210px;
+        display: flex;
+        align-items: flex-start;
+        background-color: #0f8a82;
+    }
+
+    .chat-room-container15 {
+        flex: 0 0 auto;
+    @*width:365px;*@height: 100%;
+        display: flex;
+        align-items: center;
+        border-color: #ebc39c;
+        border-style: dashed;
+        border-width: 5px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .chat-room-form {
+        width: 100%;
+        height: 227px;
+        display: flex;
+    }
+
+    .chat-room-container16 {
+        flex: 0 0 auto;
+        width: 234px;
+        height: 219px;
+        display: flex;
+        margin-top: 4px;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-image1 {
+        width: 201px;
+        height: 196px;
+        object-fit: cover;
+        padding: 5px;
+    }
+
+    .chat-room-container17 {
+        width: 138px;
+        height: 215px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container18 {
+        width: 100%;
+    @*height:50%;*@display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container19 {
+        flex: 0 0 auto;
+        width: 107px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text12 {
+        color: #562a2a;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .chat-room-container20 {
+        flex: 0 0 auto;
+        width: 95px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: #ebc39c;
+    }
+
+    .chat-room-text13 {
+        font-size: 1em;
+    }
+
+    .chat-room-container21 {
+        width: 100%;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .chat-room-container22 {
+        flex: 0 0 auto;
+        width: 100px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text14 {
+        color: #562a2a;
+        font-size: 1em;
+    }
+
+    .chat-room-container23 {
+        flex: 0 0 auto;
+        width: 95px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: #ebc39c;
+    }
+
+    .chat-room-text15 {
+        font-size: 1em;
+    }
+
+    .chat-room-container24 {
+        flex: 0 0 auto;
+        width: 755px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-container25 {
+        width: 100%;
+        height: 75px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container26 {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-text16 {
+        color: #562a2a;
+        font-size: 1.5em;
+    }
+
+    .chat-room-container27 {
+        width: 295px;
+        height: 81px;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        border-color: #562a2a;
+        border-style: dashed;
+        border-width: 2px;
+        justify-content: center;
+        background-color: #562a2a;
+        border-radius: 5px;
+    }
+
+    .chat-room-button1 {
+        color: #ebc39c;
+        width: 100%;
+        height: 100%;
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        transition: 0.3s;
+        font-weight: 700;
+        line-height: 2.5;
+        border-color: #562a2a;
+        background-color: #562a2a;
+    }
+
+    .chat-room-button1:hover {
+        color: #562a2a;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .chat-room-container28 {
+        height: 260px;
+        display: flex;
+        margin-top: var(--dl-space-space-halfunit);
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container29 {
+        height: 210px;
+        display: flex;
+        align-items: flex-start;
+        background-color: var(--dl-color-gray-900);
+    }
+
+    .chat-room-container30 {
+        flex: 0 0 auto;
+        width: 365px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-color: #ebc39c;
+        border-style: dashed;
+        border-width: 5px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .chat-room-form1 {
+        width: 100%;
+        height: 227px;
+        display: flex;
+    }
+
+    .chat-room-container31 {
+        flex: 0 0 auto;
+        width: 234px;
+        height: 219px;
+        display: flex;
+        margin-top: 4px;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-image2 {
+        width: 201px;
+        height: 196px;
+        object-fit: cover;
+    }
+
+    .chat-room-container32 {
+        width: 138px;
+        height: 215px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container33 {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container34 {
+        flex: 0 0 auto;
+        width: 107px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text17 {
+        color: #0f8a82;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .chat-room-container35 {
+        flex: 0 0 auto;
+        width: 50px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .chat-room-text18 {
+        font-size: 1em;
+    }
+
+    .chat-room-container36 {
+        width: 100%;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .chat-room-container37 {
+        flex: 0 0 auto;
+        width: 100px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text19 {
+        color: #0f8a82;
+        font-size: 1em;
+    }
+
+    .chat-room-container38 {
+        flex: 0 0 auto;
+        width: 50px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .chat-room-text20 {
+        font-size: 1em;
+    }
+
+    .chat-room-container39 {
+        flex: 0 0 auto;
+        width: 755px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-container40 {
+        width: 100%;
+        height: 75px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container41 {
+        flex: 0 0 auto;
+        width: 680px;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-text21 {
+        color: #0f8a82;
+        font-size: 1.5em;
+    }
+
+    .chat-room-container42 {
+        flex: 0 0 auto;
+        width: 470px;
+        height: 28px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .chat-room-button2 {
+        width: 56px;
+        height: 27px;
+        display: flex;
+        border-color: var(--dl-color-gray-900);
+        flex-direction: row;
+        background-color: var(--dl-color-gray-900);
+    }
+
+    .chat-room-icon {
+        width: 100%;
+        height: var(--dl-size-size-xsmall);
+        align-self: center;
+    }
+
+    .chat-room-container43 {
+        width: 295px;
+        height: 81px;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        border-color: #e5412a;
+        border-style: dashed;
+        border-width: 2px;
+        justify-content: center;
+        background-color: #e5412a;
+        border-radius: 5px;
+    }
+
+    .chat-room-text22 {
+        color: var(--dl-color-gray-white);
+        font-size: 1.3em;
+    }
+
+    .chat-room-container44 {
+        width: 100%;
+        height: 260px;
+        display: flex;
+        margin-top: var(--dl-space-space-halfunit);
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container45 {
+        height: 210px;
+        display: flex;
+        align-items: flex-start;
+        background-color: #562a2a;
+    }
+
+    .chat-room-container46 {
+        flex: 0 0 auto;
+        width: 365px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        border-color: #ebc39c;
+        border-style: dashed;
+        border-width: 5px;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .chat-room-form2 {
+        width: 100%;
+        height: 227px;
+        display: flex;
+    }
+
+    .chat-room-container47 {
+        flex: 0 0 auto;
+        width: 234px;
+        height: 219px;
+        display: flex;
+        margin-top: 4px;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-image3 {
+        width: 201px;
+        height: 196px;
+        object-fit: cover;
+    }
+
+    .chat-room-container48 {
+        width: 138px;
+        height: 215px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-container49 {
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container50 {
+        flex: 0 0 auto;
+        width: 107px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text23 {
+        color: #ebc39c;
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .chat-room-container51 {
+        flex: 0 0 auto;
+        width: 50px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .chat-room-text24 {
+        font-size: 1em;
+    }
+
+    .chat-room-container52 {
+        width: 100%;
+        height: 65px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .chat-room-container53 {
+        flex: 0 0 auto;
+        width: 100px;
+        height: 25px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-text25 {
+        color: #ebc39c;
+        font-size: 1em;
+    }
+
+    .chat-room-container54 {
+        flex: 0 0 auto;
+        width: 50px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .chat-room-text26 {
+        font-size: 1em;
+    }
+
+    .chat-room-container55 {
+        flex: 0 0 auto;
+        width: 755px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .chat-room-container56 {
+        width: 100%;
+        height: 75px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    .chat-room-container57 {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 50%;
+        display: flex;
+        align-items: center;
+        margin-left: var(--dl-space-space-halfunit);
+    }
+
+    .chat-room-text27 {
+        color: #ebc39c;
+        font-size: 1.5em;
+    }
+
+    .chat-room-container58 {
+        width: 295px;
+        height: 81px;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        border-color: #ebc39c;
+        border-style: dashed;
+        border-width: 2px;
+        justify-content: center;
+        background-color: #ebc39c;
+        border-radius: 5px;
+    }
+
+    .chat-room-text28 {
+        color: #0f8a82;
+        font-size: 1em;
+        font-style: normal;
+        font-weight: 700;
+    }
+
+    @@media(max-width: 1200px) {
+        .chat-room-container04 {
+            width: 981px;
+        }
+
+        .chat-room-container07 {
+            width: 100%;
+        }
+    }
+</style>
+
+@code {
+
+    [Parameter]
+    public int FeiraID { get; set; }
+    [Parameter]
+    public int StandID { get; set; }
+    private List<Proposta>? propostas;
+
+    private Feira feira = new Feira();
+    private StandFeirante stand = new StandFeirante();
+
+    protected async override Task OnInitializedAsync()
+    {
+        var feira = await FeiraService.GetFeira(FeiraID);
+        var stand = await StandService.GetStand(StandID);
+        var propostas = await PropostaService.GetPropostasStand(StandID);
+
+        if (stand != null)
+        {
+            this.stand = stand;
+        }
+        if (feira != null)
+        {
+            this.feira = feira;
+        }
+
+        if (propostas != null)
+        {
+            this.propostas = propostas;
+        }
+    }
+
+    private string ClassProposta(Proposta proposta)
+    {
+        if (proposta.Estado == "Pendente")
+        {
+            return "chat-room-container45";
+        }
+        else if(proposta.Estado == "Recusada")
+        {
+            return "chat-room-container29";
+        }
+        else
+        {
+            return "chat-room-container14";
+        }
+    }
+
+}

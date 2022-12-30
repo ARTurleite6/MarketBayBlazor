@@ -5,6 +5,7 @@
 @inject IFeiraService FeiraService
 @inject IPropostaService PropostaService
 @inject NavigationManager Navigator
+@inject IJSRuntime JS
 
 
 <div class="proposta-container">
@@ -114,10 +115,10 @@
         </div>
         <div class="proposta-container28">
             <div class="proposta-container29">
-                <button type="submit" class="proposta-button1 button" onclick="@SendProposta">Publicar</button>
+                <button type="submit" class="proposta-button1 button" @onclick="SendProposta">Publicar</button>
             </div>
             <div class="proposta-container30">
-                <button class="proposta-button2 button">
+                <button class="proposta-button2 button" @onclick="GoToChatRoom">
                     <span>
                         <span>Ver Chat</span>
                         <br />
@@ -125,7 +126,7 @@
                 </button>
             </div>
             <div class="proposta-container31">
-                <button class="proposta-button3 button" onclick="@GoToStand">
+                <button class="proposta-button3 button" @onclick="GoToStand">
                     <span>
                         <span>Eliminar</span>
                         <br />
@@ -825,11 +826,12 @@
             var answer = PropostaService.SendProposta(this.proposta);
             if(answer != null)
             {
-                Console.WriteLine("Proposta enviada com sucesso");
+                await JS.InvokeVoidAsync("alert", "Proposta enviada com sucesso");
+                Navigator.NavigateTo($"/standfeira/{this.FeiraID}/{this.StandID}");
             }
             else
             {
-                Console.WriteLine("Proposta não conseguiu ser enviada com sucesso");
+                await JS.InvokeVoidAsync("alert", "Ocurreu algum problema a enviar proposta");
             }
         }
         else
@@ -841,5 +843,10 @@
     private void GoToStand()
     {
         Navigator.NavigateTo($"/standfeira/{this.FeiraID}/{this.StandID}");
+    }
+
+    private void GoToChatRoom()
+    {
+        Navigator.NavigateTo($"/chatroom/{this.FeiraID}/{this.StandID}");
     }
 }

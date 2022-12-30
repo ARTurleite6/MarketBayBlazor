@@ -3,7 +3,6 @@
 @inject IStandService StandService
 @inject NavigationManager Navigator
 
-<div>
     <div class="stand-container">
         <div class="stand-container01">
             <div class="stand-container02">
@@ -103,13 +102,13 @@
         }
     </div>
     <div class="stand-container24">
-        <div class="stand-container25">
+        <button class="button stand-container25" @onclick="GoToChatRoom">
             <svg viewBox="0 0 1024 1024" class="stand-icon">
                 <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
                 </path>
             </svg>
-        </div>
-        <div class="stand-container26">
+        </button>
+        <button class="button stand-container26">
             <svg viewBox="0 0 1024 1024" class="stand-icon2">
                 <path
                     d="M932 550l-114 262q-26 42-74 42h-346q-40 0-70-30t-30-70v-334q0-36 26-62l274-272 18 20q24 24 38 52 6 14 4 28l-40 198h236q34 0 59 26t25 60v46q0 18-6 34zM86 854v-470h84q18 0 31 12t13 30v384q0 18-13 31t-31 13h-84z">
@@ -119,9 +118,8 @@
                     d="M92 474l114-262q26-42 74-42h346q42 0 71 29t29 71v334q0 36-26 62l-274 272-18-20q-24-24-38-52-6-14-4-28l40-198h-236q-34 0-59-26t-25-60v-46q0-20 6-34zM938 170v470h-84q-18 0-31-12t-13-30v-384q0-18 13-31t31-13h84z">
                 </path>
             </svg>
-        </div>
+        </button>
     </div>
-</div>
 
 <style>
     .stand-container {
@@ -648,6 +646,7 @@
         margin-left: 0px;
         justify-content: center;
         background-color: #0f8a82;
+        padding: 5px;
     }
 
     .stand-icon {
@@ -665,6 +664,7 @@
         margin-left: 0px;
         justify-content: flex-start;
         background-color: #562a2a;
+        padding: 5px;
     }
 
     .stand-icon2 {
@@ -1090,5 +1090,10 @@
     private void GoToNegotiation(int produtoID)
     {
         Navigator.NavigateTo($"/proposta/{this.FeiraID}/{this.ID}/{produtoID}");
+    }
+
+    private void GoToChatRoom()
+    {
+        Navigator.NavigateTo($"/chatroom/{this.FeiraID}/{this.ID}");
     }
 }
