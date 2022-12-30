@@ -2,261 +2,238 @@
 @using System.Security.Claims
 @inject IProdutoService ProdutoService
 @inject IFeiraService FeiraService
+@inject IJSRuntime JS
 @attribute [Authorize(Roles = "Feirante")]
 
 <AuthorizeView>
-<div class="por-produto-em-feira-container">
-  <div class="por-produto-em-feira-container01">
-    <div class="por-produto-em-feira-container02">
-      <div class="por-produto-em-feira-container03">
-        <div data-thq="thq-dropdown" class="por-produto-em-feira-thq-dropdown list-item">
-          <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle" href="/feiras">
-            <a href="/feiras">
-              <img alt="image" src="logo.png" class="por-produto-em-feira-image">
-            </a>
+  <div class="por-produto-em-feira-container">
+    <div class="por-produto-em-feira-container01">
+      <div class="por-produto-em-feira-container02">
+        <div class="por-produto-em-feira-container03">
+          <div data-thq="thq-dropdown" class="por-produto-em-feira-thq-dropdown list-item">
+            <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle" href="/feiras">
+              <a href="/feiras">
+                <img alt="image" src="logo.png" class="por-produto-em-feira-image">
+              </a>
+            </div>
+            <ul data-thq="thq-dropdown-list" class="por-produto-em-feira-dropdown-list">
+              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown list-item">
+                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle1">
+                  <span class="por-produto-em-feira-text">Sobre nós</span>
+                </div>
+              </li>
+              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown1 list-item">
+                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle2">
+                  <span class="por-produto-em-feira-text01">Ajuda</span>
+                </div>
+              </li>
+              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown2 list-item">
+                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle3">
+                  <span class="por-produto-em-feira-text02">Definições</span>
+                </div>
+              </li>
+            </ul>
           </div>
-          <ul data-thq="thq-dropdown-list" class="por-produto-em-feira-dropdown-list">
-            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown list-item">
-              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle1">
-                <span class="por-produto-em-feira-text">Sobre nós</span>
-              </div>
-            </li>
-            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown1 list-item">
-              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle2">
-                <span class="por-produto-em-feira-text01">Ajuda</span>
-              </div>
-            </li>
-            <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown2 list-item">
-              <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle3">
-                <span class="por-produto-em-feira-text02">Definições</span>
-              </div>
-            </li>
-          </ul>
+        </div>
+      </div>
+      <div class="por-produto-em-feira-container04">
+        <div class="por-produto-em-feira-container05">
+          <button class="por-produto-em-feira-button button">
+            <span class="por-produto-em-feira-text03">
+              <span>Filter</span>
+              <br />
+            </span>
+          </button>
+        </div>
+        <div class="por-produto-em-feira-container06">
+          <input type="text" placeholder="Pesquisa" class="por-produto-em-feira-textinput input" />
         </div>
       </div>
     </div>
-    <div class="por-produto-em-feira-container04">
-      <div class="por-produto-em-feira-container05">
-        <button class="por-produto-em-feira-button button">
-          <span class="por-produto-em-feira-text03">
-            <span>Filter</span>
-            <br />
-          </span>
-        </button>
-      </div>
-      <div class="por-produto-em-feira-container06">
-        <input type="text" placeholder="Pesquisa" class="por-produto-em-feira-textinput input" />
-      </div>
-    </div>
-  </div>
-  <div class="por-produto-em-feira-container07">
-    <div class="por-produto-em-feira-container08">
-      <h1 class="por-produto-em-feira-text06">
-        @feira.NomeFeira
-      </h1>
-    </div>
-    <div class="por-produto-em-feira-container09">
-      <h1 class="por-produto-em-feira-text07">@DateTime.Now.Day/@DateTime.Now.Month</h1>
-    </div>
-  </div>
-  <div class="por-produto-em-feira-container10">
-    <div class="por-produto-em-feira-container11">
-      <div class="por-produto-em-feira-container12">
-        <div class="por-produto-em-feira-container13">
-          <img alt="image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400" class="por-produto-em-feira-textarea textarea"/>
-        </div>
-        <div class="por-produto-em-feira-container14">
-          <h1 class="por-produto-em-feira-text08">@context.User.Identity.Name.ToUpper()</h1>
-        </div>
-      </div>
-    </div>
-    <div class="por-produto-em-feira-container15">
-      <div class="por-produto-em-feira-container16">
-        <h1 class="por-produto-em-feira-text09">
-          Indicar produtos de stand:
+    <div class="por-produto-em-feira-container07">
+      <div class="por-produto-em-feira-container08">
+        <h1 class="por-produto-em-feira-text06">
+          @feira.NomeFeira
         </h1>
       </div>
-
-      @foreach (var produto in this.produtos)
-      {
-            <div class="por-produto-em-feira-container17">
-              <div class="por-produto-em-feira-container18">
-                <img alt="image"
-                src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
-                class="por-produto-em-feira-image1" />
-              </div>
-              <div class="por-produto-em-feira-container19">
-                <div class="por-produto-em-feira-container20">
-                  <h1 class="por-produto-em-feira-text10">@produto.Nome</h1>
-                </div>
-              </div>
-              <div class="por-produto-em-feira-container21">
-                <div class="por-produto-em-feira-container22">
-                  <div class="por-produto-em-feira-container23">
-                    <h1 class="por-produto-em-feira-text11">Adicionar:</h1>
-                  </div>
-                  <div class="por-produto-em-feira-container24">
-                    <div class="por-produto-em-feira-container25">
-                      <input type="checkbox" class="por-produto-em-feira-checkbox" />
-                    </div>
-                  </div>
-                </div>
-                <div class="por-produto-em-feira-container26">
-                  <div class="por-produto-em-feira-container27">
-                    <h1 class="por-produto-em-feira-text12">Destacar:</h1>
-                  </div>
-                  <div class="por-produto-em-feira-container28">
-                    <div class="por-produto-em-feira-container29">
-                      <input type="checkbox" class="por-produto-em-feira-checkbox1" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-      }
-
-      <div class="por-produto-em-feira-container17">
-        <div class="por-produto-em-feira-container18">
-          <img alt="image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
-            class="por-produto-em-feira-image1" />
-        </div>
-        <div class="por-produto-em-feira-container19">
-          <div class="por-produto-em-feira-container20">
-            <h1 class="por-produto-em-feira-text10">Computador</h1>
-          </div>
-        </div>
-        <div class="por-produto-em-feira-container21">
-          <div class="por-produto-em-feira-container22">
-            <div class="por-produto-em-feira-container23">
-              <h1 class="por-produto-em-feira-text11">Adicionar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container24">
-              <div class="por-produto-em-feira-container25">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox" />
-              </div>
-            </div>
-          </div>
-          <div class="por-produto-em-feira-container26">
-            <div class="por-produto-em-feira-container27">
-              <h1 class="por-produto-em-feira-text12">Destacar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container28">
-              <div class="por-produto-em-feira-container29">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox1" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="por-produto-em-feira-container30">
-        <div class="por-produto-em-feira-container31">
-          <img alt="image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
-            class="por-produto-em-feira-image2" />
-        </div>
-        <div class="por-produto-em-feira-container32">
-          <div class="por-produto-em-feira-container33">
-            <h1 class="por-produto-em-feira-text13">Computador</h1>
-          </div>
-        </div>
-        <div class="por-produto-em-feira-container34">
-          <div class="por-produto-em-feira-container35">
-            <div class="por-produto-em-feira-container36">
-              <h1 class="por-produto-em-feira-text14">Adicionar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container37">
-              <div class="por-produto-em-feira-container38">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox2" />
-              </div>
-            </div>
-          </div>
-          <div class="por-produto-em-feira-container39">
-            <div class="por-produto-em-feira-container40">
-              <h1 class="por-produto-em-feira-text15">Destacar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container41">
-              <div class="por-produto-em-feira-container42">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox3" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="por-produto-em-feira-container43">
-        <div class="por-produto-em-feira-container44">
-          <img alt="image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
-            class="por-produto-em-feira-image3" />
-        </div>
-        <div class="por-produto-em-feira-container45">
-          <div class="por-produto-em-feira-container46">
-            <h1 class="por-produto-em-feira-text16">Computador</h1>
-          </div>
-        </div>
-        <div class="por-produto-em-feira-container47">
-          <div class="por-produto-em-feira-container48">
-            <div class="por-produto-em-feira-container49">
-              <h1 class="por-produto-em-feira-text17">Adicionar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container50">
-              <div class="por-produto-em-feira-container51">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox4" />
-              </div>
-            </div>
-          </div>
-          <div class="por-produto-em-feira-container52">
-            <div class="por-produto-em-feira-container53">
-              <h1 class="por-produto-em-feira-text18">Destacar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container54">
-              <div class="por-produto-em-feira-container55">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox5" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="por-produto-em-feira-container56">
-        <div class="por-produto-em-feira-container57">
-          <img alt="image"
-            src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
-            class="por-produto-em-feira-image4" />
-        </div>
-        <div class="por-produto-em-feira-container58">
-          <div class="por-produto-em-feira-container59">
-            <h1 class="por-produto-em-feira-text19">Computador</h1>
-          </div>
-        </div>
-        <div class="por-produto-em-feira-container60">
-          <div class="por-produto-em-feira-container61">
-            <div class="por-produto-em-feira-container62">
-              <h1 class="por-produto-em-feira-text20">Adicionar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container63">
-              <div class="por-produto-em-feira-container64">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox6" />
-              </div>
-            </div>
-          </div>
-          <div class="por-produto-em-feira-container65">
-            <div class="por-produto-em-feira-container66">
-              <h1 class="por-produto-em-feira-text21">Destacar:</h1>
-            </div>
-            <div class="por-produto-em-feira-container67">
-              <div class="por-produto-em-feira-container68">
-                <input type="checkbox" checked="true" class="por-produto-em-feira-checkbox7" />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="por-produto-em-feira-container09">
+        <h1 class="por-produto-em-feira-text07">@DateTime.Now.Day/@DateTime.Now.Month</h1>
       </div>
     </div>
+    <div class="por-produto-em-feira-container10">
+      <div class="por-produto-em-feira-container11">
+        <div class="por-produto-em-feira-container12">
+          <div class="por-produto-em-feira-container13">
+            <img alt="image"
+              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400"
+              class="por-produto-em-feira-textarea textarea" />
+          </div>
+          <div class="por-produto-em-feira-container14">
+            <h1 class="por-produto-em-feira-text08">@context.User.Identity.Name.ToUpper()</h1>
+          </div>
+        </div>
+      </div>
+      <div class="por-produto-em-feira-container15">
+        <div class="por-produto-em-feira-container16">
+          <h1 class="por-produto-em-feira-text09">
+            Indicar produtos de stand:
+          </h1>
+        </div>
+
+        @foreach (var produto in this.produtos)
+        {
+          <div class="por-produto-em-feira-container17">
+            <div class="por-produto-em-feira-container18">
+              <img alt="image"
+              src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDJ8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTgzNDU4OQ&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=300"
+              class="por-produto-em-feira-image1" />
+            </div>
+            <div class="por-produto-em-feira-container19">
+              <div class="por-produto-em-feira-container20">
+                <h1 class="por-produto-em-feira-text10">@produto.Nome</h1>
+              </div>
+            </div>
+            <div class="por-produto-em-feira-container21">
+                <div class="adicionar-destacar-container">
+                  <div class="por-produto-em-feira-container22">
+                    <div class="por-produto-em-feira-container23">
+                      <h1 class="por-produto-em-feira-text11">Adicionar:</h1>
+                    </div>
+                    <div class="por-produto-em-feira-container24">
+                      <div class="por-produto-em-feira-container25">
+                        <input type="checkbox" class="por-produto-em-feira-checkbox"
+                        @onchange="(async eventArgs => await OnCheckedProduct(produto.ID, eventArgs.Value))" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="por-produto-em-feira-container26">
+                    <div class="por-produto-em-feira-container27">
+                      <h1 class="por-produto-em-feira-text12">Destacar:</h1>
+                    </div>
+                    <div class="por-produto-em-feira-container28">
+                      <div class="por-produto-em-feira-container29">
+                        <input type="checkbox" class="por-produto-em-feira-checkbox1" id="destaque-@(produto.ID)" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                  <div class="adicionar-destacar-container">
+                    <div class="por-produto-em-feira-container26">
+                      <div class="por-produto-em-feira-container27">
+                        <h1 class="por-produto-em-feira-text12">Quantidade:</h1>
+                      </div>
+                      <div class="por-produto-em-feira-container28">
+                        <div class="por-produto-em-feira-container29">
+                          <input type="number" name="quantidade" id="quantidade-produto-@(produto.ID)" class="input-number" value="0" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="por-produto-em-feira-container26">
+                      <div class="por-produto-em-feira-container27">
+                        <h1 class="por-produto-em-feira-text12">Preco:</h1>
+                      </div>
+                      <div class="por-produto-em-feira-container28">
+                        <div class="por-produto-em-feira-container29">
+                      @* <input type="checkbox" class="por-produto-em-feira-checkbox1" /> *@
+                          <input type="number" name="preco" id="preco-produto-@(produto.ID)" class="input-number" value="0.0">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        }
+
+      </div>
+    </div>
+    <div class="submit-container">
+      <button class="submit-button button" @onclick="SubmitInscricao">Submit</button>
+      <button class="cancel-button button">Cancelar</button>
+    </div>
   </div>
-</div>
 </AuthorizeView>
 
 <style>
+
+  .adicionar-destacar-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .submit-container {
+    flex: 0 0 auto;
+    width: 104px;
+    @* height: 136px; *@
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    position: fixed;
+    z-index: 100000;
+    bottom: 20px;
+    right: 75px;
+  }
+
+  .cancel-button:hover {
+    color: #562a2a;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .cancel-button {
+    width: 150px;
+    height: 46px;
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 700;
+    border-color: #ebc39c;
+    background-color: #562a2a;
+    margin-top: 5px;
+  }
+
+  .submit-button:hover {
+    color: #0f8a82;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .submit-button {
+    width: 150px;
+    height: 46px;
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 700;
+    border-color: #0f8a82;
+    background-color: #0f8a82;
+  }
+
+  .button {
+    cursor: pointer;
+    border-radius: 6px;
+    color: var(--dl-color-gray-black);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-color: var(--dl-color-gray-black);
+    border-width: 1px;
+    border-radius: 4px;
+    background-color: var(--dl-color-gray-white);
+  }
+
+
+  .input-number {
+    flex: 0 0 auto;
+    width: 80px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    border-radius: 5px;
+  }
+
   .por-produto-em-feira-container {
     width: 100%;
     display: flex;
@@ -555,7 +532,6 @@
 
   .por-produto-em-feira-container10 {
     width: 100%;
-    height: 898px;
     display: flex;
     justify-content: flex-start;
   }
@@ -643,6 +619,7 @@
     height: 189px;
     display: flex;
     align-items: flex-start;
+    margin-bottom: 20px;
   }
 
   .por-produto-em-feira-container18 {
@@ -693,14 +670,14 @@
     height: 100%;
     display: flex;
     align-items: flex-start;
-    flex-direction: row;
-    justify-content: flex-start;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .por-produto-em-feira-container22 {
     flex: 0 0 auto;
     width: 145px;
-    height: 192px;
+    @* height: 192px; *@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -708,7 +685,7 @@
 
   .por-produto-em-feira-container23 {
     width: 100%;
-    height: 81px;
+    @* height: 81px; *@
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -747,7 +724,7 @@
   .por-produto-em-feira-container26 {
     flex: 0 0 auto;
     width: 145px;
-    height: 192px;
+    @* height: 192px; *@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -755,7 +732,7 @@
 
   .por-produto-em-feira-container27 {
     width: 100%;
-    height: 81px;
+    @* height: 81px; *@
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -1276,7 +1253,25 @@
 
   private List<Produto> produtos = new List<Produto>();
 
-  private FeiraSubmitDTO dto;
+  private HashSet<int> produtosEscolhidos = new HashSet<int>();
+
+  private IJSObjectReference? module;
+
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      this.module = await JS.InvokeAsync<IJSObjectReference>("import", "./scripts.js");
+      Console.WriteLine("tentei importar modulo");
+      if (this.module is not null)
+      {
+        Console.WriteLine("Carregamento bem sucedido");
+      }
+    }
+  }
+
+
 
   protected override async Task OnInitializedAsync()
   {
@@ -1289,39 +1284,75 @@
       var produtos = await ProdutoService.GetProdutos(this.feira.CategoriaID);
 
       Console.WriteLine("Procurando produtos");
-      if(produtos != null)
+      if (produtos != null)
       {
         this.produtos = produtos;
-
-        var auth = await this.authState;
-        var user = auth.User;
-        int id = Int32.Parse(user.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1");
-
-        if(id != -1)
-        {
-          this.dto = new FeiraSubmitDTO()
-          {
-            FeiraID = this.ID,
-            FeiranteID = id,
-          };
-        }
       }
     }
   }
 
-  private void OnCheckedProduct(int produto, object checkValue)
+  private async Task OnCheckedProduct(int produto, object checkValue)
   {
-    if((bool)checkValue)
+    if ((bool)checkValue)
     {
-
-      this.dto.Produtos.Add(produto);
+      this.produtosEscolhidos.Add(produto);
+      Console.WriteLine("Produto adicionado");
+      Console.WriteLine(this.produtosEscolhidos);
     }
     else
     {
-      this.dto.Produtos.Remove(produto);
-      this.dto.ProdutosDestacados.Remove(produto);
-      this.dto.ProdutoPreco.Remove(produto);
-      this.dto.QuantidadeProduto.Remove(produto);
+
+      this.produtosEscolhidos.Remove(produto);
+      Console.WriteLine(this.produtosEscolhidos);
+
+      if (module is not null)
+      {
+        await JS.InvokeVoidAsync("resetProduct", produto);
+      }
     }
+  }
+
+  private async Task SubmitInscricao()
+  {
+    if (this.produtosEscolhidos.Count() == 0)
+    {
+      await JS.InvokeVoidAsync("alert", "Terá de adicionar produtos para efetuar inscricão");
+      return;
+    }
+
+    var auth = await this.authState;
+    var feiranteID = Int32.Parse(auth.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1");
+
+    if (feiranteID == -1) return;
+
+
+    var dto = new FeiraSubmitDTO()
+    {
+      FeiraID = this.feira.ID,
+      FeiranteID = feiranteID,
+    };
+
+    bool valido = true;
+    foreach (var produtoID in this.produtosEscolhidos)
+    {
+      int quantidade = await JS.InvokeAsync<int>("getProductQuantity", produtoID);
+      int preco = await JS.InvokeAsync<int>("getProductPrice", produtoID);
+      bool destacado = await JS.InvokeAsync<bool>("estaDestacado", produtoID);
+      if (quantidade <= 0 || preco <= 0)
+      {
+        valido = false;
+        break;
+      }
+
+      dto.Produtos.Add(produtoID);
+      dto.QuantidadeProduto.Add(produtoID, quantidade);
+      dto.ProdutoPreco.Add(produtoID, preco);
+      dto.ProdutosDestacados.Add(produtoID);
+
+    }
+
+    if (valido) await this.FeiraService.InscreveEmFeira(dto);
+    else await JS.InvokeVoidAsync("alert", "Existem produtos com preços e/ou quantidades inválidas");
+
   }
 }

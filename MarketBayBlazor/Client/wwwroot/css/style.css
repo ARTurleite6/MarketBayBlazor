@@ -1,3 +1,7 @@
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  display: none; 
+}
+
 :root {
   --dl-color-gray-500: #595959;
   --dl-color-gray-700: #999999;

@@ -28,25 +28,52 @@ namespace MarketBayBlazor.Server.Controllers
             return Ok(feira);
 	    }
 
-        [HttpPost("Inscrever")]
-        public async Task<ActionResult<StandFeirante>?> InscreveFeira(int id, StandFeirante stand)
+        [HttpPost("Inscrever/{id:int}")]
+        public async Task<ActionResult<StandFeirante>?> InscreveFeira(int id, FeiraSubmitDTO request)
         { 
-            if(!this._context.Feiras.Any(feira => feira.ID == id))
-            {
-                return NotFound("Feira não existente");
-	        }
 
-            //Ver se já atingiu o limite de feirantes na feira
-            var feira = this._context.Feiras.Where(feira => feira.ID == id).Include(feira => feira.Stands.Where(s => s.ativo == true)).First();
-            var numero_participantes = feira.Stands.Count;
-            if(numero_participantes >= feira.NumeroMaximoFeirantes || feira.Stands.Any(s => s.FeiranteID == stand.FeiranteID) || feira.DataFim <= DateTime.Now)
+            if(!this._context.Feirantes.Any(feirante => feirante.ID == request.FeiranteID))
             {
-                return null;
-	        }
+                return BadRequest("Não existe nenhum feirante com id de " + request.FeiranteID);
+            }
+            if(!this._context.Feiras.Any(feira => feira.ID == request.FeiraID)) {
+                return BadRequest("Não existe nenhuma feira com id de " + request.FeiraID);
+            }
+
+            if(this._context.StandsFeirantes.Any(stand => stand.FeiraID == id && stand.FeiranteID == request.FeiranteID))
+            {
+                return BadRequest("Este feirante já está inscrito na feira");
+            }
+
+            var produtos = request.Produtos;
+
+            var stand = new StandFeirante()
+            {
+                FeiranteID = request.FeiranteID,
+                FeiraID = request.FeiraID,
+            };
+
+            foreach(var produtoID in produtos)
+            {
+                if(!this._context.Produtos.Any(produto => produtoID == produto.ID))
+                {
+                    return BadRequest("Não existe nenhum produto com id de " + produtoID);
+                }
+
+                var produtoStand = new ProdutoStand()
+                {
+                    ProdutoID = produtoID,
+                    Preco = request.ProdutoPreco[produtoID],
+                    Quantidade = request.QuantidadeProduto[produtoID],
+                    Destacado = request.ProdutosDestacados.Contains(produtoID),
+                };
+                stand.ProdutosStands.Add(produtoStand);
+            }
 
             await this._context.StandsFeirantes.AddAsync(stand);
             await this._context.SaveChangesAsync();
             return Ok(stand);
+
 	    }
 
         [HttpGet]

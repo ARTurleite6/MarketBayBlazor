@@ -9,6 +9,8 @@ namespace MarketBayBlazor.Client.Services
 
         public Task<Feira?> GetFeira(int id);
 
+        public Task InscreveEmFeira(FeiraSubmitDTO request);
+
     }
 }
 

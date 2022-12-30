@@ -39,6 +39,15 @@ namespace MarketBayBlazor.Client.Services
             var feira = await this._httpClient.GetFromJsonAsync<Feira>($"api/Feira/{id}");
             return feira;
         }
+
+        public async Task InscreveEmFeira(FeiraSubmitDTO request)
+        {
+            var stand = await this._httpClient.PostAsJsonAsync($"api/Feira/Inscrever/{request.FeiraID}", request);
+            if(stand.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Stand adicionado com sucesso");
+            }
+        }
     }
 }
 
