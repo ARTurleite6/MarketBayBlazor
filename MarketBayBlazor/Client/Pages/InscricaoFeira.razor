@@ -4,6 +4,7 @@
 @inject IProdutoService ProdutoService
 @inject IFeiraService FeiraService
 @inject IJSRuntime JS
+@inject NavigationManager Nav
 @attribute [Authorize(Roles = "Feirante")]
 
 <AuthorizeView>
@@ -150,7 +151,7 @@
     </div>
     <div class="submit-container">
       <button class="submit-button button" @onclick="SubmitInscricao">Submit</button>
-      <button class="cancel-button button">Cancelar</button>
+      <button class="cancel-button button" @onclick="GoToFeira">Cancelar</button>
     </div>
   </div>
 </AuthorizeView>
@@ -1340,12 +1341,20 @@
       dto.Produtos.Add(produtoID);
       dto.QuantidadeProduto.Add(produtoID, quantidade);
       dto.ProdutoPreco.Add(produtoID, preco);
-      dto.ProdutosDestacados.Add(produtoID);
+      if(destacado)
+      {
+        dto.ProdutosDestacados.Add(produtoID);
+      }
 
     }
 
     if (valido) await this.FeiraService.InscreveEmFeira(dto);
     else await JS.InvokeVoidAsync("alert", "Existem produtos com preços e/ou quantidades inválidas");
 
+  }
+
+  private void GoToFeira()
+  {
+    Nav.NavigateTo($"/standsfeira/{ID}"); 
   }
 }

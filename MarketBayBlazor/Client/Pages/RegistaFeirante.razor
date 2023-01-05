@@ -1,6 +1,7 @@
 @page "/registarfeirante"
 @inject NavigationManager Navigator
 @inject IFeiranteService FeiranteService
+@inject IJSRuntime JS
 
 <div class="regista-feirante-container">
     <header data-thq="thq-navbar" class="regista-feirante-navbar-interactive">
@@ -82,9 +83,9 @@
                         <span>Já tem conta?</span>
                         <br />
                     </span>
-                    <a href="https://example.com" target="_blank" rel="noreferrer noopener"
+                    <a href="/login" target="_blank" rel="noreferrer noopener"
                         class="regista-feirante-link">
-                        <span><a href="/login"> Log in</a></span>
+                        <span>&nbsp; Log in</span>
                         <br />
                     </a>
                 </div>
@@ -159,8 +160,8 @@
                     <span>É um Cliente?</span>
                     <br />
                 </span>
-                <a href="https://example.com" target="_blank" rel="noreferrer noopener" class="regista-feirante-link1">
-                    <span><a href="/registerclient"> Registar-se</a></span>
+                <a href="/registerclient" target="_blank" rel="noreferrer noopener" class="regista-feirante-link1">
+                    <span>&nbsp;Registar-se</span>
                     <br />
                 </a>
             </div>
@@ -756,6 +757,9 @@
 
     private async void Register()
     {
-        await FeiranteService.RegistaFeirante(this.feirante);
+        if(await FeiranteService.RegistaFeirante(this.feirante))
+        {
+            await JS.InvokeVoidAsync("alert", "Conta de feirante criada com sucesso");
+        }
     }
 }
