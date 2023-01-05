@@ -1,62 +1,70 @@
 ﻿@page "/standsfeira/{ID:int}"
 @inject IFeiraService FeiraService;
 @inject NavigationManager NavigationManager
+@using Components
 
 
-  <div class="feira-container">
-    <div class="feira-container01">
-      <div class="feira-container02">
-        <div class="feira-container03">
-          <div data-thq="thq-dropdown" class="feira-thq-dropdown list-item">
-            <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle">
-              <a href="/feiras">
-                <img alt="image" src="logo.png" class="feira-image" />
-              </a>
-            </div>
-            <ul data-thq="thq-dropdown-list" class="feira-dropdown-list">
-              <li data-thq="thq-dropdown" class="feira-dropdown list-item">
-                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle1">
-                  <span class="feira-text">Sobre nós</span>
-                </div>
-              </li>
-              <li data-thq="thq-dropdown" class="feira-dropdown1 list-item">
-                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle2">
-                  <span class="feira-text01">Ajuda</span>
-                </div>
-              </li>
-              <li data-thq="thq-dropdown" class="feira-dropdown2 list-item">
-                <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle3">
-                  <span class="feira-text02">Definições</span>
-                </div>
-              </li>
-            </ul>
+<div class="feira-container">
+
+  <NavBar @bind-FilterParam="@filterParam"/>
+
+  @* <div class="feira-container01">
+    <div class="feira-container02">
+      <div class="feira-container03">
+        <div data-thq="thq-dropdown" class="feira-thq-dropdown list-item">
+          <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle">
+            <a href="/feiras">
+              <img alt="image" src="logo.png" class="feira-image" />
+            </a>
           </div>
+          <ul data-thq="thq-dropdown-list" class="feira-dropdown-list">
+            <li data-thq="thq-dropdown" class="feira-dropdown list-item">
+              <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle1">
+                <span class="feira-text">Sobre nós</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="feira-dropdown1 list-item">
+              <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle2">
+                <span class="feira-text01">Ajuda</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="feira-dropdown2 list-item">
+              <div data-thq="thq-dropdown-toggle" class="feira-dropdown-toggle3">
+                <span class="feira-text02">Definições</span>
+              </div>
+            </li>
+          </ul>
         </div>
-      </div>
-      <div class="feira-container04">
-        <div class="feira-container05">
-          <button class="feira-button button">
-            <span class="feira-text03">
-              <span>Filter</span>
-              <br />
-            </span>
-          </button>
-        </div>
-        <div class="feira-container06">
-          <input @bind="@filterParam" type="text" placeholder="Pesquisa" class="feira-textinput input" />
-        </div>
-      </div>
-      <div class="feira-container07">
-        <button class="feira-button1 button">
-          <svg viewBox="0 0 1024 1024" class="feira-icon">
-            <path
-              d="M550.272 66.432c-3.925-8.064-10.581-15.019-19.371-19.371-21.12-10.411-46.72-1.749-57.131 19.371l-121.941 246.997-272.683 39.893c-8.875 1.237-17.536 5.419-24.363 12.416-16.469 16.896-16.085 43.904 0.768 60.331l197.248 192.128-46.549 271.445c-1.536 8.832-0.256 18.389 4.309 27.051 10.965 20.864 36.779 28.885 57.643 17.92l243.797-128.213 243.84 128.213c7.936 4.224 17.408 5.931 27.051 4.309 23.211-3.968 38.827-26.027 34.859-49.28l-46.549-271.445 197.248-192.128c6.443-6.229 11.051-14.677 12.459-24.405 3.413-23.296-12.715-44.971-36.053-48.384l-272.64-39.851zM512 181.717l93.568 189.611c6.443 13.013 18.603 21.291 32.085 23.339l209.323 30.592-151.424 147.499c-10.411 10.155-14.549 24.277-12.288 37.76l35.712 208.341-187.136-98.432c-12.843-6.741-27.605-6.315-39.723 0l-187.136 98.432 35.712-208.341c2.475-14.336-2.517-28.203-12.288-37.76l-151.424-147.499 209.365-30.635c14.336-2.091 25.984-11.093 32.085-23.296z">
-            </path>
-          </svg>
-        </button>
       </div>
     </div>
-    <div class="feira-container08">
+    <div class="feira-container04">
+      <div class="feira-container05">
+        <button class="feira-button button">
+          <span class="feira-text03">
+            <span>Filter</span>
+            <br />
+          </span>
+        </button>
+      </div>
+      <div class="feira-container06">
+        <input @bind="@filterParam" type="text" placeholder="Pesquisa" class="feira-textinput input" />
+      </div>
+    </div>
+
+  
+
+    @* <div class="feira-container07">
+      <button class="feira-button1 button">
+        <svg viewBox="0 0 1024 1024" class="feira-icon">
+          <path
+            d="M550.272 66.432c-3.925-8.064-10.581-15.019-19.371-19.371-21.12-10.411-46.72-1.749-57.131 19.371l-121.941 246.997-272.683 39.893c-8.875 1.237-17.536 5.419-24.363 12.416-16.469 16.896-16.085 43.904 0.768 60.331l197.248 192.128-46.549 271.445c-1.536 8.832-0.256 18.389 4.309 27.051 10.965 20.864 36.779 28.885 57.643 17.92l243.797-128.213 243.84 128.213c7.936 4.224 17.408 5.931 27.051 4.309 23.211-3.968 38.827-26.027 34.859-49.28l-46.549-271.445 197.248-192.128c6.443-6.229 11.051-14.677 12.459-24.405 3.413-23.296-12.715-44.971-36.053-48.384l-272.64-39.851zM512 181.717l93.568 189.611c6.443 13.013 18.603 21.291 32.085 23.339l209.323 30.592-151.424 147.499c-10.411 10.155-14.549 24.277-12.288 37.76l35.712 208.341-187.136-98.432c-12.843-6.741-27.605-6.315-39.723 0l-187.136 98.432 35.712-208.341c2.475-14.336-2.517-28.203-12.288-37.76l-151.424-147.499 209.365-30.635c14.336-2.091 25.984-11.093 32.085-23.296z">
+          </path>
+        </svg>
+      </button>
+    </div> 
+  </div> *@
+  <div class="feira-container08">
+    <div class="feira-informacao">
       <div class="feira-container09">
         <h1 class="feira-text06">@feira.NomeFeira</h1>
       </div>
@@ -64,31 +72,41 @@
         <h1 class="feira-text07">@feira.DataInicio.Day/@feira.DataInicio.Month</h1>
       </div>
     </div>
-      <div style="display:flex; flex-wrap: wrap; justify-content: center;">
-    @foreach (var stand in this.stands.Where(stand1 => stand1.Feirante.Conta.Nome.Contains(this.filterParam)))
-    {
-          <div class="feira-container12">
-            <div class="feira-container13">
-              <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
-                @* <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image1" /> *@
-                <img class="feira-image1" alt="image" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400">
-              </div>
-              <div class="feira-container15">
-                <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
-              </div>
-            </div>
-            <div class="feira-container16">
-              @foreach (var produto in stand.ProdutosStands)
-              {
-                <div class="feira-container17">
-                  <h1 class="feira-text09">@produto.Produto.Nome</h1>
-                </div>
-              }
-            </div>
-          </div>
-    }
-      </div>
+    <AuthorizeView Roles="Feirante">
+      <Authorized>
+        <div class="feira-container10 feira-size55">
+          <h1 class="text-red feira-text07"><a href="/inscreverfeira/@ID">Inscrever-se na Feira</a></h1>
+        </div>
+      </Authorized>
+    </AuthorizeView>
   </div>
+  <div style="display:flex; flex-wrap: wrap; justify-content: center;">
+    @foreach (var stand in this.stands.Where(stand1 => stand1.Feirante.Conta.Nome.IndexOf(this.filterParam,
+    StringComparison.OrdinalIgnoreCase) >= 0))
+    {
+      <div class="feira-container12">
+        <div class="feira-container13">
+          <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
+            @* <img alt="image" src="/playground_assets/cesium_logo-300h.png" class="feira-image1" /> *@
+            <img class="feira-image1" alt="image"
+            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400">
+          </div>
+          <div class="feira-container15">
+            <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
+          </div>
+        </div>
+        <div class="feira-container16">
+          @foreach (var produto in stand.ProdutosStands)
+          {
+            <div class="feira-container17">
+              <h1 class="feira-text09">@produto.Produto.Nome</h1>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
 
 <style>
   .feira-container {
@@ -290,7 +308,7 @@
 
   .feira-container04 {
     flex: 0 0 auto;
-    width: 75%;
+    width: 65%;
     height: 109px;
     display: flex;
     align-self: center;
@@ -377,7 +395,7 @@
     border-color: #0f8a82;
     border-style: dashed;
     border-width: 3px;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .feira-container09 {
@@ -402,6 +420,10 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .feira-size55 {
+    width: 55%;
   }
 
   .feira-text07 {
@@ -430,8 +452,7 @@
 
   .feira-container13 {
     flex: 0 0 auto;
-    @* width: 279px; *@
-    height: 100%;
+  @*width:279px;*@height: 100%;
     display: flex;
     align-items: center;
     margin-left: 0px;
@@ -440,8 +461,7 @@
   }
 
   .feira-container14 {
-    @* width: 264px; *@
-    height: 257px;
+  @*width:264px;*@height: 257px;
     display: flex;
     padding: 15px;
     align-items: center;
@@ -1109,6 +1129,15 @@
     font-size: 1.2em;
   }
 
+  .feira-informacao {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .text-red {
+    color: red;
+  }
+
   @@media(max-width: 1200px) {
     .feira-container04 {
       width: 981px;
@@ -1124,7 +1153,7 @@
   [Parameter]
   public int ID { get; set; }
   private List<StandFeirante> stands = new List<StandFeirante>();
-  private List<IGrouping<int, StandFeirante>> standsGroup;
+
   private Feira feira = new Feira()
   {
     NomeFeira = "Feira Não Encontrada",
@@ -1147,17 +1176,16 @@
     if (stands != null)
     {
       this.stands = stands;
-      this.standsGroup = this.stands.Zip(
-      Enumerable.Range(0, this.stands.Count()),
-      (stand, nr) => new { Group = nr / 2, Item = stand }
-      )
-      .GroupBy(i => i.Group, g => g.Item)
-      .ToList();
     }
   }
 
-  private void GoToStand(int ID) 
+  private void GoToStand(int ID)
   {
     NavigationManager.NavigateTo($"/standfeira/{this.ID}/{ID}");
+  }
+
+  private void GoToInscricao()
+  {
+    Console.WriteLine("Carreguei para me inscrever");
   }
 }

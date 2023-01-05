@@ -6,10 +6,12 @@
 @inject IPropostaService PropostaService
 @inject NavigationManager Navigator
 @inject IJSRuntime JS
+@using Components
 
 
 <div class="proposta-container">
-    <div class="proposta-container01">
+    <NavBar />
+    @* <div class="proposta-container01">
         <div class="proposta-container02">
             <div class="proposta-container03">
                 <div data-thq="thq-dropdown" class="proposta-thq-dropdown list-item">
@@ -51,7 +53,7 @@
                 <input type="text" placeholder="Pesquisa" class="proposta-textinput input" />
             </div>
         </div>
-    </div>
+    </div> *@
     <div class="proposta-container07">
         <div class="proposta-container08">
             <div class="proposta-container09">

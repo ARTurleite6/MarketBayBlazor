@@ -1,11 +1,14 @@
 ﻿@page "/feiras"
-@using MarketBayBlazor.Client.Shared
+@using Components
 @inject IFeiraService FeiraService
 @inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationState
+@inject ILocalStorageService LocalStorage
 
 <div>
     <div class="home-container">
-        <div class="home-container01">
+        <NavBar @bind-FilterParam="@filterParam" />
+        @* <div class="home-container01">
             <div class="home-container02">
                 <div class="home-container03">
                     <div data-thq="thq-dropdown" class="home-thq-dropdown list-item">
@@ -45,7 +48,8 @@
                     <input @bind="@filterParam" type="text" placeholder="Pesquisa" class="home-textinput input" />
                 </div>
             </div>
-        </div>
+            <LogPerfilComponent />
+        </div> *@
         <div style="display: flex; width: 100%; height: 87px">
             <div class="date-container">
                 @foreach (var data in this.datas)
@@ -64,7 +68,7 @@
             </div>
         </div>
             <div style="display: flex; flex-wrap: wrap; justify-content: center;">
-        @foreach(var feira in this.feiras.Where(feira => feira.NomeFeira.Contains(filterParam)))
+        @foreach(var feira in this.feiras.Where(feira => feira.NomeFeira.IndexOf(filterParam, StringComparison.OrdinalIgnoreCase) >= 0))
         {
                 <div class="home-container15">
                     <button class="imagem-feira" onclick="@(() => GoToFeira(feira.ID))">
@@ -1105,6 +1109,34 @@
         width: 100%;
         height: 100%;
     }
+
+    .log-button {
+      color: white;
+      background-color: #562a2a;
+      border-color: #562a2a;
+      width: 200px;
+      font-weight: 800;
+      transition: 0.3s
+    }
+
+    .log-button:hover {
+        color: #0f8a82;
+        border-color: var(--dl-color-gray-white);
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .buttons-login-perfil {
+        display: flex;    
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    .buttons-login-perfil {
+        margin-top: 2px;
+    }
 </style>
 
 
@@ -1138,6 +1170,18 @@
     private void GoToFeira(int feiraID)
     {
         NavigationManager.NavigateTo($"/standsfeira/{feiraID}");
+    }
+
+    private async Task LogOut()
+    {
+        await LocalStorage.RemoveItemAsync("token");
+        Console.WriteLine("Nao ta a dar");
+        NavigationManager.NavigateTo("/feiras", true);
+    }
+
+    private void GoToLogin()
+    {
+        NavigationManager.NavigateTo("/login");
     }
 
 }

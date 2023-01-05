@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
@@ -54,6 +55,53 @@ namespace MarketBayBlazor.Server.Controllers
 
             return Ok(classificacoes);
 	    }
+
+        [HttpPost("Register")]
+        public async Task<ActionResult> RegisterFeirante(FeiranteDTO request)
+        {
+
+            CreatePasswordHash(request.Password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            var feirante = new Feirante()
+            {
+                NIFempresarial = request.NIFempresarial,
+                Foto = request.Foto ?? "Não tem foto",
+                Conta = new Conta()
+                {
+                    Nome = request.Nome,
+                    Morada = new Morada()
+                    {
+                        Rua = request.Rua,
+                        CodigoPostal = request.CodigoPostal,
+                        Localidade = request.Localidade,
+                    },
+                    Email = request.Email,
+                    Password = passwordHash,
+                    PasswordSalt = passwordSalt,
+                    NumeroTelemovel = request.NumeroTelemovel,
+                },
+            };
+
+            await this._context.Feirantes.AddAsync(feirante);
+            try {
+                await this._context.SaveChangesAsync();
+            } catch(DbUpdateException)
+            {
+                Console.WriteLine("Erro a inserir Feirante " + request.Email);
+                return BadRequest("Error creating Feirante");
+            }
+
+            return Ok();
+        }
+
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using(var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
     }
 }
 

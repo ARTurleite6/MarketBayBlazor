@@ -1,5 +1,6 @@
 @page "/inscreverfeira/{id:int}"
 @using System.Security.Claims
+@using Components
 @inject IProdutoService ProdutoService
 @inject IFeiraService FeiraService
 @inject IJSRuntime JS
@@ -7,7 +8,8 @@
 
 <AuthorizeView>
   <div class="por-produto-em-feira-container">
-    <div class="por-produto-em-feira-container01">
+    <NavBar />
+    @* <div class="por-produto-em-feira-container01">
       <div class="por-produto-em-feira-container02">
         <div class="por-produto-em-feira-container03">
           <div data-thq="thq-dropdown" class="por-produto-em-feira-thq-dropdown list-item">
@@ -49,7 +51,7 @@
           <input type="text" placeholder="Pesquisa" class="por-produto-em-feira-textinput input" />
         </div>
       </div>
-    </div>
+    </div> *@
     <div class="por-produto-em-feira-container07">
       <div class="por-produto-em-feira-container08">
         <h1 class="por-produto-em-feira-text06">
@@ -154,74 +156,6 @@
 </AuthorizeView>
 
 <style>
-
-  .adicionar-destacar-container {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .submit-container {
-    flex: 0 0 auto;
-    width: 104px;
-    @* height: 136px; *@
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    position: fixed;
-    z-index: 100000;
-    bottom: 20px;
-    right: 75px;
-  }
-
-  .cancel-button:hover {
-    color: #562a2a;
-    border-color: var(--dl-color-gray-white);
-    background-color: var(--dl-color-gray-white);
-  }
-
-  .cancel-button {
-    width: 150px;
-    height: 46px;
-    font-size: 20px;
-    font-style: normal;
-    text-align: center;
-    transition: 0.3s;
-    font-weight: 700;
-    border-color: #ebc39c;
-    background-color: #562a2a;
-    margin-top: 5px;
-  }
-
-  .submit-button:hover {
-    color: #0f8a82;
-    border-color: var(--dl-color-gray-white);
-    background-color: var(--dl-color-gray-white);
-  }
-
-  .submit-button {
-    width: 150px;
-    height: 46px;
-    font-size: 20px;
-    font-style: normal;
-    text-align: center;
-    transition: 0.3s;
-    font-weight: 700;
-    border-color: #0f8a82;
-    background-color: #0f8a82;
-  }
-
-  .button {
-    cursor: pointer;
-    border-radius: 6px;
-    color: var(--dl-color-gray-black);
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-color: var(--dl-color-gray-black);
-    border-width: 1px;
-    border-radius: 4px;
-    background-color: var(--dl-color-gray-white);
-  }
-
 
   .input-number {
     flex: 0 0 auto;
@@ -1228,6 +1162,65 @@
     width: 100%;
     height: 100%;
     align-self: center;
+  }
+
+  .adicionar-destacar-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .submit-container {
+    flex: 0 0 auto;
+    width: 104px;
+    @* height: 136px; *@
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    position: fixed;
+    z-index: 100000;
+    bottom: 20px;
+    right: 75px;
+  }
+
+  .cancel-button:hover {
+    color: #562a2a;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .cancel-button {
+    width: 150px;
+    height: 46px;
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 700;
+    border-color: #ebc39c;
+    background-color: #562a2a;
+    margin-top: 5px;
+  }
+
+  .submit-button:hover {
+    color: #0f8a82;
+    border-color: var(--dl-color-gray-white);
+    background-color: var(--dl-color-gray-white);
+  }
+
+  .submit-button {
+    width: 150px;
+    height: 46px;
+    font-size: 20px;
+    font-style: normal;
+    text-align: center;
+    transition: 0.3s;
+    font-weight: 700;
+    border-color: #0f8a82;
+    background-color: #0f8a82;
+  }
+
+  .submit-button, .cancel-button {
+    color: white;
   }
 
   @@media(max-width: 1200px) {

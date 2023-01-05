@@ -1,0 +1,59 @@
+@namespace Components
+@inject NavigationManager Navigator;
+@inject ILocalStorageService LocalStorage
+
+<AuthorizeView>
+    <Authorized>
+        <div class="buttons-login-perfil">
+            <button class="button log-button" @onclick="() => LogOut()">Log Out</button>
+        </div>
+    </Authorized>
+    <NotAuthorized>
+        <div class="buttons-login-perfil">
+            <button class="button log-button" @onclick ="() => GoToLogin()">Log In</button>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+    
+<style>
+    .log-button {
+      color: white;
+      background-color: #562a2a;
+      border-color: #562a2a;
+      width: 200px;
+      font-weight: 800;
+      transition: 0.3s
+    }
+
+    .log-button:hover {
+        color: #0f8a82;
+        border-color: var(--dl-color-gray-white);
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .buttons-login-perfil {
+        display: flex;    
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+    }
+
+    .buttons-login-perfil {
+        margin-top: 2px;
+    }
+</style>
+
+@code {
+    private void GoToLogin()
+    {
+        Navigator.NavigateTo("/login");
+    }
+
+    private void LogOut()
+    {
+        LocalStorage.RemoveItemAsync("token");
+        Navigator.NavigateTo("/feiras", true);
+    }
+}

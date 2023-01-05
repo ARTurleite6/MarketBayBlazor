@@ -2,9 +2,11 @@
 @inject IFeiraService FeiraService
 @inject IStandService StandService
 @inject NavigationManager Navigator
+@using Components
 
     <div class="stand-container">
-        <div class="stand-container01">
+        <NavBar @bind-FilterParam="@filterParam"/>
+        @* <div class="stand-container01">
             <div class="stand-container02">
                 <div class="stand-container03">
                     <div data-thq="thq-dropdown" class="stand-thq-dropdown list-item">
@@ -46,7 +48,7 @@
                     <input type="text" placeholder="Pesquisa" @bind="@filterParam" class="stand-textinput input" />
                 </div>
             </div>
-        </div>
+        </div> *@
         <div class="stand-container07">
             <div class="stand-container08">
                 <div class="stand-container09">
@@ -66,7 +68,7 @@
                 </div>
             </div>
         </div>
-        @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.Contains(this.filterParam)))
+        @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam, StringComparison.OrdinalIgnoreCase) >= 0))
         {
             <div class="stand-container13">
                 <div class="stand-container14">
