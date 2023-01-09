@@ -5,12 +5,6 @@
 @inject ILocalStorageService LocalStorage;
 @inject IJSRuntime JS
 
-<AuthorizeView Roles="Feirante">
-  <Authorized>
-    @context.User.Identity.Name
-  </Authorized>
-</AuthorizeView>
-
 <div class="login-container">
   <header data-thq="thq-navbar" class="login-navbar-interactive">
     <div class="logo">
@@ -479,7 +473,6 @@
     if (result.IsSuccessStatusCode)
     {
       var token = await result.Content.ReadAsStringAsync();
-      Console.WriteLine(token);
       await LocalStorage.SetItemAsync("token", token);
       await AuthStateProvider.GetAuthenticationStateAsync();
       navigator.NavigateTo("/feiras");

@@ -4,84 +4,43 @@
 @inject NavigationManager Navigator
 @using Components
 
-    <div class="stand-container">
-        <NavBar @bind-FilterParam="@filterParam"/>
-        @* <div class="stand-container01">
-            <div class="stand-container02">
-                <div class="stand-container03">
-                    <div data-thq="thq-dropdown" class="stand-thq-dropdown list-item">
-                        <div data-thq="thq-dropdown-toggle" class="stand-dropdown-toggle">
-                            <a href="/feiras">
-                                <img alt="image" src="logo.png" class="stand-image" />
-                            </a>
-                        </div>
-                        <ul data-thq="thq-dropdown-list" class="stand-dropdown-list">
-                            <li data-thq="thq-dropdown" class="stand-dropdown list-item">
-                                <div data-thq="thq-dropdown-toggle" class="stand-dropdown-toggle1">
-                                    <span class="stand-text">Sobre nós</span>
-                                </div>
-                            </li>
-                            <li data-thq="thq-dropdown" class="stand-dropdown1 list-item">
-                                <div data-thq="thq-dropdown-toggle" class="stand-dropdown-toggle2">
-                                    <span class="stand-text01">Ajuda</span>
-                                </div>
-                            </li>
-                            <li data-thq="thq-dropdown" class="stand-dropdown2 list-item">
-                                <div data-thq="thq-dropdown-toggle" class="stand-dropdown-toggle3">
-                                    <span class="stand-text02">Definições</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<div class="stand-container">
+    <NavBar @bind-FilterParam="@filterParam" />
+    <div class="stand-container07">
+        <div class="stand-container08">
+            <div class="stand-container09">
+                <h1 class="stand-text06">@feira.NomeFeira</h1>
             </div>
-            <div class="stand-container04">
-                <div class="stand-container05">
-                    <button class="stand-button button">
-                        <span class="stand-text03">
-                            <span>Filter</span>
-                            <br />
-                        </span>
-                    </button>
-                </div>
-                <div class="stand-container06">
-                    <input type="text" placeholder="Pesquisa" @bind="@filterParam" class="stand-textinput input" />
-                </div>
-            </div>
-        </div> *@
-        <div class="stand-container07">
-            <div class="stand-container08">
-                <div class="stand-container09">
-                    <h1 class="stand-text06">@feira.NomeFeira</h1>
-                </div>
-                <div class="stand-container10">
-                    <h1 class="stand-text07">@feira.DataInicio.Day/@feira.DataInicio.Month</h1>
-                </div>
-            </div>
-            <div class="stand-container11">
-                <div class="stand-container12">
-                    <h1 class="stand-text08">
-                        <span>@stand.Feirante.Conta.Nome</span>
-                        <br />
-                        <br />
-                    </h1>
-                </div>
+            <div class="stand-container10">
+                <h1 class="stand-text07">@feira.DataInicio.Day/@feira.DataInicio.Month</h1>
             </div>
         </div>
-        @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam, StringComparison.OrdinalIgnoreCase) >= 0))
-        {
-            <div class="stand-container13">
-                <div class="stand-container14">
-                    <div class="stand-container15">
-                        <img alt="image"
-                        src="https://images.unsplash.com/photo-1586005309510-fee1ad863c04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDQ5fHxtdWdzfGVufDB8fHx8MTY3MTczMTY1NA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600"
-                        class="stand-image1" />
+        <div class="stand-container11">
+            <div class="stand-container12">
+                <h1 class="stand-text08">
+                    <span>@stand.Feirante.Conta.Nome</span>
+                    <br />
+                    <br />
+                </h1>
+            </div>
+        </div>
+    </div>
+    @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam,
+    StringComparison.OrdinalIgnoreCase) >= 0))
+    {
+        <div class="stand-container13">
+            <div class="stand-container14">
+                <div class="stand-container15">
+                    <img alt="image"
+                    src="https://images.unsplash.com/photo-1586005309510-fee1ad863c04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDQ5fHxtdWdzfGVufDB8fHx8MTY3MTczMTY1NA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600"
+                    class="stand-image1" />
+                </div>
+                <div class="stand-container16">
+                    <div class="stand-container17">
+                        <h1 class="stand-text12">@produto.Produto.Nome</h1>
                     </div>
-                    <div class="stand-container16">
-                        <div class="stand-container17">
-                            <h1 class="stand-text12">@produto.Produto.Nome</h1>
-                        </div>
-                        <div class="stand-container18">
+                    <div class="stand-container18">
+                        <div style="display: flex; flex-direction: column">
                             <div class="stand-container19">
                                 <h1 class="stand-text13">Preço:</h1>
                             </div>
@@ -89,27 +48,46 @@
                                 <h1 class="stand-text14">@produto.Preco€</h1>
                             </div>
                         </div>
-                        <div class="stand-container21">
+                        <AuthorizeView Roles="Feirante">
+                            <div style="display: flex; flex-direction: column; margin-left: 100px">
+                                <div class="stand-container19">
+                                    <h1 class="stand-text13">Stock:</h1>
+                                </div>
+                                <div class="stand-container20">
+                                    <h1 class="stand-text14">@produto.Quantidade</h1>
+                                </div>
+                            </div>
+                        </AuthorizeView>
+                    </div>
+                    <div class="stand-container21">
+                        <AuthorizeView Roles="Cliente">
                             <div class="stand-container22">
                                 <button class="stand-button1 button">Comprar</button>
                             </div>
                             <div class="stand-container23">
-                                <button class="stand-button2 button" onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
+                                <button class="stand-button2 button"
+                                onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
                             </div>
-                        </div>
+                        </AuthorizeView>
+                        <AuthorizeView Roles="Feirante">
+                            <div class="stand-container22">
+                                <button class="stand-button1 button edit-button">Editar</button </div>
+                        </AuthorizeView>
                     </div>
                 </div>
-
             </div>
-        }
-    </div>
-    <div class="stand-container24">
-        <button class="button stand-container25" @onclick="GoToChatRoom">
-            <svg viewBox="0 0 1024 1024" class="stand-icon">
-                <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
-                </path>
-            </svg>
-        </button>
+
+        </div>
+    }
+</div>
+<div class="stand-container24">
+    <button class="button stand-container25" @onclick="GoToChatRoom">
+        <svg viewBox="0 0 1024 1024" class="stand-icon">
+            <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
+            </path>
+        </svg>
+    </button>
+    <AuthorizeView Roles="Cliente">
         <button class="button stand-container26">
             <svg viewBox="0 0 1024 1024" class="stand-icon2">
                 <path
@@ -121,7 +99,8 @@
                 </path>
             </svg>
         </button>
-    </div>
+    </AuthorizeView>
+</div>
 
 <style>
     .stand-container {
@@ -432,8 +411,7 @@
     }
 
     .stand-container11 {
-        @* flex: 0 0 auto; *@
-        width: 100%;
+    @*flex:00auto;*@width: 100%;
         height: 19px;
         display: flex;
         align-items: flex-end;
@@ -526,7 +504,7 @@
         display: flex;
         align-items: flex-start;
         margin-left: var(--dl-space-space-unit);
-        flex-direction: column;
+        flex-direction: row;
         justify-content: flex-start;
     }
 
@@ -1042,6 +1020,18 @@
         border-style: dashed;
         border-width: 0px;
         flex-direction: column;
+    }
+
+    .edit-button {
+        margin-left: 200px;
+        background-color: #e5412a;
+        border-color: #e5412a
+    }
+
+    .edit-button:hover {
+        color: #e5412a;
+        border-color: white;
+        background-color: white;
     }
 
     @@media(max-width: 1200px) {

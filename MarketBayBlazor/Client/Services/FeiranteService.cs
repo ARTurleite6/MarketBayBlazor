@@ -15,13 +15,17 @@ public class FeiranteService : IFeiranteService
         var result = await _http.PostAsJsonAsync("api/feirante/register", feirante);
         if(result.IsSuccessStatusCode)
         {
-            Console.WriteLine("Feirante adicionado com sucesso");
             return true;
         } 
         else
         {
-            Console.WriteLine("Erro a criar feirate, erro = " + result.RequestMessage);
             return false;
         }
+    }
+
+    public async Task<Feirante?> GetFeirante(int ID)
+    {
+        var feirante = await _http.GetFromJsonAsync<Feirante>($"api/feirante/{ID}");
+        return feirante;
     }
 }

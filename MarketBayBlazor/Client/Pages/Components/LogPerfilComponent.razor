@@ -2,27 +2,32 @@
 @inject NavigationManager Navigator;
 @inject ILocalStorageService LocalStorage
 
-<AuthorizeView>
-    <Authorized>
-        <div class="buttons-login-perfil">
-            <button class="button log-button" @onclick="() => LogOut()">Log Out</button>
-        </div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="buttons-login-perfil">
-            <button class="button log-button" @onclick ="() => GoToLogin()">Log In</button>
-        </div>
-    </NotAuthorized>
-</AuthorizeView>
-    
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; width: 100%; height: 100%; align-content: center">
+    <AuthorizeView>
+        <Authorized>
+            <div class="buttons-login-perfil">
+                <button class="button log-button" @onclick="() => LogOut()">Log Out</button>
+            </div>
+            <div class="buttons-login-perfil">
+                <button class="button log-button" @onclick="() => GoToLogin()">Ver Perfil</button>
+            </div>
+        </Authorized>
+        <NotAuthorized>
+            <div class="buttons-login-perfil">
+                <button class="button log-button" @onclick="() => GoToLogin()">Log In</button>
+            </div>
+        </NotAuthorized>
+    </AuthorizeView>
+</div>
+
 <style>
     .log-button {
-      color: white;
-      background-color: #562a2a;
-      border-color: #562a2a;
-      width: 200px;
-      font-weight: 800;
-      transition: 0.3s
+        color: white;
+        background-color: #562a2a;
+        border-color: #562a2a;
+        width: 200px;
+        font-weight: 800;
+        transition: 0.3s
     }
 
     .log-button:hover {
@@ -32,12 +37,11 @@
     }
 
     .buttons-login-perfil {
-        display: flex;    
+        display: flex;
         justify-content: space-between;
         align-items: center;
         flex-direction: column;
         width: 100%;
-        height: 100%;
     }
 
     .buttons-login-perfil {

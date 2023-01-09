@@ -84,6 +84,7 @@ namespace MarketBayBlazor.Server.Controllers
             return Ok(_context
                 .Feiras
                 // .Where(feira => feira.DataFim > compareDate)
+                .Include(feira => feira.Stands)
                 .Include(feira => feira.Categoria));
     	}
 

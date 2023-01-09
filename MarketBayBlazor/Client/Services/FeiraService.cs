@@ -11,12 +11,10 @@ namespace MarketBayBlazor.Client.Services
             this._httpClient = _httpClient;
         }
 
-        public async Task<List<Feira>?> GetFeiras()
+        public Task<List<Feira>?> GetFeiras()
         {
-            var feiras = await this._httpClient.GetFromJsonAsync<List<Feira>>("api/Feira");
-            if (feiras != null)
-                return feiras;
-            return null;
+            var feiras = this._httpClient.GetFromJsonAsync<List<Feira>>("api/Feira");
+            return feiras;
         }
 
         public async Task<List<StandFeirante>?> GetStandsFeira(int id)
@@ -34,9 +32,9 @@ namespace MarketBayBlazor.Client.Services
             return null;
 	    }
 
-        public async Task<Feira?> GetFeira(int id) 
+        public Task<Feira?> GetFeira(int id) 
         {
-            var feira = await this._httpClient.GetFromJsonAsync<Feira>($"api/Feira/{id}");
+            var feira = this._httpClient.GetFromJsonAsync<Feira>($"api/Feira/{id}");
             return feira;
         }
 
