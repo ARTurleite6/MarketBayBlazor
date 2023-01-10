@@ -128,6 +128,21 @@ namespace MarketBayBlazor.Server.Controllers
 
             return Ok(stands);
     	}
+
+        [HttpGet("organizador/{organizadorID:int}")]
+        public ActionResult<List<Feira>> GetFeiras(int organizadorID)
+        {
+
+            if(this._context.Feirantes.Any(feirante => feirante.ID == organizadorID))
+            {
+                return NotFound("Não existe nenhum feirante com o id passado");
+            }
+
+            return Ok(_context.Feiras.Where(feira => feira.FeiranteID == organizadorID)
+            .Include(feira => feira.Organizador)
+            .Include(feira => feira.Categoria)
+            .ToList());
+        }
     }
 }
 

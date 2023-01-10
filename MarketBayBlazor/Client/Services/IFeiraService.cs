@@ -11,6 +11,8 @@ namespace MarketBayBlazor.Client.Services
 
         public Task InscreveEmFeira(FeiraSubmitDTO request);
 
+        public Task<List<Feira>?> GetFeirasOrganizador(int id);
+
     }
 }
 

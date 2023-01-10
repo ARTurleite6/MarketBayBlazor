@@ -1,5 +1,6 @@
 @namespace Components
-@inject IFeiranteService feirante_service;
+@inject IFeiranteService feirante_service
+@inject NavigationManager nav
 @using System.Security.Claims
 
 <div class="feira-container01">
@@ -40,11 +41,18 @@
         </span>
       </button>
       <input @bind="@FilterParam" type="text" placeholder="Pesquisa" class="feira-textinput input" />
-      @if (this.feirante?.Organizador ?? false)
+      @if ((this.feirante?.Organizador ?? false))
       {
-        <button class="feira-button button" style="margin-left: 50px;" id="last-button">
+        <button class="feira-button button" style="margin-left: 50px;" id="last-button" @onclick="@(() => ShowFeirasOrganizador())">
           <span class="feira-text03">
+            @if(ShowMineParam)
+            {
             <span>Minhas Feiras</span>
+            }
+            else
+            {
+              <span>Todas as Feiras</span>
+            }
             <br />
           </span>
         </button>
@@ -339,6 +347,21 @@
     }
   }
 
+  private bool _showMine = true;
+
+  [Parameter]
+  public bool ShowMineParam
+  {
+    get => _showMine;
+    set {
+      if(_showMine == value) return;
+      _showMine = value;
+      ShowMineParamChanged.InvokeAsync(value);
+    }
+  }
+
+  [Parameter]
+  public EventCallback<bool> ShowMineParamChanged { get; set; }
 
   [Parameter]
   public string FilterParam
@@ -354,5 +377,10 @@
 
   [Parameter]
   public EventCallback<string> FilterParamChanged { get; set; }
+
+    private void ShowFeirasOrganizador()
+    {
+      ShowMineParam = !ShowMineParam;
+    }
 
 }

@@ -1,7 +1,9 @@
 @page "/standfeira/{feiraid:int}/{id:int}"
 @inject IFeiraService FeiraService
 @inject IStandService StandService
+@inject ILocalStorageService LocalStorage
 @inject NavigationManager Navigator
+@inject IJSRuntime JS
 @using Components
 
 <div class="stand-container">
@@ -81,7 +83,7 @@
     }
 </div>
 <div class="stand-container24">
-    <button class="button stand-container25" @onclick="GoToChatRoom">
+    <button class="button stand-container25" @onclick="@(() => GoToChatRoom())">
         <svg viewBox="0 0 1024 1024" class="stand-icon">
             <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
             </path>
@@ -1058,6 +1060,8 @@
 
     private string filterParam = string.Empty;
 
+    [CascadingParameter]
+    public Task<AuthenticationState> authstate {get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -1079,13 +1083,39 @@
         }
     }
 
-    private void GoToNegotiation(int produtoID)
+    private async Task<bool> DealLogin(string page)
     {
-        Navigator.NavigateTo($"/proposta/{this.FeiraID}/{this.ID}/{produtoID}");
+        var auth = await authstate;
+        if(auth.User.Identity?.IsAuthenticated ?? false)
+            return true;
+
+        var confirm = await JS.InvokeAsync<bool>("confirm", "Você deve estar autenticado para efetuar esta operação, Deseja efetuar o login?");
+        if(!confirm)
+        {
+            return false;
+        }
+        await LocalStorage.SetItemAsStringAsync("last_page", page);
+        Navigator.NavigateTo("/login");
+        return false;
     }
 
-    private void GoToChatRoom()
+    private async Task GoToNegotiation(int produtoID)
     {
-        Navigator.NavigateTo($"/chatroom/{this.FeiraID}/{this.ID}");
+
+        var logged = await DealLogin($"/proposta/{this.FeiraID}/{this.ID}/{produtoID}");
+        if(logged)
+        {
+            Navigator.NavigateTo($"/proposta/{this.FeiraID}/{this.ID}/{produtoID}");
+        }
+
+    }
+
+    private async Task GoToChatRoom()
+    {
+        var logged = await DealLogin($"/chatroom/{this.FeiraID}/{this.ID}");
+        if(logged)
+        {
+            Navigator.NavigateTo($"/chatroom/{this.FeiraID}/{this.ID}");
+        }
     }
 }

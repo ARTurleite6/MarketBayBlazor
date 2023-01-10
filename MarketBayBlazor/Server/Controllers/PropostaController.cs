@@ -55,9 +55,23 @@ namespace MarketBayBlazor.Server.Controllers
             .Where(proposta => proposta.StandFeiranteID == standID)
             .OrderByDescending(proposta => proposta.data)
             .Include(proposta => proposta.Produto)
+            .ThenInclude(produto => produto.Categoria)
             .Include(proposta => proposta.Cliente)
             .ThenInclude(cliente => cliente.Conta)
             .ToListAsync<Proposta>());
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> UpdateProposta(int id, Proposta proposta)
+        {
+            this._context.Propostas.Update(proposta);
+            try {
+                await this._context.SaveChangesAsync();
+            } catch(DbUpdateException e)
+            {
+                return BadRequest(e.Message);
+            }
+            return Ok();
         }
 
     }

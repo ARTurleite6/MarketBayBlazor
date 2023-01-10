@@ -10,9 +10,9 @@ public class Feira
     [Key]
     public int ID { get; set; }
     [MaxLength(100)]
-    public string NomeFeira { get; set; }
+    public string NomeFeira { get; set; } = string.Empty;
     [MaxLength(200)]
-    public string Logotipo { get; set; }
+    public string Logotipo { get; set; } = string.Empty;
     public DateTime DataInicio { get; set; }
     public DateTime DataFim { get; set; }
     [Precision(10, 2)]
@@ -21,11 +21,11 @@ public class Feira
 
     [ForeignKey("Feirante")]
     public int FeiranteID { get; set; }
-    public virtual Feirante Organizador { get; set; }
+    public virtual Feirante? Organizador { get; set; }
     
     [ForeignKey("Categoria")]
     public int CategoriaID{ get; set;}
-    public Categoria Categoria { get; set; }
+    public Categoria? Categoria { get; set; }
 
     public virtual ICollection<StandFeirante> Stands { get; set; } = new List<StandFeirante>();
 }

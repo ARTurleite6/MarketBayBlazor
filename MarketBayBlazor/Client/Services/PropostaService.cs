@@ -10,6 +10,15 @@ public class PropostaService : IPropostaService
         this._http = _http; 
     }
 
+    public async Task UpdateProposta(Proposta proposta)
+    {
+        var res = await this._http.PutAsJsonAsync($"api/proposta/{proposta.ID}", proposta);
+        if(res.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Proposta Aceite com sucesso");
+        }
+    }
+
     public async Task<List<Proposta>?> GetPropostasStand(int standID)
     {
         var response = await this._http.GetFromJsonAsync<List<Proposta>>($"api/Proposta/{standID}");

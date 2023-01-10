@@ -73,7 +73,6 @@
 </div>
 
 <style>
-
   .input {
     width: 100%;
   }
@@ -322,7 +321,7 @@
     align-self: flex-start;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
   }
 
   .logo {
@@ -388,21 +387,23 @@
     border-color: #0f8a82;
   }
 
-  .button-login:hover, .later-button:hover {
+  .button-login:hover,
+  .later-button:hover {
     color: #0f8a82;
     border-color: var(--dl-color-gray-white);
     background-color: var(--dl-color-gray-white);
   }
 
-    .later-button {
-      color: white;
-      background-color: #562a2a;
-      border-color: #562a2a;
-    }
+  .later-button {
+    color: white;
+    background-color: #562a2a;
+    border-color: #562a2a;
+  }
 
-    .later-button, .button-login {
-      transition: 0.3s;
-    }
+  .later-button,
+  .button-login {
+    transition: 0.3s;
+  }
 
   @@media(max-width: 767px) {
     .login-navbar-interactive {
@@ -449,12 +450,12 @@
     color: #562a2a;
     font-size: 1.5em;
   }
-  
+
   .registo-text {
     font-size: 20px;
     font-weight: 700;
   }
-  
+
   .login-verde {
     color: #0f8a82;
   }
@@ -466,6 +467,13 @@
 
 @code {
   private UserLoginDTO dto = new UserLoginDTO();
+
+  protected override async Task OnInitializedAsync()
+  {
+    await LocalStorage.RemoveItemAsync("token");
+  }
+
+
 
   private async Task HandleLogin()
   {
@@ -482,5 +490,15 @@
     {
       await JS.InvokeVoidAsync("alert", "Username ou password inválidos");
     }
+
+
+    var lastPage = await LocalStorage.GetItemAsStringAsync("last_page");
+    await LocalStorage.RemoveItemAsync("last_page");
+    if (lastPage == null)
+    {
+      lastPage = "/";
+    }
+    navigator.NavigateTo(lastPage);
+
   }
 }

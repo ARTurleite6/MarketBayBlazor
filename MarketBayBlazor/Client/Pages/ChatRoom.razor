@@ -6,49 +6,6 @@
 
 <div class="chat-room-container">
     <NavBar />
-    @* <div class="chat-room-container01">
-        <div class="chat-room-container02">
-            <div class="chat-room-container03">
-                <div data-thq="thq-dropdown" class="chat-room-thq-dropdown list-item">
-                    <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle">
-                        <a href="/feiras">
-                            <img alt="image" src="logo.png" class="chat-room-image" />
-                        </a>
-                    </div>
-                    <ul data-thq="thq-dropdown-list" class="chat-room-dropdown-list">
-                        <li data-thq="thq-dropdown" class="chat-room-dropdown list-item">
-                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle1">
-                                <span class="chat-room-text">Sobre nós</span>
-                            </div>
-                        </li>
-                        <li data-thq="thq-dropdown" class="chat-room-dropdown1 list-item">
-                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle2">
-                                <span class="chat-room-text01">Ajuda</span>
-                            </div>
-                        </li>
-                        <li data-thq="thq-dropdown" class="chat-room-dropdown2 list-item">
-                            <div data-thq="thq-dropdown-toggle" class="chat-room-dropdown-toggle3">
-                                <span class="chat-room-text02">Definições</span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="chat-room-container04">
-            <div class="chat-room-container05">
-                <button class="chat-room-button button">
-                    <span class="chat-room-text03">
-                        <span>Filter</span>
-                        <br />
-                    </span>
-                </button>
-            </div>
-            <div class="chat-room-container06">
-                <input type="text" placeholder="Pesquisa" class="chat-room-textinput input" />
-            </div>
-        </div>
-    </div> *@
     <div class="chat-room-container07">
         <div class="chat-room-container08">
             <div class="chat-room-container09">
@@ -86,7 +43,7 @@
                         <div class="chat-room-container17">
                             <div class="chat-room-container18">
                                 <div class="chat-room-container19">
-                                    <h1 class="chat-room-text12">Quantidade:</h1>
+                                    <h1 class="chat-room-text12" style=@(proposta.Estado == "Recusada" ? "color: #0f8a82" : "")>Quantidade:</h1>
                                 </div>
                                 <div class="chat-room-container20">
                                     <h1 class="chat-room-text13">@proposta.Quantidade</h1>
@@ -94,7 +51,7 @@
                             </div>
                             <div class="chat-room-container21">
                                 <div class="chat-room-container22">
-                                    <h1 class="chat-room-text14">Preço:</h1>
+                                    <h1 class="chat-room-text14" style=@(proposta.Estado == "Recusada" ? "color: #0f8a82" : "")>Preço:</h1>
                                 </div>
                                 <div class="chat-room-container23">
                                     <h1 class="chat-room-text15">@proposta.Preco€</h1>
@@ -104,25 +61,56 @@
                     </form>
                 </div>
                 <div class="chat-room-container24">
+                    @if (proposta.Estado == "Aceite")
+                    {
                     <div class="chat-room-container25">
                         <div class="chat-room-container26">
                             <h1 class="chat-room-text16">@(proposta.Produto?.Nome ?? "Produto Não Carregado")</h1>
                         </div>
                     </div>
-                    @if (proposta.Estado == "Aceite")
-                    {
-                        <div class="chat-room-container27">
-                            <button class="chat-room-button1 button">Resgatar Proposta</button>
-                        </div>
+                        <AuthorizeView Roles="Cliente">
+                            <Authorized>
+                                <div class="chat-room-container27">
+                                    <button class="chat-room-button1 button">Resgatar Proposta</button>
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
+                        <AuthorizeView Roles="Feirante">
+                            <Authorized>
+                                <div class="chat-room-container27">
+                                    <h1 class="chat-room-text22">Aceitou Proposta</h1>
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
                     }
                     else if (proposta.Estado == "Pendente")
                     {
-                        <div class="chat-room-container58">
-                            <h1 class="chat-room-text28">@proposta.Descricao</h1>
+                    <div class="chat-room-container25">
+                        <div class="chat-room-container26">
+                            <h1 class="chat-room-text16">@(proposta.Produto?.Nome ?? "Produto Não Carregado")</h1>
                         </div>
+                    </div>
+                        <AuthorizeView>
+                            <Authorized>
+                                <div class="chat-room-container58">
+                                    <h1 class="chat-room-text28">@proposta.Descricao</h1>
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
+                        <AuthorizeView Roles="Feirante">
+                            <div class="accept-buttons-container">
+                                <button class="button button-feirante accept-button" style="margin-right: 50px" @onclick="@(() => UpdateProposta(proposta, "Aceite"))">Aceitar</button>
+                                <button class="button button-feirante reject-button" @onclick="@(() => UpdateProposta(proposta, "Recusada"))">Rejeitar</button>
+                            </div>
+                        </AuthorizeView>
                     }
                     else
                     {
+                    <div class="chat-room-container25">
+                        <div class="chat-room-container26">
+                            <h1 class="chat-room-text16" style="color: #0f8a82;">@(proposta.Produto?.Nome ?? "Produto Não Carregado")</h1>
+                        </div>
+                    </div>
                         <div class="chat-room-container43">
                             <h1 class="chat-room-text22">Proposta Recusada</h1>
                         </div>
@@ -547,7 +535,7 @@
     }
 
     .chat-room-text12 {
-        color: #562a2a;
+        color: #ebc39c;
         font-size: 1em;
         text-align: center;
     }
@@ -587,7 +575,7 @@
     }
 
     .chat-room-text14 {
-        color: #562a2a;
+        color: #ebc39c;
         font-size: 1em;
     }
 
@@ -611,17 +599,18 @@
         width: 755px;
         height: 100%;
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         flex-direction: column;
     }
 
     .chat-room-container25 {
         width: 100%;
-        height: 75px;
         display: flex;
         align-self: flex-start;
         align-items: center;
         justify-content: flex-start;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .chat-room-container26 {
@@ -634,7 +623,7 @@
     }
 
     .chat-room-text16 {
-        color: #562a2a;
+        color: #ebc39c;
         font-size: 1.5em;
     }
 
@@ -1066,6 +1055,7 @@
         justify-content: center;
         background-color: #ebc39c;
         border-radius: 5px;
+        margin-bottom: 10px;
     }
 
     .chat-room-text28 {
@@ -1073,6 +1063,43 @@
         font-size: 1em;
         font-style: normal;
         font-weight: 700;
+    }
+
+    .accept-buttons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .button-feirante {
+        color: white;
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        font-weight: 700;
+        transition: 0.3s;
+    }
+
+    .accept-button:hover {
+        color: #0f8a82;
+        background-color: white;
+        border-color: white;
+    }
+
+    .reject-button:hover {
+        color: #e5412a;
+        background-color: white;
+        border-color: white
+    }
+
+    .accept-button {
+        border-color: #0f8a82;
+        background-color: #0f8a82;
+    }
+
+    .reject-button {
+        background-color: #e5412a;
+        border-color: #e5412a;
     }
 
     @@media(max-width: 1200px) {
@@ -1124,7 +1151,7 @@
         {
             return "chat-room-container45";
         }
-        else if(proposta.Estado == "Recusada")
+        else if (proposta.Estado == "Recusada")
         {
             return "chat-room-container29";
         }
@@ -1132,6 +1159,12 @@
         {
             return "chat-room-container14";
         }
+    }
+
+    private void UpdateProposta(Proposta proposta, string Estado)
+    {
+        proposta.Estado = Estado;
+        PropostaService.UpdateProposta(proposta);
     }
 
 }

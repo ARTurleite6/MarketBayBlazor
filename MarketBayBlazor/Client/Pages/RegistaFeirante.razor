@@ -83,11 +83,8 @@
                         <span>Já tem conta?</span>
                         <br />
                     </span>
-                    <a href="/login" target="_blank" rel="noreferrer noopener"
-                        class="regista-feirante-link">
-                        <span>&nbsp; Log in</span>
-                        <br />
-                    </a>
+                    <span><a href="/login" class="regista-feirante-link">&nbsp; Log in</a></span>
+                    <br />
                 </div>
             </div>
         </div>
@@ -160,7 +157,7 @@
                     <span>É um Cliente?</span>
                     <br />
                 </span>
-                <a href="/registerclient" target="_blank" rel="noreferrer noopener" class="regista-feirante-link1">
+                <a href="/registerclient" class="regista-feirante-link1">
                     <span>&nbsp;Registar-se</span>
                     <br />
                 </a>
@@ -757,7 +754,7 @@
 
     private async void Register()
     {
-        if(await FeiranteService.RegistaFeirante(this.feirante))
+        if (await FeiranteService.RegistaFeirante(this.feirante))
         {
             await JS.InvokeVoidAsync("alert", "Conta de feirante criada com sucesso");
         }

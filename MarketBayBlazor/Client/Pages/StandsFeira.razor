@@ -24,7 +24,7 @@
         <div class="feira-container10 feira-size55">
           @if(!this.stands.Any(stand => stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1")))
           {
-            <h1 class="text-red feira-text07"><a href="javascript: void(0)" onclick="@GoToInscricao" @onclick:preventDefault>Inscrever-se na Feira</a></h1>
+            <h1 class="text-red feira-text07"><a href="javascript: void(0)" onclick="@(() => GoToInscricao())" @onclick:preventDefault>Inscrever-se na Feira</a></h1>
           }
           else
           {

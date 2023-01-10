@@ -46,6 +46,12 @@ namespace MarketBayBlazor.Client.Services
                 Console.WriteLine("Stand adicionado com sucesso");
             }
         }
+
+        public async Task<List<Feira>?> GetFeirasOrganizador(int id)
+        {
+            var feiras = await this._httpClient.GetFromJsonAsync<List<Feira>>($"api/feira/organizador/{id}");
+            return feiras;
+        }
     }
 }
 

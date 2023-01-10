@@ -50,8 +50,10 @@
 </style>
 
 @code {
-    private void GoToLogin()
+    private async Task GoToLogin()
     {
+        var currentUri = Navigator.Uri ?? "/";
+        await LocalStorage.SetItemAsStringAsync("last_page", currentUri);
         Navigator.NavigateTo("/login");
     }
 
