@@ -111,7 +111,6 @@ namespace MarketBayBlazor.Server.Controllers
         [HttpGet("Stands/{id:int}")]
         public ActionResult<List<StandFeirante>> GetStands(int id)
         {
-
             if(!this._context.Feiras.Any(feira => feira.ID == id))
             {
                 return NotFound();

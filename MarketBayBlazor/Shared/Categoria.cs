@@ -9,5 +9,5 @@ public class Categoria
     [Key]
     public int ID { get; set; }    
     [MaxLength(50)]
-    public string Descricao { get; set; }
+    public string Descricao { get; set; } = string.Empty;
 }

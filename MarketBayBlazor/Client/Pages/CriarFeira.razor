@@ -1,0 +1,1547 @@
+@page "/criarfeira"
+@attribute [Authorize(Roles = "Feirante")]
+@inject ICategoriaService CategoriaService
+@inject IFeiraService FeiraService
+
+<div class="criar-feira-container">
+  <div class="criar-feira-container001">
+    <div class="criar-feira-container002">
+      <div class="criar-feira-container003">
+        <div data-thq="thq-dropdown" class="criar-feira-thq-dropdown list-item">
+          <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle">
+            <a href="/">
+              <img alt="image" src="logo.png" class="criar-feira-image" />
+            </a>
+          </div>
+          <ul data-thq="thq-dropdown-list" class="criar-feira-dropdown-list">
+            <li data-thq="thq-dropdown" class="criar-feira-dropdown list-item">
+              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle1">
+                <span class="criar-feira-text">Sobre nós</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="criar-feira-dropdown1 list-item">
+              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle2">
+                <span class="criar-feira-text01">Ajuda</span>
+              </div>
+            </li>
+            <li data-thq="thq-dropdown" class="criar-feira-dropdown2 list-item">
+              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle3">
+                <span class="criar-feira-text02">Definições</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="criar-feira-container004">
+      <div class="criar-feira-container005">
+        <h1 class="criar-feira-text03">MarketBay</h1>
+      </div>
+    </div>
+  </div>
+  <EditForm Model="@feira" class="criar-feira-container007">
+    <div class="criar-feira-container011">
+      <div class="criar-feira-container012">
+        <div class="criar-feira-container008">
+          <div class="criar-feira-container009">
+            <button class="criar-feira-button1 button">
+              <svg viewBox="0 0 877.7142857142857 1024" class="criar-feira-icon">
+                <path
+                  d="M694.857 548.571v-73.143c0-20-16.571-36.571-36.571-36.571h-146.286v-146.286c0-20-16.571-36.571-36.571-36.571h-73.143c-20 0-36.571 16.571-36.571 36.571v146.286h-146.286c-20 0-36.571 16.571-36.571 36.571v73.143c0 20 16.571 36.571 36.571 36.571h146.286v146.286c0 20 16.571 36.571 36.571 36.571h73.143c20 0 36.571-16.571 36.571-36.571v-146.286h146.286c20 0 36.571-16.571 36.571-36.571zM877.714 512c0 242.286-196.571 438.857-438.857 438.857s-438.857-196.571-438.857-438.857 196.571-438.857 438.857-438.857 438.857 196.571 438.857 438.857z">
+                </path>
+              </svg>
+            </button>
+          </div>
+          <div class="criar-feira-container010">
+            <span class="criar-feira-text07">
+              <span>Logótipo da feira</span>
+              <br />
+            </span>
+          </div>
+        </div>
+        <div class="criar-feira-form">
+          <div class="criar-feira-container013">
+            <div class="criar-feira-container014">
+              <h1 class="criar-feira-text10">Nome:</h1>
+            </div>
+            <div class="criar-feira-container015">
+              <InputText @bind-Value="feira.NomeFeira" placeholder="Nome da Feira" class="input" />
+            </div>
+          </div>
+          <div class="criar-feira-container016">
+            <div class="criar-feira-container017">
+              <h1 class="criar-feira-text11">Data Início:</h1>
+            </div>
+            <div class="criar-feira-container018">
+              <InputDate @bind-Value="feira.DataInicio" class="input" />
+            </div>
+          </div>
+          <div class="criar-feira-container019">
+            <div class="criar-feira-container020">
+              <h1 class="criar-feira-text12">
+                <span>Data Final</span>
+                <span>:</span>
+                <br />
+              </h1>
+            </div>
+            <div class="criar-feira-container021">
+              <InputDate @bind-Value="feira.DataFim" placeholder="@DateTime.Now" class="input" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="criar-feira-container022">
+        <div class="criar-feira-container023">
+          <h1 class="criar-feira-text16">Categorias:</h1>
+        </div>
+        <div class="criar-feira-container024">
+          <InputSelect id="categoria" @bind-Value="feira.CategoriaID">
+            @foreach (var categoria in this._categorias)
+            {
+                      <option value="@categoria.ID">@categoria.Descricao</option>
+            }
+                  </InputSelect>
+                </div>
+              </div>
+              <div class="criar-feira-container082">
+                <div class="criar-feira-form2">
+                  <div class="criar-feira-container083">
+                    <div class="criar-feira-container084">
+                      <div class="criar-feira-container085">
+                        <h1 class="criar-feira-text35">
+                          <span>Preço de aluguer de stand/dia:</span>
+                          <br />
+                        </h1>
+                      </div>
+                      <div class="criar-feira-container086">
+                        <div class="criar-feira-container087">
+                          <InputNumber @bind-Value="feira.PrecoAluguel" class="criar-feira-text38" />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="criar-feira-container089">
+                      <div class="criar-feira-container090">
+                        <h1 class="criar-feira-text39">
+                          <span>Número de stands:</span>
+                          <br />
+                        </h1>
+                      </div>
+                      <div class="criar-feira-container091">
+                        <div class="criar-feira-container092">
+                          <InputNumber @bind-Value="feira.NumeroMaximoFeirantes" class="criar-feira-text42" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="criar-feira-container094">
+                    <div class="criar-feira-container095">
+                      <div class="criar-feira-container096">
+                        <h1 class="criar-feira-text43">
+                          <span>A pagar (70/dia):</span>
+                          <br />
+                        </h1>
+                      </div>
+                      <div class="criar-feira-container097">
+                        <div class="criar-feira-container098">
+                          <div class="criar-feira-container099">
+                            <h1 class="criar-feira-text46">0</h1>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="criar-feira-container100">
+                      <div class="criar-feira-container101">
+                        <button class="criar-feira-button2 button" type="submit" @onclick="(() => CreateFeira())">
+                          <span class="criar-feira-text47">
+                            <span>Criar</span>
+                            <br />
+                            <span>feira</span>
+                            <br />
+                          </span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </EditForm>
+        </div>
+
+
+        <style>
+          .criar-feira-container {
+            display: flex;
+            overflow: auto;
+            align-items: center;
+            flex-direction: column;
+            background-color: #ebc39c;
+          }
+
+          .criar-feira-container001 {
+            width: 100%;
+            display: flex;
+            position: relative;
+            align-items: flex-start;
+            background-color: #0f8a82;
+          }
+
+          .criar-feira-container002 {
+            height: 77px;
+            display: flex;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-container003 {
+            display: flex;
+            align-self: center;
+            margin-top: 0px;
+            align-items: center;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-thq-dropdown {
+            cursor: pointer;
+            height: 80px;
+            display: inline-block;
+            position: relative;
+            align-self: center;
+            border-radius: var(--dl-radius-radius-radius2);
+          }
+
+          .criar-feira-dropdown-toggle {
+            fill: #595959;
+            color: #595959;
+            width: 135px;
+            height: 94px;
+            display: inline-flex;
+            align-items: center;
+            padding-top: var(--dl-space-space-halfunit);
+            padding-left: var(--dl-space-space-unit);
+            border-radius: var(--dl-radius-radius-radius2);
+            padding-right: var(--dl-space-space-unit);
+            padding-bottom: var(--dl-space-space-halfunit);
+            justify-content: center;
+          }
+
+          .criar-feira-image {
+            width: 88px;
+            height: 82px;
+            object-fit: cover;
+          }
+
+          .criar-feira-dropdown-list {
+            left: 0%;
+            width: max-content;
+            display: none;
+            z-index: 100;
+            position: absolute;
+            min-width: 100%;
+            transition: 0.3s;
+            align-items: stretch;
+            border-color: #D9D9D9;
+            border-width: 1px;
+            border-radius: var(--dl-radius-radius-radius4);
+            flex-direction: column;
+            list-style-type: none;
+            background-color: var(--dl-color-gray-white);
+            list-style-position: inside;
+          }
+
+          .criar-feira-dropdown {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            border-radius: var(--dl-radius-radius-radius2);
+          }
+
+          .criar-feira-dropdown-toggle1 {
+            fill: #595959;
+            color: #595959;
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            transition: 0.3s;
+            align-items: center;
+            padding-top: var(--dl-space-space-halfunit);
+            padding-left: var(--dl-space-space-unit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-unit);
+            padding-bottom: var(--dl-space-space-halfunit);
+          }
+
+          .criar-feira-dropdown-toggle1:hover {
+            fill: #fff;
+            color: #fff;
+            background-color: #595959;
+          }
+
+          .criar-feira-text {
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+          }
+
+          .criar-feira-dropdown1 {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            border-radius: var(--dl-radius-radius-radius2);
+          }
+
+          .criar-feira-dropdown-toggle2 {
+            fill: #595959;
+            color: #595959;
+            width: 100%;
+            height: 100%;
+            display: inline-flex;
+            transition: 0.3s;
+            align-items: center;
+            padding-top: var(--dl-space-space-halfunit);
+            padding-left: var(--dl-space-space-unit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-unit);
+            padding-bottom: var(--dl-space-space-halfunit);
+          }
+
+          .criar-feira-dropdown-toggle2:hover {
+            fill: #fff;
+            color: #fff;
+            background-color: #595959;
+          }
+
+          .criar-feira-text01 {
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+          }
+
+          .criar-feira-dropdown2 {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            border-radius: var(--dl-radius-radius-radius2);
+          }
+
+          .criar-feira-dropdown-toggle3 {
+            fill: #595959;
+            color: #595959;
+            width: 100%;
+            display: inline-flex;
+            transition: 0.3s;
+            align-items: center;
+            padding-top: var(--dl-space-space-halfunit);
+            padding-left: var(--dl-space-space-unit);
+            border-radius: var(--dl-radius-radius-radius4);
+            padding-right: var(--dl-space-space-unit);
+            padding-bottom: var(--dl-space-space-halfunit);
+          }
+
+          .criar-feira-dropdown-toggle3:hover {
+            fill: #fff;
+            color: #fff;
+            background-color: #595959;
+          }
+
+          .criar-feira-text02 {
+            width: 100%;
+            cursor: pointer;
+            display: flex;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+          }
+
+          .criar-feira-container004 {
+            width: 100%;
+            height: 109px;
+            display: flex;
+            align-self: center;
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+          }
+
+          .criar-feira-container005 {
+            width: 420px;
+            height: 100px;
+            display: flex;
+            align-self: flex-start;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text03 {
+            color: #562a2a;
+            text-align: center;
+          }
+
+          .criar-feira-container006 {
+            flex: 0 0 auto;
+            width: 200px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-button {
+            color: var(--dl-color-gray-white);
+            width: 180px;
+            height: 49px;
+            text-align: center;
+            transition: 0.3s;
+            border-color: #562a2a;
+            background-color: #562a2a;
+          }
+
+          .criar-feira-button:hover {
+            color: #562a2a;
+            border-color: var(--dl-color-gray-white);
+            background-color: var(--dl-color-gray-white);
+          }
+
+          .criar-feira-text04 {
+            font-style: normal;
+            font-weight: 700;
+          }
+
+          .criar-feira-container007 {
+            display: flex;
+            flex-direction: row;
+          }
+
+          .criar-feira-container008 {
+            flex: 0 0 auto;
+            width: 313px;
+            height: 272px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-container009 {
+            width: 198px;
+            height: 180px;
+            display: flex;
+            align-items: flex-start;
+          }
+
+          .criar-feira-button1 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: 0.3s;
+            border-color: var(--dl-color-gray-white);
+            flex-direction: row;
+          }
+
+          .criar-feira-button1:hover {
+            border-color: var(--dl-color-gray-700);
+            background-color: var(--dl-color-gray-900);
+          }
+
+          .criar-feira-icon {
+            fill: #e5412a;
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container010 {
+            width: 100%;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-text07 {
+            color: #562a2a;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 700;
+          }
+
+          .criar-feira-container011 {
+            flex: 0 0 auto;
+            width: 1073px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .criar-feira-container012 {
+            width: 1073px;
+            height: 262px;
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            justify-content: center;
+          }
+
+          .criar-feira-form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+          }
+
+          .criar-feira-container013 {
+            flex: 0 0 auto;
+            width: 297px;
+            height: 264px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-container014 {
+            width: 85px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-text10 {
+            color: #562a2a;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container015 {
+            flex: 0 0 auto;
+            width: 277px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-container016 {
+            flex: 0 0 auto;
+            width: 195px;
+            height: 264px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-container017 {
+            width: 140px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-text11 {
+            color: rgb(86, 42, 42);
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container018 {
+            flex: 0 0 auto;
+            width: 277px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-container019 {
+            flex: 0 0 auto;
+            width: 297px;
+            height: 264px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-container020 {
+            width: 138px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-text12 {
+            color: rgb(86, 42, 42);
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container021 {
+            flex: 0 0 auto;
+            width: 277px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-container022 {
+            width: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-container023 {
+            flex: 0 0 auto;
+            width: 100%;
+            height: 42px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-text16 {
+            color: #562a2a;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container024 {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-form1 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+          }
+
+          .criar-feira-container025 {
+            flex: 0 0 auto;
+            width: 324px;
+            height: 268px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container026 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container027 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container028 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text17 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container029 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container030 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox01 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container031 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text18 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container032 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container033 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox02 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container034 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text19 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container035 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container036 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox03 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container037 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text20 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container038 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container039 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox04 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container040 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text21 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container041 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container042 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox05 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container043 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text22 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container044 {
+            flex: 0 0 auto;
+            width: 324px;
+            height: 268px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container045 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container046 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox06 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container047 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text23 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container048 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container049 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox07 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container050 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text24 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container051 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container052 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox08 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container053 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text25 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container054 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container055 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox09 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container056 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text26 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container057 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container058 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox10 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container059 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text27 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container060 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container061 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox11 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container062 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text28 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container063 {
+            flex: 0 0 auto;
+            width: 324px;
+            height: 268px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container064 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container065 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox12 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container066 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text29 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container067 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container068 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox13 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container069 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text30 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container070 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container071 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox14 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container072 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text31 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container073 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container074 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox15 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container075 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text32 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container076 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container077 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox16 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container078 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text33 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container079 {
+            width: 100%;
+            height: 45px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-container080 {
+            flex: 0 0 auto;
+            width: 49px;
+            height: 39px;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-checkbox17 {
+            width: 100%;
+            height: 100%;
+          }
+
+          .criar-feira-container081 {
+            flex: 0 0 auto;
+            width: 250px;
+            height: 100%;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            justify-content: center;
+          }
+
+          .criar-feira-text34 {
+            color: #0f8a82;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container082 {
+            width: 100%;
+            height: 318px;
+            display: flex;
+            align-items: flex-start;
+          }
+
+          .criar-feira-form2 {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container083 {
+            height: 129px;
+            display: flex;
+            align-items: flex-start;
+          }
+
+          .criar-feira-container084 {
+            flex: 0 0 auto;
+            width: 519px;
+            height: 121px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container085 {
+            width: 100%;
+            height: 49px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-text35 {
+            color: #562a2a;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container086 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-container087 {
+            flex: 0 0 auto;
+            width: 200px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container088 {
+            width: 156px;
+            height: 49px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--dl-color-gray-white);
+          }
+
+          .criar-feira-text38 {
+            font-size: 1.5em;
+            width: 100%
+          }
+
+          .criar-feira-container089 {
+            flex: 0 0 auto;
+            width: 519px;
+            height: 121px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container090 {
+            height: 49px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-text39 {
+            color: rgb(86, 42, 42);
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container091 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-container092 {
+            flex: 0 0 auto;
+            width: 200px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container093 {
+            width: 115px;
+            height: 49px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--dl-color-gray-white);
+          }
+
+          .criar-feira-text42 {
+            width: 100%;
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container094 {
+            height: 129px;
+            display: flex;
+            align-items: flex-start;
+          }
+
+          .criar-feira-container095 {
+            flex: 0 0 auto;
+            width: 519px;
+            height: 121px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container096 {
+            width: 100%;
+            height: 49px;
+            display: flex;
+            align-items: center;
+          }
+
+          .criar-feira-text43 {
+            color: rgb(86, 42, 42);
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container097 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .criar-feira-container098 {
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container099 {
+            width: 156px;
+            height: 49px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--dl-color-gray-white);
+          }
+
+          .criar-feira-text46 {
+            font-size: 1.5em;
+          }
+
+          .criar-feira-container100 {
+            height: 121px;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+          }
+
+          .criar-feira-container101 {
+            height: 100px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-start;
+          }
+
+          .criar-feira-button2 {
+            color: var(--dl-color-gray-white);
+            width: 132px;
+            height: 70px;
+            text-align: center;
+            transition: 0.3s;
+            border-color: #0f8a82;
+            background-color: rgb(15, 138, 130);
+          }
+
+          .criar-feira-button2:hover {
+            border-color: #e5412a;
+            background-color: #e5412a;
+          }
+
+          .criar-feira-text47 {
+            font-size: 25px;
+            font-style: normal;
+            font-weight: 700;
+          }
+
+          @@media(max-width: 1200px) {
+            .criar-feira-container004 {
+              width: 981px;
+            }
+          }
+        </style>
+
+        @code {
+  Feira feira = new Feira();
+
+  private List<Categoria> _categorias = new List<Categoria>();
+
+  protected override async Task OnInitializedAsync()
+  {
+    this._categorias = await CategoriaService.GetCategorias() ?? new List<Categoria>();
+  }
+
+  private async Task CreateFeira()
+  {
+    await FeiraService.CreateFeira(this.feira);
+  }
+}

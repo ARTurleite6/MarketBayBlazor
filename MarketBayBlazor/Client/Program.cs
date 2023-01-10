@@ -21,6 +21,7 @@ builder.Services.AddScoped<IStandService, StandService>();
 builder.Services.AddScoped<IPropostaService, PropostaService>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
 builder.Services.AddScoped<IFeiranteService, FeiranteService>();
+builder.Services.AddScoped<ICategoriaService, CategoriaService>();
 builder.Services.AddBlazoredLocalStorage(); 
 
 await builder.Build().RunAsync();

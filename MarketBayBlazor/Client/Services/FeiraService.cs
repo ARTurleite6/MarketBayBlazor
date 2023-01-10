@@ -52,6 +52,20 @@ namespace MarketBayBlazor.Client.Services
             var feiras = await this._httpClient.GetFromJsonAsync<List<Feira>>($"api/feira/organizador/{id}");
             return feiras;
         }
+
+        public async Task CreateFeira(Feira feira)
+        {
+            var res = await this._httpClient.PostAsJsonAsync("api/feira", feira);
+
+            if(res.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Feira criada com sucesso");
+            }
+            else
+            {
+                Console.WriteLine("Erro a criar feira");
+            }
+        }
     }
 }
 
