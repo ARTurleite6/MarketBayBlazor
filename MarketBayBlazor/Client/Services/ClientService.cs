@@ -11,9 +11,10 @@ namespace MarketBayBlazor.Client.Services
             this._httpClient = _httpClient;
        	}
 
-        public Task<Cliente> GetCliente(int id)
+        public async Task<Cliente?> GetCliente(int id)
         {
-            throw new NotImplementedException();
+            var res = await this._httpClient.GetFromJsonAsync<Cliente>($"api/cliente/{id}");
+            return res;
         }
 
         public Task GetClientes()
@@ -24,6 +25,21 @@ namespace MarketBayBlazor.Client.Services
         public async Task RegistaCliente(ClienteEntry cliente)
         {
             await _httpClient.PostAsJsonAsync("api/Cliente", cliente);
+        }
+
+        public async Task<bool> UpdateCliente(Cliente cliente)
+        {
+            var res = await this._httpClient.PutAsJsonAsync("api/cliente", cliente);
+            if(res.IsSuccessStatusCode)
+            {
+                Console.WriteLine("alteração bem sucedida");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Ocorreu um erro alterando o cliente");
+                return false;
+            }
         }
     }
 }

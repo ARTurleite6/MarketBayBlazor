@@ -1,0 +1,936 @@
+@page "/perfil"
+@using System.Security.Cryptography
+@attribute [Authorize]
+@inject IFeiranteService FeiranteService
+@inject IJSRuntime JS
+@inject IClientService ClienteService
+
+<div class="perfil-container">
+    <NavBar ShowFilter="false" />
+    <div class="perfil-container06">
+        <div class="perfil-container07">
+            <div class="perfil-container08">
+                <AuthorizeView Roles="Feirante">
+                    <div class="perfil-container09">
+                        <svg viewBox="0 0 1024 1024" class="perfil-icon">
+                            <path
+                                d="M576 706.612v-52.78c70.498-39.728 128-138.772 128-237.832 0-159.058 0-288-192-288s-192 128.942-192 288c0 99.060 57.502 198.104 128 237.832v52.78c-217.102 17.748-384 124.42-384 253.388h896c0-128.968-166.898-235.64-384-253.388z">
+                            </path>
+                        </svg>
+                        <div class="perfil-container10">
+                            <button class="perfil-button button">
+                                <svg viewBox="0 0 1024 1024" class="perfil-icon2">
+                                    <path
+                                        d="M864 0c88.364 0 160 71.634 160 160 0 36.020-11.91 69.258-32 96l-64 64-224-224 64-64c26.742-20.090 59.978-32 96-32zM64 736l-64 288 288-64 592-592-224-224-592 592zM715.578 363.578l-448 448-55.156-55.156 448-448 55.156 55.156z">
+                                    </path>
+                                </svg>
+                                <span class="perfil-text04">Editar</span>
+                            </button>
+                        </div>
+                    </div>
+                </AuthorizeView>
+                @if(this.cliente != null)
+                {
+                    <div class="perfil-container11">
+                        <EditForm Model="@this.cliente" class="perfil-form">
+                            <div class="perfil-container12">
+                                <div class="perfil-container13">
+                                    <div class="perfil-container14">
+                                        <h1 class="perfil-text05">Nome:</h1>
+                                    </div>
+                                    <div class="perfil-container15">
+                                        <InputText @bind-Value="cliente.Conta.Nome" class="perfil-textinput input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container16">
+                                    <div class="perfil-container17">
+                                        <h1 class="perfil-text06">Email:</h1>
+                                    </div>
+                                    <div class="perfil-container18">
+                                        <InputText @bind-Value="@cliente.Conta.Email" class="perfil-textinput1 input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container26">
+                                    <div class="perfil-container27">
+                                        <h1 class="perfil-text08">Método de Pagamento:</h1>
+                                    </div>
+                                    <div class="perfil-container28">
+                                        <InputText @bind-Value="@cliente.Conta.NumeroTelemovel" class="perfil-textinput3 input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container29">
+                                    <div class="perfil-container30">
+                                        <h1 class="perfil-text09">Rua:</h1>
+                                    </div>
+                                    <div class="perfil-container31">
+                                        <InputText @bind-Value="@(this.cliente.Conta.Morada.Rua)" class="perfil-textinput4 input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container32">
+                                    <div class="perfil-container33">
+                                        <h1 class="perfil-text10">Código-Postal:</h1>
+                                    </div>
+                                    <div class="perfil-container34">
+                                        <InputText @bind-Value="@(this.cliente.Conta.Morada.CodigoPostal)" class="perfil-textinput5 input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container35">
+                                    <div class="perfil-container36">
+                                        <h1 class="perfil-text11">Localidade:</h1>
+                                    </div>
+                                    <div class="perfil-container37">
+                                        <InputText @bind-Value="@(this.cliente.Conta.Morada.Localidade)" class="perfil-textinput6 input" />
+                                    </div>
+                                </div>
+                                <div class="perfil-container38">
+                                    <div class="perfil-container39">
+                                        <h1 class="perfil-text12">Histórico:</h1>
+                                    </div>
+                                    <div class="perfil-container40">
+                                        <button class="perfil-button2 button">Compras</button>
+                                    </div>
+                                </div>
+                                <div class="perfil-container41">
+                                    <div class="perfil-container42">
+                                        <h1 class="perfil-text13">Favoritos:</h1>
+                                    </div>
+                                    <div class="perfil-container43">
+                                        <button class="perfil-button3 button">Feiras</button>
+                                        <button class="perfil-button4 button">Categorias</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </EditForm>
+                    </div>
+                    <div class="perfil-container22">
+                        <div class="perfil-container23">
+                            <button type="submit" class="perfil-button1 button" @onclick="@(() => SubmitCliente())">Submeter Alterações</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .perfil-container {
+        width: 100%;
+        display: flex;
+        overflow: auto;
+        min-height: 100vh;
+        align-items: center;
+        flex-direction: column;
+        background-color: #ebc39c;
+    }
+
+    .perfil-container01 {
+        width: 100%;
+        height: 96px;
+        display: flex;
+        position: relative;
+        align-items: flex-start;
+        background-color: #0f8a82;
+    }
+
+    .perfil-container02 {
+        flex: 0 0 auto;
+        width: 219px;
+        height: 77px;
+        display: flex;
+        align-self: center;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .perfil-container03 {
+        flex: 0 0 auto;
+        width: 181px;
+        display: flex;
+        align-self: center;
+        margin-top: 0px;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-thq-dropdown {
+        width: 149px;
+        cursor: pointer;
+        height: 80px;
+        display: inline-block;
+        position: relative;
+        align-self: center;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .perfil-dropdown-toggle {
+        fill: #595959;
+        color: #595959;
+        width: 135px;
+        height: 94px;
+        display: inline-flex;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius2);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+        justify-content: center;
+    }
+
+    .perfil-image {
+        width: 88px;
+        height: 82px;
+        object-fit: cover;
+    }
+
+    .perfil-dropdown-list {
+        left: 0%;
+        width: max-content;
+        display: none;
+        z-index: 100;
+        position: absolute;
+        min-width: 100%;
+        transition: 0.3s;
+        align-items: stretch;
+        border-color: #D9D9D9;
+        border-width: 1px;
+        border-radius: var(--dl-radius-radius-radius4);
+        flex-direction: column;
+        list-style-type: none;
+        background-color: var(--dl-color-gray-white);
+        list-style-position: inside;
+    }
+
+    .perfil-dropdown {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .perfil-dropdown-toggle1 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .perfil-dropdown-toggle1:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .perfil-text {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .perfil-dropdown1 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .perfil-dropdown-toggle2 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        height: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .perfil-dropdown-toggle2:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .perfil-text01 {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 600;
+    }
+
+    .perfil-dropdown2 {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        border-radius: var(--dl-radius-radius-radius2);
+    }
+
+    .perfil-dropdown-toggle3 {
+        fill: #595959;
+        color: #595959;
+        width: 100%;
+        display: inline-flex;
+        transition: 0.3s;
+        align-items: center;
+        padding-top: var(--dl-space-space-halfunit);
+        padding-left: var(--dl-space-space-unit);
+        border-radius: var(--dl-radius-radius-radius4);
+        padding-right: var(--dl-space-space-unit);
+        padding-bottom: var(--dl-space-space-halfunit);
+    }
+
+    .perfil-dropdown-toggle3:hover {
+        fill: #fff;
+        color: #fff;
+        background-color: #595959;
+    }
+
+    .perfil-text02 {
+        width: 100%;
+        cursor: pointer;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 500;
+    }
+
+    .perfil-container05 {
+        width: 420px;
+        height: 100px;
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .perfil-text03 {
+        color: #562a2a;
+        text-align: center;
+    }
+
+    .perfil-container06 {
+        flex: 0 0 auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container07 {
+        flex: 0 0 auto;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container08 {
+        width: 100%;
+        display: flex;
+        margin-top: var(--dl-space-space-unit);
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .perfil-container09 {
+        flex: 0 0 auto;
+        width: 194px;
+        height: 181px;
+        display: flex;
+        align-items: center;
+        border-color: #0f8a82;
+        border-style: dashed;
+        border-width: 2px;
+        flex-direction: column;
+        justify-content: flex-end;
+        background-color: #0f8a82;
+    }
+
+    .perfil-icon {
+        fill: var(--dl-color-gray-white);
+        width: 205px;
+        height: 185px;
+    }
+
+    .perfil-container10 {
+        width: 100%;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .perfil-button {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        transition: 0.3s;
+        align-items: center;
+        font-weight: 700;
+        border-color: var(--dl-color-gray-white);
+        flex-direction: row;
+        justify-content: center;
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .perfil-button:hover {
+        background-color: var(--dl-color-gray-900);
+    }
+
+    .perfil-icon2 {
+        fill: #e5412a;
+        width: 24px;
+        height: 24px;
+        align-self: center;
+    }
+
+    .perfil-text04 {
+        color: #e5412a;
+        align-self: center;
+    }
+
+    .perfil-container11 {
+        flex: 0 0 auto;
+        width: 683px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .perfil-form {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .perfil-container12 {
+        flex: 0 0 auto;
+        display: flex;
+        margin-top: var(--dl-space-space-halfunit);
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .perfil-container13 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container14 {
+        flex: 0 0 auto;
+        width: 68px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text05 {
+        color: #562a2a;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container15 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container16 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container17 {
+        flex: 0 0 auto;
+        width: 68px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text06 {
+        color: rgb(86, 42, 42);
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container18 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput1 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container19 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container20 {
+        flex: 0 0 auto;
+        width: 50%;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text07 {
+        color: rgb(86, 42, 42);
+        width: 180px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container21 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput2 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container22 {
+        flex: 0 0 auto;
+        width: 159px;
+        height: 59px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .perfil-container23 {
+        flex: 0 0 auto;
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .perfil-button1 {
+        color: var(--dl-color-gray-white);
+        width: 156px;
+        height: 53px;
+        font-style: normal;
+        text-align: center;
+        transition: 0.3s;
+        font-weight: 500;
+        border-color: #562a2a;
+        background-color: #562a2a;
+    }
+
+    .perfil-button1:hover {
+        color: #e5412a;
+        border-color: var(--dl-color-gray-white);
+        background-color: var(--dl-color-gray-white);
+    }
+
+    .perfil-container24 {
+        width: 100%;
+        height: 512px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .perfil-container25 {
+        flex: 0 0 auto;
+        width: 552px;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .perfil-form1 {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .perfil-container26 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container27 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text08 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container28 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput3 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container29 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container30 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text09 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container31 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput4 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container32 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container33 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text10 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container34 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput5 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container35 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container36 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text11 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container37 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-textinput6 {
+        width: 100%;
+        height: 100%;
+    }
+
+    .perfil-container38 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container39 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text12 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container40 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .perfil-button2 {
+        color: #0f8a82;
+        font-size: 20px;
+        font-style: normal;
+        transition: 0.3s;
+        font-weight: 600;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .perfil-button2:hover {
+        color: var(--dl-color-gray-white);
+        background-color: #0f8a82;
+    }
+
+    .perfil-container41 {
+        width: 349px;
+        height: 71px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .perfil-container42 {
+        flex: 0 0 auto;
+        width: 251px;
+        height: 27px;
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .perfil-text13 {
+        color: rgb(86, 42, 42);
+        width: 255px;
+        font-size: 1.2em;
+        text-transform: uppercase;
+    }
+
+    .perfil-container43 {
+        flex: 0 0 auto;
+        width: 341px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .perfil-button3 {
+        color: rgb(15, 138, 130);
+        font-size: 20px;
+        font-style: normal;
+        transition: 0.3s;
+        font-weight: 600;
+        border-color: #ebc39c;
+        background-color: rgb(235, 195, 156);
+    }
+
+    .perfil-button3:hover {
+        color: var(--dl-color-gray-white);
+        background-color: #0f8a82;
+    }
+
+    .perfil-button4 {
+        color: #0f8a82;
+        font-size: 20px;
+        font-style: normal;
+        text-align: center;
+        transition: 0.3s;
+        font-weight: 600;
+        border-color: #ebc39c;
+        background-color: #ebc39c;
+    }
+
+    .perfil-button4:hover {
+        color: var(--dl-color-gray-white);
+        background-color: #0f8a82;
+    }
+</style>
+
+
+@code {
+    public int? userID = null;
+
+    private Cliente? cliente = null;
+    private Feirante? feirante = null;
+
+    [CascadingParameter]
+    public Task<AuthenticationState> authState { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var auth = await authState;
+        if (auth != null)
+        {
+            var id_string = auth.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+            Console.WriteLine($"id_string = {id_string}");
+            if (id_string != null)
+            {
+                this.userID = Int32.Parse(id_string ?? "-1");
+                Console.WriteLine($"UserID = {this.userID}");
+                if (auth.User.IsInRole("Feirante"))
+                {
+                    this.feirante = await FeiranteService.GetFeirante(this.userID ?? -1);
+                }
+                else
+                {
+                    this.cliente = await ClienteService.GetCliente(this.userID ?? -1);
+                    if(this.cliente != null)
+                    {
+                        this.cliente.Conta.Morada = new Morada();
+                    }
+                }
+            }
+
+        }
+        await JS.InvokeVoidAsync("alert", "Se desejar alterar morada necessita preencher todos os dados da morada");
+    }
+
+    public async Task SubmitCliente()
+    {
+        if((!this.cliente?.Conta.Morada?.Rua.Any() ?? false) || (!this.cliente?.Conta.Morada?.Localidade.Any() ?? false) || (!this.cliente?.Conta.Morada?.CodigoPostal.Any() ?? false))
+        {
+            this.cliente.Conta.Morada = null;
+        }
+        if(!this.cliente.Conta.NumeroTelemovel?.Any() ?? false)
+        {
+            this.cliente.Conta.NumeroTelemovel = null;
+        }
+
+        var res = await ClienteService.UpdateCliente(this.cliente);
+        if(res)
+        {
+            await JS.InvokeVoidAsync("alert", "Alteração dos dados bem sucedida");
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("alert", "Alteração dos dados mal sucedida");
+        }
+
+    }
+}

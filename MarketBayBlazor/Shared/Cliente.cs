@@ -12,7 +12,7 @@ public class Cliente: IUser
     
     [ForeignKey("Conta")]
     public int ContaID { get; set; }
-    public virtual Conta Conta { get; set; }
+    public virtual Conta Conta { get; set; } = new Conta();
 
     public virtual ICollection<Categoria> Categorias { get; set; } = new List<Categoria>();
     public virtual ICollection<FavFeirasCliente> FeirasFavoritas { get; set; } = new List<FavFeirasCliente>();

@@ -25,6 +25,32 @@ namespace MarketBayBlazor.Server.Controllers
 	            .Include(cliente => cliente.Conta).ToList());
 	    }
 
+        [HttpGet("{id:int}")]
+        public ActionResult<Cliente> Get(int id)
+        {
+            Console.WriteLine(id);
+            if(!this._context.Clientes.Any(cliente => cliente.ID == id))
+            {
+                return BadRequest("Não existe nenhum cliente com o id de " + id);
+            }
+            return Ok(this._context.Clientes
+                .Include(cliente => cliente.Conta)
+                .ThenInclude(conta => conta.Morada)
+                .First(cliente => cliente.ID == id));
+        }
+
+        [HttpPut]
+        public ActionResult Update(Cliente cliente)
+        {
+            if(!this._context.Clientes.Any(c => c.ID == cliente.ID))
+            {
+                return BadRequest("Não existe nenhum cliente com este id");
+            }
+            this._context.Clientes.Update(cliente);
+            this._context.SaveChanges();
+            return Ok("Alteracao bem sucedida");
+        }
+
         [HttpPost]
         public async Task<ActionResult<Cliente>> RegistaCliente(ClienteEntry cliente) 
     	{

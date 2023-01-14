@@ -41,7 +41,7 @@
     </div>
   </header>
   <main class="login-container07">
-    <EditForm Model="@dto" class="login-form" OnValidSubmit="@HandleLogin">
+    <EditForm Model="@dto" class="login-form" OnValidSubmit="@(async () => await HandleLogin())">
       <div class="login-email">
         <div class="login-container08">
           <h2 class="entry-form">Email</h2>

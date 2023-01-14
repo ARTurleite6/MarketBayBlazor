@@ -6,9 +6,11 @@ namespace MarketBayBlazor.Client.Services
 
 
         public Task GetClientes();
-        public Task<Cliente> GetCliente(int id);
+        public Task<Cliente?> GetCliente(int id);
 
         public Task RegistaCliente(ClienteEntry cliente);
+
+        public Task<bool> UpdateCliente(Cliente cliente);
     }
 }
 

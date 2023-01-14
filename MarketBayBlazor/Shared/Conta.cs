@@ -12,9 +12,9 @@ public class Conta
     [Key]
     public int ID { get; set; }
     [MaxLength(50)]
-    public string Nome { get; set; }
+    public string Nome { get; set; } = string.Empty;
     [MaxLength(100)]
-    public string Email { get; set; }
+    public string Email { get; set; } = string.Empty;
     public byte[] Password { get; set; }
     public byte[] PasswordSalt { get; set; }
     [MaxLength(9)]

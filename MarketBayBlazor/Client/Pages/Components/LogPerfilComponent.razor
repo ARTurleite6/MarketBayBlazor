@@ -9,7 +9,7 @@
                 <button class="button log-button" @onclick="() => LogOut()">Log Out</button>
             </div>
             <div class="buttons-login-perfil">
-                <button class="button log-button" @onclick="() => GoToLogin()">Ver Perfil</button>
+                <button class="button log-button" @onclick="() => GoToPerfil()">Ver Perfil</button>
             </div>
         </Authorized>
         <NotAuthorized>
@@ -61,5 +61,10 @@
     {
         LocalStorage.RemoveItemAsync("token");
         Navigator.NavigateTo("/feiras", true);
+    }
+
+    private void GoToPerfil()
+    {
+        Navigator.NavigateTo("/perfil");
     }
 }
