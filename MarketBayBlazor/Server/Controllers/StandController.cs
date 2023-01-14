@@ -37,6 +37,20 @@ namespace MarketBayBlazor.Server.Controllers
 
             return Ok(stand);
 	    }
+
+        [HttpPut("{id:int}")]
+        public async Task<ActionResult> Update(int id, StandFeirante newStand)
+        {
+            
+            if(!this._context.StandsFeirantes.Any(stand => stand.ID == id))
+            {
+                return BadRequest("Não existe nenhum feirante com o id passado");
+            }
+
+            this._context.Update(newStand);
+            await this._context.SaveChangesAsync();
+            return Ok();
+        }
     }
 }
 

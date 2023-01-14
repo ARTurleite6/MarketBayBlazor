@@ -9,6 +9,19 @@ public class StandService : IStandService
         this._httpClient = _httpClient;
     }
 
+    public async Task DesativaStand(StandFeirante stand)
+    {
+        var res = await this._httpClient.PutAsJsonAsync($"api/stand/{stand.ID}", stand);
+        if(res.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Stand Inativo com sucesso");
+        }
+        else
+        {
+            Console.WriteLine("Ocorreu erro a dar update ao stand");
+        }
+    }
+
     public async Task<StandFeirante?> GetStand(int ID)
     {
         return await this._httpClient.GetFromJsonAsync<StandFeirante>($"api/stand/{ID}");

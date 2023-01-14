@@ -10,7 +10,7 @@
 
 <div>
     <div class="home-container">
-        <NavBar @bind-FilterParam="@filterParam" @bind-ShowMineParam="@ShowMineParam"/>
+        <NavBar MineFeirasFilter="true" @bind-FilterParam="@filterParam" @bind-ShowMineParam="@ShowMineParam"/>
         <div style="display: flex; width: 100%; height: 87px">
             <div class="date-container">
                 @foreach (var data in this.datas)
@@ -43,6 +43,10 @@
                         <span class="home-text36">
                             @feira.NomeFeira
                         </span>
+                        @if(feira.DataInicio > DateTime.Now)
+                        {
+                            <span style="color: red" class="home-text36">(Começará a @feira.DataInicio.Day/@feira.DataInicio.Month/@feira.DataInicio.Year)</span>
+                        }
                         <AuthorizeView>
                             <Authorized>
                                 @if(@context.User.IsInRole("Cliente"))
@@ -82,6 +86,10 @@
                         <span class="home-text36">
                             @feira.NomeFeira
                         </span>
+                        @if(feira.DataInicio > DateTime.Now)
+                        {
+                            <span style="color: red" class="home-text36">(Começará a @feira.DataInicio.Day/@feira.DataInicio.Month/@feira.DataInicio.Year)</span>
+                        }
                         <AuthorizeView>
                             <Authorized>
                                 @if(@context.User.IsInRole("Cliente"))
@@ -105,6 +113,19 @@
 
 
                     }
+
+                <div class="home-container15">
+                    <button class="add-feira-container button" @onclick="@(() => GoToCriarFeira())">
+                        <span style="color: #e5412a; font-size: 20px; font-syle: normal; text-align: center; font-weight: 700;">
+                            Adicionar Feira
+                        </span>
+                        <svg viewBox="0 0 877.7142857142857 1024" class="minhas-feiras-icon">
+                            <path
+                                d="M694.857 548.571v-73.143c0-20-16.571-36.571-36.571-36.571h-146.286v-146.286c0-20-16.571-36.571-36.571-36.571h-73.143c-20 0-36.571 16.571-36.571 36.571v146.286h-146.286c-20 0-36.571 16.571-36.571 36.571v73.143c0 20 16.571 36.571 36.571 36.571h146.286v146.286c0 20 16.571 36.571 36.571 36.571h73.143c20 0 36.571-16.571 36.571-36.571v-146.286h146.286c20 0 36.571-16.571 36.571-36.571zM877.714 512c0 242.286-196.571 438.857-438.857 438.857s-438.857-196.571-438.857-438.857 196.571-438.857 438.857-438.857 438.857 196.571 438.857 438.857z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
             }
         }
             </div>
@@ -112,6 +133,50 @@
 </div>
 
 <style>
+
+    .minhas-feiras-icon {
+        fill: #e5412a;
+        width: 107px;
+        height: 79px;
+        align-self: center;
+    }
+
+    .add-feira-container:hover {
+        background-color: gray;
+    }
+
+    .add-feira-container {
+        width: 399px;
+        height: 213px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        transition: 0.3s;
+        border-color: white;
+        flex-direction: row;
+        justify-content: center;
+        background-color: white;
+    }
+
+    .add-feira-icon {
+        fill: #e5412a;
+        width: 107px;
+        height: 79px;
+        align-self: center;
+    }
+
+    .add-feira {
+        width: 399px;
+        height: 213px;
+        display: flex;
+        text-align: center;
+        align-items: center;
+        transition: 0.3s;
+        border-color: white;
+        flex-direction: row;
+        justify-content: center;
+    }
+
     .home-container {
         display: flex;
         min-height: 100vh;
@@ -1187,6 +1252,11 @@
     private void GoToLogin()
     {
         NavigationManager.NavigateTo("/login");
+    }
+
+    private void GoToCriarFeira()
+    {
+        NavigationManager.NavigateTo("/criarfeira");
     }
 
 }

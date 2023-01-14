@@ -13,8 +13,8 @@ public class Feira
     public string NomeFeira { get; set; } = string.Empty;
     [MaxLength(200)]
     public string Logotipo { get; set; } = string.Empty;
-    public DateTime DataInicio { get; set; }
-    public DateTime DataFim { get; set; }
+    public DateTime DataInicio { get; set; } = DateTime.Now;
+    public DateTime DataFim { get; set; } = DateTime.Now;
     [Precision(10, 2)]
     public decimal PrecoAluguel { get; set; }
     public int NumeroMaximoFeirantes { get; set; }

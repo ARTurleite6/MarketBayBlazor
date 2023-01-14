@@ -4,10 +4,13 @@
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager Navigator
 @inject IJSRuntime JS
+@inject ICartService Cart
 @using Components
+@using System.Security.Claims
+@using ViewModels.Carrinho
 
 <div class="stand-container">
-    <NavBar @bind-FilterParam="@filterParam" />
+    <NavBar ShowCarrinho="true" @bind-FilterParam="@filterParam" @bind-ShowCartParam="ShowCart"/>
     <div class="stand-container07">
         <div class="stand-container08">
             <div class="stand-container09">
@@ -27,6 +30,8 @@
             </div>
         </div>
     </div>
+    @if(!ShowCart)
+    {
     @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam,
     StringComparison.OrdinalIgnoreCase) >= 0))
     {
@@ -50,6 +55,14 @@
                                 <h1 class="stand-text14">@produto.Preco€</h1>
                             </div>
                         </div>
+                        <AuthorizeView Roles="Cliente">
+                            <div style="display: flex; flex-direction: column; margin-left: 100px">
+                                <div class="stand-container19">
+                                    <h1 class="stand-text13">Quantidade:</h1>
+                                </div>
+                                        <input class="stand-container20" type="number" id="@($"quantidade-produto-{produto.ProdutoID}")" style="width: 140px; font-size:25px; font-weight: 700; text-align: center" min="0" value="0"/>
+                            </div>
+                        </AuthorizeView>
                         <AuthorizeView Roles="Feirante">
                             <div style="display: flex; flex-direction: column; margin-left: 100px">
                                 <div class="stand-container19">
@@ -63,17 +76,34 @@
                     </div>
                     <div class="stand-container21">
                         <AuthorizeView Roles="Cliente">
+                            <Authorized>
                             <div class="stand-container22">
-                                <button class="stand-button1 button">Comprar</button>
+                                <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
                             </div>
                             <div class="stand-container23">
                                 <button class="stand-button2 button"
-                                onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
+                                @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
                             </div>
+                            </Authorized>
+                            <NotAuthorized>
+                                    @if (!context.User.Identity?.IsAuthenticated ?? false || context.User.IsInRole("Cliente"))
+                                    {
+                                            <div class="stand-container22">
+                                                <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
+                                            </div>
+                                            <div class="stand-container23">
+                                                <button class="stand-button2 button" @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
+                                            </div>
+                                    }
+                            </NotAuthorized>
                         </AuthorizeView>
                         <AuthorizeView Roles="Feirante">
+                            @if(stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1"))
+                            {
                             <div class="stand-container22">
-                                <button class="stand-button1 button edit-button">Editar</button </div>
+                                <button class="stand-button1 button edit-button">Editar</button>
+                            </div>
+                            }
                         </AuthorizeView>
                     </div>
                 </div>
@@ -81,8 +111,64 @@
 
         </div>
     }
+    }
+    else
+    {
+    @foreach (var linha in this.cart.Produtos)
+    {
+        <div class="stand-container13">
+            <div class="stand-container14">
+                <div class="stand-container15">
+                    <img alt="image"
+                    src="https://images.unsplash.com/photo-1586005309510-fee1ad863c04?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDQ5fHxtdWdzfGVufDB8fHx8MTY3MTczMTY1NA&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=600"
+                    class="stand-image1" />
+                </div>
+                <div class="stand-container16">
+                    <div class="stand-container17">
+                        <h1 class="stand-text12">@linha.Produto.Nome</h1>
+                    </div>
+                    <div class="stand-container18">
+                        <div style="display: flex; flex-direction: column">
+                            <div class="stand-container19">
+                                <h1 class="stand-text13">Preço:</h1>
+                            </div>
+                            <div class="stand-container20">
+                                <h1 class="stand-text14">@linha.Preco€</h1>
+                            </div>
+                        </div>
+                        <AuthorizeView Roles="Cliente">
+                            <div style="display: flex; flex-direction: column; margin-left: 100px">
+                                <div class="stand-container19">
+                                    <h1 class="stand-text13">Quantidade:</h1>
+                                </div>
+                                    <div class="stand-container20">
+                                        <h1 class="stand-text14">@linha.Quantidade</h1>
+                                    </div>
+                            </div>
+                        </AuthorizeView>
+                    </div>
+                    <div class="stand-container21">
+                        <AuthorizeView Roles="Cliente">
+                            <div class="stand-container22">
+                                <button class="stand-button1 button edit-button">Editar</button 
+                            </div>
+                        </AuthorizeView>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    }
+    }
 </div>
 <div class="stand-container24">
+    <AuthorizeView Roles="Cliente">
+        @if(this.ShowCart)
+        {
+            <button class="button">Pagar</button>
+        }
+    </AuthorizeView>
+
     <button class="button stand-container25" @onclick="@(() => GoToChatRoom())">
         <svg viewBox="0 0 1024 1024" class="stand-icon">
             <path d="M854 86q34 0 59 25t25 59v512q0 34-25 60t-59 26h-598l-170 170v-768q0-34 25-59t59-25h684z">
@@ -607,9 +693,6 @@
     }
 
     .stand-container24 {
-        flex: 0 0 auto;
-        width: 104px;
-        height: 136px;
         display: flex;
         align-items: flex-start;
         flex-direction: column;
@@ -620,7 +703,7 @@
     }
 
     .stand-container25 {
-        width: 65px;
+        width: 77px;
         height: 50%;
         display: flex;
         align-self: flex-start;
@@ -629,6 +712,7 @@
         justify-content: center;
         background-color: #0f8a82;
         padding: 5px;
+        margin-top: var(--dl-space-space-unit);
     }
 
     .stand-icon {
@@ -638,7 +722,7 @@
     }
 
     .stand-container26 {
-        width: 65px;
+        width: 77px;
         height: 50%;
         display: flex;
         margin-top: var(--dl-space-space-unit);
@@ -1054,6 +1138,8 @@
     [Parameter]
     public int FeiraID { get; set; }
 
+    public bool ShowCart { get; set; } = false;
+
     private Feira feira = new Feira();
 
     private StandFeirante stand = new StandFeirante();
@@ -1062,6 +1148,8 @@
 
     [CascadingParameter]
     public Task<AuthenticationState> authstate {get; set; }
+
+    private Carrinho cart = new Carrinho();
 
     protected override async Task OnInitializedAsync()
     {
@@ -1080,6 +1168,23 @@
             Console.WriteLine(stand.FeiranteID);
             Console.WriteLine(stand.Feirante != null);
             Console.WriteLine(stand.Feirante?.Conta.Nome);
+        }
+        this.cart = await Cart.Carrinho ?? new Carrinho();
+    }
+
+    private bool firstRender = true;    
+    private IJSObjectReference? module;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if(firstRender)
+        {
+            this.module = await JS.InvokeAsync<IJSObjectReference>("import", "./scripts.js");
+            if(this.module is not null)
+            {
+                Console.WriteLine("Modulo importado");
+            }
+            firstRender = !firstRender;
         }
     }
 
@@ -1118,4 +1223,26 @@
             Navigator.NavigateTo($"/chatroom/{this.FeiraID}/{this.ID}");
         }
     }
+
+    private async void AddToCart(ProdutoStand produto)
+    {
+        var logged = await DealLogin(Navigator.Uri);
+        if(logged)
+        {
+        if (this.module is not null)
+        {
+            int quantidade = await JS.InvokeAsync<int>("getProductQuantity", produto.ProdutoID);
+            if (quantidade > 0)
+            {
+                await Cart.AddProduto(produto.Produto, preco: produto.Preco, quantidade);
+                await JS.InvokeVoidAsync("alert", "Produto adicionado com sucesso ao carrinho");
+                this.cart = await Cart.Carrinho ?? new Carrinho();
+            }
+            else{
+                await JS.InvokeVoidAsync("alert", "Deve incluir alguma quantidade para adicionar produto ao carrinho");
+            }
+        }
+        }
+    }
+
 }

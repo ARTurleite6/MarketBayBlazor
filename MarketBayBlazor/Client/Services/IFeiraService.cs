@@ -13,7 +13,7 @@ namespace MarketBayBlazor.Client.Services
 
         public Task<List<Feira>?> GetFeirasOrganizador(int id);
 
-        public Task CreateFeira(Feira feira);
+        public Task<bool> CreateFeira(Feira feira);
 
     }
 }

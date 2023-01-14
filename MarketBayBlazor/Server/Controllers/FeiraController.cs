@@ -42,7 +42,7 @@ namespace MarketBayBlazor.Server.Controllers
 
             if(this._context.StandsFeirantes.Any(stand => stand.FeiraID == id && stand.FeiranteID == request.FeiranteID))
             {
-                return BadRequest("Este feirante já está inscrito na feira");
+                return BadRequest("Este feirante já está ou estava(foi expulso ou saiu da feira) inscrito na feira");
             }
 
             var produtos = request.Produtos;

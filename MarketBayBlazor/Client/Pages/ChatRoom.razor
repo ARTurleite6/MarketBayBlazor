@@ -1,7 +1,9 @@
 @page "/chatroom/{feiraid:int}/{standid:int}"
 @inject IStandService StandService
 @inject IFeiraService FeiraService
+@using System.Security.Claims
 @inject IPropostaService PropostaService
+@inject ICartService Cart
 @using Components
 
 <div class="chat-room-container">
@@ -28,8 +30,7 @@
         </div>
     </div>
 
-
-    @foreach (var proposta in this.propostas ?? new List<Proposta>())
+    @foreach (var proposta in this.propostas?.Where(proposta => proposta.ClienteID == (clienteID ?? proposta.ClienteID)) ?? new List<Proposta>())
     {
         <div class="chat-room-container13">
             <div class="@ClassProposta(proposta)">
@@ -71,7 +72,7 @@
                         <AuthorizeView Roles="Cliente">
                             <Authorized>
                                 <div class="chat-room-container27">
-                                    <button class="chat-room-button1 button">Resgatar Proposta</button>
+                                    <button class="chat-room-button1 button" @onclick="@(() => AdicionarCarrinho(proposta))">Resgatar Proposta</button>
                                 </div>
                             </Authorized>
                         </AuthorizeView>
@@ -104,7 +105,7 @@
                             </div>
                         </AuthorizeView>
                     }
-                    else
+                    else if(proposta.Estado == "Recusada")
                     {
                     <div class="chat-room-container25">
                         <div class="chat-room-container26">
@@ -114,6 +115,21 @@
                         <div class="chat-room-container43">
                             <h1 class="chat-room-text22">Proposta Recusada</h1>
                         </div>
+                    }
+                    else if(proposta.Estado == "Resgatada")
+                    {
+                    <div class="chat-room-container25">
+                        <div class="chat-room-container26">
+                            <h1 class="chat-room-text16">@(proposta.Produto?.Nome ?? "Produto Não Carregado")</h1>
+                        </div>
+                    </div>
+                        <AuthorizeView Roles="Cliente">
+                            <Authorized>
+                                <div class="chat-room-container27">
+                                    <h1 class="chat-room-text22">Proposta Resgatada</h1>
+                                </div>
+                            </Authorized>
+                        </AuthorizeView>
                     }
                 </div>
             </div>
@@ -1115,6 +1131,10 @@
 
 @code {
 
+    private int? clienteID;
+    [CascadingParameter]
+    public Task<AuthenticationState> authState { get; set; }
+
     [Parameter]
     public int FeiraID { get; set; }
     [Parameter]
@@ -1143,6 +1163,16 @@
         {
             this.propostas = propostas;
         }
+
+        var auth = await authState;
+        if(auth != null)
+        {
+            if(auth.User.IsInRole("Cliente"))
+            {
+                this.clienteID = Int32.Parse(auth.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1");
+            }
+        }    
+
     }
 
     private string ClassProposta(Proposta proposta)
@@ -1165,6 +1195,15 @@
     {
         proposta.Estado = Estado;
         PropostaService.UpdateProposta(proposta);
+    }
+
+    private void AdicionarCarrinho(Proposta proposta)
+    {
+        if(proposta.Produto != null)
+        {
+            var carrinho = Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade);
+            this.UpdateProposta(proposta, "Resgatada");
+        }
     }
 
 }

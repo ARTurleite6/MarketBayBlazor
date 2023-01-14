@@ -15,7 +15,12 @@ function getProductPrice(produtoID) {
 }
 
 function getProductQuantity(produtoID) {
-    return Number(document.getElementById(`quantidade-produto-${produtoID}`).value)
+    const quantidade = document.getElementById(`quantidade-produto-${produtoID}`)
+    if(quantidade == null)
+    {
+        return -1;
+    }
+    else return quantidade.value;
 }
 
 function estaDestacado(produtoID) {

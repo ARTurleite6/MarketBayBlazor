@@ -485,6 +485,13 @@
       await AuthStateProvider.GetAuthenticationStateAsync();
       navigator.NavigateTo("/feiras");
       await JS.InvokeVoidAsync("alert", "Login efetuado com sucesso");
+      var lastPage = await LocalStorage.GetItemAsStringAsync("last_page");
+      await LocalStorage.RemoveItemAsync("last_page");
+      if (lastPage == null)
+      {
+        lastPage = "/";
+      }
+      navigator.NavigateTo(lastPage);
     }
     else
     {
@@ -492,13 +499,6 @@
     }
 
 
-    var lastPage = await LocalStorage.GetItemAsStringAsync("last_page");
-    await LocalStorage.RemoveItemAsync("last_page");
-    if (lastPage == null)
-    {
-      lastPage = "/";
-    }
-    navigator.NavigateTo(lastPage);
 
   }
 }

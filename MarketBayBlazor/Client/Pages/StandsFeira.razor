@@ -2,13 +2,14 @@
 @inject IFeiraService FeiraService;
 @using System.Security.Claims
 @inject NavigationManager NavigationManager
+@inject IStandService StandS
 @inject IJSRuntime JS
 @using Components
 
 
 <div class="feira-container">
 
-  <NavBar @bind-FilterParam="@filterParam"/>
+  <NavBar @bind-FilterParam="@filterParam" />
 
   <div class="feira-container08">
     <div class="feira-informacao">
@@ -21,50 +22,150 @@
     </div>
     <AuthorizeView Roles="Feirante">
       <Authorized>
-        <div class="feira-container10 feira-size55">
-          @if(!this.stands.Any(stand => stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1")))
+        @if (!JaEsteveNaFeira(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1"))
+        {
+          @if (feira.FeiranteID != Int32.Parse(context.User.FindFirst(claim => claim.Type ==
+         ClaimTypes.NameIdentifier)?.Value ?? "-1"))
           {
-            <h1 class="text-red feira-text07"><a href="javascript: void(0)" onclick="@(() => GoToInscricao())" @onclick:preventDefault>Inscrever-se na Feira</a></h1>
+            <div class="feira-container10 feira-size55">
+              @if (!this.stands.Any(stand => stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type ==
+             ClaimTypes.NameIdentifier)?.Value ?? "-1")))
+              {
+                <h1 class="text-red feira-text07"><a href="javascript: void(0)" onclick="@(() => GoToInscricao())"
+              @onclick:preventDefault>Inscrever-se na Feira</a></h1>
+              }
+              else
+              {
+                @* <h1>Meu Stand</h1> *@
+                <h1 class="text-red feira-text07"><a href="javascript: void(0)"
+              onclick="@(() => GoToStand(this.stands.First(stand => stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1")).ID))"
+              @onclick:preventDefault>
+                    Meu Stand
+                  </a></h1>
+              }
+            </div>
           }
           else
           {
-            @* <h1>Meu Stand</h1> *@
-            <h1 class="text-red feira-text07"><a href="javascript: void(0)" onclick="@(() => GoToStand(this.stands.First(stand => stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1")).ID))" @onclick:preventDefault>
-              Meu Stand
-              </a></h1>
+            <h1 style="color: #0f8a82; width: 174px; height: 21px; font-size: 1em;">Total Faturado: <span
+            class="text-red">0</span></h1>
           }
-        </div>
+        }
+        else
+        {
+          <div class="feira-container10 feira-size55">
+            <h1 class="text-red feira-text07">Voce foi expulso ou saiu desta feira</h1>
+          </div>
+        }
       </Authorized>
     </AuthorizeView>
   </div>
-  <div style="display:flex; flex-wrap: wrap; justify-content: center;">
-    @foreach (var stand in this.stands.Where(stand1 => stand1.Feirante.Conta.Nome.IndexOf(this.filterParam,
-    StringComparison.OrdinalIgnoreCase) >= 0))
-    {
-      <div class="feira-container12">
-        <div class="feira-container13">
-          <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
-            <img class="feira-image1" alt="image"
+  @if (AccountID == -1 || feira.FeiranteID != AccountID)
+  {
+    <div style="display:flex; flex-wrap: wrap; justify-content: center;">
+      @foreach (var stand in this.stands.Where(stand1 => stand1.ativo &&
+     stand1.Feirante.Conta.Nome.IndexOf(this.filterParam,
+     StringComparison.OrdinalIgnoreCase) >= 0))
+      {
+        <div class="feira-container12">
+          <div class="feira-container13">
+            <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
+              <img class="feira-image1" alt="image"
             src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400">
-          </div>
-          <div class="feira-container15">
-            <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
-          </div>
-        </div>
-        <div class="feira-container16">
-          @foreach (var produto in stand.ProdutosStands)
-          {
-            <div class="feira-container17">
-              <h1 class="feira-text09">@produto.Produto.Nome</h1>
             </div>
-          }
+            <div class="feira-container15">
+              <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
+            </div>
+          </div>
+          <div class="feira-container16">
+            @foreach (var produto in stand.ProdutosStands)
+            {
+              <div class="feira-container17">
+                <h1 class="feira-text09">@produto.Produto.Nome</h1>
+              </div>
+            }
+          </div>
         </div>
-      </div>
-    }
-  </div>
+      }
+    </div>
+  }
+  else
+  {
+    <div style="display:flex; flex-wrap: wrap; justify-content: center;">
+      @foreach (var stand in this.stands.Where(stand1 => stand1.ativo &&
+     stand1.Feirante.Conta.Nome.IndexOf(this.filterParam,
+     StringComparison.OrdinalIgnoreCase) >= 0))
+      {
+        <div class="stand-organizador-row">
+          <div class="feira-container12">
+            <div class="feira-container13">
+              <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
+                <img class="feira-image1" alt="image"
+              src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400">
+              </div>
+              <div class="feira-container15">
+                <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
+              </div>
+            </div>
+            <div class="feira-container16">
+              @foreach (var produto in stand.ProdutosStands)
+              {
+                <div class="feira-container17">
+                  <h1 class="feira-text09">@produto.Produto.Nome</h1>
+                </div>
+              }
+            </div>
+
+            <div class="organizador-gestao">
+              <div style="width: 258px;">
+                <h1 style="color: white;">Vendeu:</h1>
+              </div>
+              <div class="quantidade-vendeu">
+                <h1>0</h1>
+              </div>
+              <button class="button kick-button" @onclick="@(() => KickFeirante(stand))">Expulsar</button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
 </div>
 
 <style>
+  .kick-button {
+    color: white;
+    width: 140px;
+    font-style: normal;
+    text-align: center;
+    font-weight: 700;
+    transition: 0.3s;
+    background-color: #e5412a;
+    border-color: #e5412a;
+    margin-top: 32px;
+  }
+
+  .quantidade-vendeu {
+    width: 65px;
+    height: 38px;
+    display: flex;
+    margin-top: 16px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ebc39c;
+    border-radius: 5px;
+  }
+
+  .organizador-gestao {
+    width: 100%;
+    height: 266px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #562a2a;
+  }
+
   .feira-container {
     display: flex;
     overflow: auto;
@@ -1063,6 +1164,11 @@
 </style>
 
 @code {
+
+  [CascadingParameter]
+  public Task<AuthenticationState> authState { get; set; }
+  private int AccountID = -1;
+
   [Parameter]
   public int ID { get; set; }
   private List<StandFeirante> stands = new List<StandFeirante>();
@@ -1090,6 +1196,17 @@
     {
       this.stands = stands;
     }
+
+    var auth = await this.authState;
+    if (auth != null)
+    {
+      var id_string = auth.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1";
+      var id = Int32.Parse(id_string);
+      if (id != -1)
+      {
+        this.AccountID = id;
+      }
+    }
   }
 
   private void GoToStand(int ID)
@@ -1099,14 +1216,34 @@
 
   private void GoToInscricao()
   {
-    if(this.stands.Count == this.feira.NumeroMaximoFeirantes)
+    if (this.stands.Count == this.feira.NumeroMaximoFeirantes)
     {
       JS.InvokeVoidAsync("alert", "Feira já se encontra cheia");
     }
-    else 
+    else
     {
       NavigationManager.NavigateTo($"inscreverfeira/{ID}");
       Console.WriteLine("Carreguei para me inscrever");
     }
+  }
+
+  private void KickFeirante(StandFeirante stand)
+  {
+    stand.ativo = false;
+    StandS.DesativaStand(stand);
+  }
+
+  private bool JaEsteveNaFeira(string ID)
+  {
+    var int_id = Int32.Parse(ID);
+    if (int_id != -1)
+    {
+      if(this.stands.Where(stand => !stand.ativo).Any(stand => stand.FeiranteID == int_id))
+      {
+        Console.WriteLine("Já esteve inscrito");
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -32,6 +32,8 @@
       </div>
     </div>
   </div>
+  @if(this.ShowFilter)
+  {
   <div class="feira-container04">
     <div class="feira-container05">
       <button class="feira-button button">
@@ -41,7 +43,8 @@
         </span>
       </button>
       <input @bind="@FilterParam" type="text" placeholder="Pesquisa" class="feira-textinput input" />
-      @if ((this.feirante?.Organizador ?? false))
+      <AuthorizeView Roles="Feirante">
+      @if ((this.feirante?.Organizador ?? false) && MineFeirasFilter)
       {
         <button class="feira-button button" style="margin-left: 50px;" id="last-button" @onclick="@(() => ShowFeirasOrganizador())">
           <span class="feira-text03">
@@ -57,8 +60,36 @@
           </span>
         </button>
       }
+      </AuthorizeView>
+      <AuthorizeView Roles="Cliente">
+        @if(ShowCarrinho)
+        {
+        <button class="feira-button button" style="margin-left: 50px;" id="last-button" @onclick="@(() => ChangeShowCarrinho())">
+          <span class="feira-text03">
+            @if(!ShowCartParam)
+            {
+                  <span>Ver Carrinho</span>
+            }
+            else
+            {
+              <span>Produtos do Stand</span>
+            }
+            <br />
+          </span>
+        </button>
+        }
+      </AuthorizeView>
     </div>
   </div>
+  }
+  else
+  {
+    <div class="feira-container04">
+      <div class="feira-container05">
+        <h1 class="feira-text04">MarketBay</h1>
+      </div>
+    </div>
+  }
 
   <LogPerfilComponent />
 </div>
@@ -298,6 +329,11 @@
     font-weight: 600;
   }
 
+          .feira-text04 {
+            color: #562a2a;
+            text-align: center;
+          }
+
   .feira-container06 {
     width: 303px;
     height: 100px;
@@ -323,7 +359,7 @@
 </style>
 
 @code {
-
+  
   private string _valueFilter = string.Empty;
 
   private Feirante? feirante;
@@ -346,6 +382,28 @@
 
     }
   }
+  private bool _showCart = false;
+  [Parameter]
+  public bool ShowCartParam {
+    get => _showCart;
+    set {
+      if(_showCart == value) return;
+      _showCart = value;
+      ShowCartParamChanged.InvokeAsync(value);
+    }
+  }
+
+  [Parameter]
+  public EventCallback<bool> ShowCartParamChanged { get; set; }
+
+    [Parameter]
+    public bool ShowCarrinho { get; set; } = false;
+
+  [Parameter]
+  public bool MineFeirasFilter { get; set; } = false;
+
+  [Parameter]
+  public bool ShowFilter { get; set; } = true;
 
   private bool _showMine = true;
 
@@ -382,5 +440,10 @@
     {
       ShowMineParam = !ShowMineParam;
     }
+
+  private void ChangeShowCarrinho()
+  {
+    this.ShowCartParam = !this.ShowCartParam;
+  }
 
 }

@@ -2,43 +2,12 @@
 @attribute [Authorize(Roles = "Feirante")]
 @inject ICategoriaService CategoriaService
 @inject IFeiraService FeiraService
+@inject IJSRuntime JS
+@inject NavigationManager Nav
+@using System.Security.Claims
 
 <div class="criar-feira-container">
-  <div class="criar-feira-container001">
-    <div class="criar-feira-container002">
-      <div class="criar-feira-container003">
-        <div data-thq="thq-dropdown" class="criar-feira-thq-dropdown list-item">
-          <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle">
-            <a href="/">
-              <img alt="image" src="logo.png" class="criar-feira-image" />
-            </a>
-          </div>
-          <ul data-thq="thq-dropdown-list" class="criar-feira-dropdown-list">
-            <li data-thq="thq-dropdown" class="criar-feira-dropdown list-item">
-              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle1">
-                <span class="criar-feira-text">Sobre nós</span>
-              </div>
-            </li>
-            <li data-thq="thq-dropdown" class="criar-feira-dropdown1 list-item">
-              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle2">
-                <span class="criar-feira-text01">Ajuda</span>
-              </div>
-            </li>
-            <li data-thq="thq-dropdown" class="criar-feira-dropdown2 list-item">
-              <div data-thq="thq-dropdown-toggle" class="criar-feira-dropdown-toggle3">
-                <span class="criar-feira-text02">Definições</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div class="criar-feira-container004">
-      <div class="criar-feira-container005">
-        <h1 class="criar-feira-text03">MarketBay</h1>
-      </div>
-    </div>
-  </div>
+  <Components.NavBar ShowFilter="false" />
   <EditForm Model="@feira" class="criar-feira-container007">
     <div class="criar-feira-container011">
       <div class="criar-feira-container012">
@@ -373,7 +342,7 @@
 
           .criar-feira-container005 {
             width: 420px;
-            height: 100px;
+            height: 100%;
             display: flex;
             align-self: flex-start;
             align-items: center;
@@ -1531,7 +1500,10 @@
         </style>
 
         @code {
-  Feira feira = new Feira();
+  private Feira feira = new Feira();
+
+  [CascadingParameter]
+  public Task<AuthenticationState> authState { get; set; }
 
   private List<Categoria> _categorias = new List<Categoria>();
 
@@ -1542,6 +1514,28 @@
 
   private async Task CreateFeira()
   {
-    await FeiraService.CreateFeira(this.feira);
+    if(this.feira.DataInicio > this.feira.DataFim)
+    {
+      await JS.InvokeVoidAsync("alert", "A Data Final não pode ser menor do que a data de inicio");
+      return;
+    }
+
+    var auth = await authState;
+    if(auth != null)
+    {
+      var id_string = auth.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1";
+      var id = Int32.Parse(id_string);
+      if(id != -1)
+      {
+        feira.FeiranteID = id;
+      }
+    }
+    var success = await FeiraService.CreateFeira(this.feira);
+    if(success)
+    {
+      await JS.InvokeVoidAsync("alert", "Feira criada com sucesso");
+      Nav.NavigateTo("/");      
+    }
+
   }
 }

@@ -10,49 +10,6 @@
 <AuthorizeView>
   <div class="por-produto-em-feira-container">
     <NavBar />
-    @* <div class="por-produto-em-feira-container01">
-      <div class="por-produto-em-feira-container02">
-        <div class="por-produto-em-feira-container03">
-          <div data-thq="thq-dropdown" class="por-produto-em-feira-thq-dropdown list-item">
-            <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle" href="/feiras">
-              <a href="/feiras">
-                <img alt="image" src="logo.png" class="por-produto-em-feira-image">
-              </a>
-            </div>
-            <ul data-thq="thq-dropdown-list" class="por-produto-em-feira-dropdown-list">
-              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown list-item">
-                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle1">
-                  <span class="por-produto-em-feira-text">Sobre nós</span>
-                </div>
-              </li>
-              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown1 list-item">
-                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle2">
-                  <span class="por-produto-em-feira-text01">Ajuda</span>
-                </div>
-              </li>
-              <li data-thq="thq-dropdown" class="por-produto-em-feira-dropdown2 list-item">
-                <div data-thq="thq-dropdown-toggle" class="por-produto-em-feira-dropdown-toggle3">
-                  <span class="por-produto-em-feira-text02">Definições</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="por-produto-em-feira-container04">
-        <div class="por-produto-em-feira-container05">
-          <button class="por-produto-em-feira-button button">
-            <span class="por-produto-em-feira-text03">
-              <span>Filter</span>
-              <br />
-            </span>
-          </button>
-        </div>
-        <div class="por-produto-em-feira-container06">
-          <input type="text" placeholder="Pesquisa" class="por-produto-em-feira-textinput input" />
-        </div>
-      </div>
-    </div> *@
     <div class="por-produto-em-feira-container07">
       <div class="por-produto-em-feira-container08">
         <h1 class="por-produto-em-feira-text06">
@@ -659,7 +616,6 @@
   .por-produto-em-feira-container26 {
     flex: 0 0 auto;
     width: 145px;
-    @* height: 192px; *@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
@@ -667,7 +623,6 @@
 
   .por-produto-em-feira-container27 {
     width: 100%;
-    @* height: 81px; *@
     display: flex;
     align-items: flex-end;
     justify-content: center;
@@ -1348,7 +1303,11 @@
 
     }
 
-    if (valido) await this.FeiraService.InscreveEmFeira(dto);
+    if (valido){
+      await this.FeiraService.InscreveEmFeira(dto);
+      await JS.InvokeVoidAsync("alert", "Inscrição na feira bem sucedida");
+      this.GoToFeira();
+    } 
     else await JS.InvokeVoidAsync("alert", "Existem produtos com preços e/ou quantidades inválidas");
 
   }
