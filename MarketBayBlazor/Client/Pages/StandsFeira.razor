@@ -47,8 +47,11 @@
           }
           else
           {
-            <h1 style="color: #0f8a82; width: 174px; height: 21px; font-size: 1em;">Total Faturado: <span
-            class="text-red">0</span></h1>
+            <h1 style="color: #0f8a82; width: 174px; height: 21px; font-size: 1em;">Total Faturado: 
+              <span class="text-red">
+                @(this.stands.Select(stand => stand.Vendas.Sum(venda => venda.Preco)).Sum())€
+              </span>
+            </h1>
           }
         }
         else
@@ -60,7 +63,7 @@
       </Authorized>
     </AuthorizeView>
   </div>
-  @if (AccountID == -1 || feira.FeiranteID != AccountID)
+  @if (feirante == false || feira.FeiranteID != AccountID)
   {
     <div style="display:flex; flex-wrap: wrap; justify-content: center;">
       @foreach (var stand in this.stands.Where(stand1 => stand1.ativo &&
@@ -89,8 +92,10 @@
       }
     </div>
   }
-  else
-  {
+  else if(feira.FeiranteID == AccountID)
+{
+  <AuthorizeView Roles="Feirante">
+    <Authorized>
     <div style="display:flex; flex-wrap: wrap; justify-content: center;">
       @foreach (var stand in this.stands.Where(stand1 => stand1.ativo &&
      stand1.Feirante.Conta.Nome.IndexOf(this.filterParam,
@@ -118,10 +123,10 @@
 
             <div class="organizador-gestao">
               <div style="width: 258px;">
-                <h1 style="color: white;">Vendeu:</h1>
+                <h1 style="color: white;">Faturou:</h1>
               </div>
               <div class="quantidade-vendeu">
-                <h1>0</h1>
+                <h1>@stand.Vendas.Sum(venda => venda.Preco)</h1>
               </div>
               <button class="button kick-button" @onclick="@(() => KickFeirante(stand))">Expulsar</button>
             </div>
@@ -129,6 +134,8 @@
         </div>
       }
     </div>
+    </Authorized>
+  </AuthorizeView>
   }
 </div>
 
@@ -1168,6 +1175,7 @@
   [CascadingParameter]
   public Task<AuthenticationState> authState { get; set; }
   private int AccountID = -1;
+  private bool feirante = false;
 
   [Parameter]
   public int ID { get; set; }
@@ -1205,6 +1213,8 @@
       if (id != -1)
       {
         this.AccountID = id;
+        if(auth.User.IsInRole("Feirante")) feirante = true;
+        Console.WriteLine("id = " + AccountID);
       }
     }
   }

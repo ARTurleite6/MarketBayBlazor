@@ -32,9 +32,11 @@
     </div>
     @if(!ShowCart)
     {
-    @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Quantidade > 0 && produto.Produto.Nome.IndexOf(this.filterParam,
+    @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam,
     StringComparison.OrdinalIgnoreCase) >= 0))
     {
+        @if(this.organizador || produto.Quantidade > 0)
+        {
         <div class="stand-container13">
             <div class="stand-container14">
                 <div class="stand-container15">
@@ -113,6 +115,7 @@
             </div>
 
         </div>
+        }
     }
     }
     else
@@ -1139,6 +1142,7 @@
     public int FeiraID { get; set; }
 
     public bool ShowCart { get; set; } = false;
+    private bool organizador = false;
 
     private Feira feira = new Feira();
 
@@ -1170,6 +1174,9 @@
             Console.WriteLine(stand.Feirante?.Conta.Nome);
         }
         this.cart = await Cart.Carrinho ?? new Carrinho();
+
+        this.organizador = await this.DonoStand();
+        Console.WriteLine("Sou organizador = " + this.organizador);
     }
 
     private bool firstRender = true;    
@@ -1258,6 +1265,20 @@
     private void GoToPay()
     {
         Navigator.NavigateTo($"/carrinhocompra/{this.stand.ID}");
+    }
+
+    private async Task<bool> DonoStand()
+    {
+        var auth = await authstate;
+        if(auth != null)
+        {
+            var id = Int32.Parse(auth.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1");
+            if(this.stand.FeiranteID == id)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

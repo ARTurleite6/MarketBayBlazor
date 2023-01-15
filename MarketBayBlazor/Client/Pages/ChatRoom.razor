@@ -1,6 +1,7 @@
 @page "/chatroom/{feiraid:int}/{standid:int}"
 @inject IStandService StandService
 @inject IFeiraService FeiraService
+@inject IJSRuntime JS
 @using System.Security.Claims
 @inject IPropostaService PropostaService
 @inject ICartService Cart
@@ -72,7 +73,7 @@
                         <AuthorizeView Roles="Cliente">
                             <Authorized>
                                 <div class="chat-room-container27">
-                                    <button class="chat-room-button1 button" @onclick="@(() => AdicionarCarrinho(proposta))">Resgatar Proposta</button>
+                                    <button class="chat-room-button1 button" @onclick="@(async () => await AdicionarCarrinho(proposta))">Resgatar Proposta</button>
                                 </div>
                             </Authorized>
                         </AuthorizeView>
@@ -1197,12 +1198,19 @@
         PropostaService.UpdateProposta(proposta);
     }
 
-    private void AdicionarCarrinho(Proposta proposta)
+    private async Task AdicionarCarrinho(Proposta proposta)
     {
         if(proposta.Produto != null)
         {
-            var carrinho = Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade, standID: StandID);
-            this.UpdateProposta(proposta, "Resgatada");
+            var res = await Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade, standID: StandID);
+            if(res)
+            {
+                this.UpdateProposta(proposta, "Resgatada");
+            }
+            else
+            {
+                await JS.InvokeVoidAsync("alert", "Produto não possui stock para resgatar proposta");
+            }
         }
     }
 

@@ -104,7 +104,7 @@
                                 }
                                 else
                                 {
-                                    <h4 style="align-self: center; margin-left: 10px">@feira.Stands.Count()/@feira.NumeroMaximoFeirantes</h4>
+                                    <h4 style="align-self: center; margin-left: 10px">@feira.Stands.Where(stand => stand.ativo).Count()/@feira.NumeroMaximoFeirantes</h4>
                                 }
                             </Authorized>
                         </AuthorizeView>

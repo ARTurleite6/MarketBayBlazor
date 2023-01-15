@@ -97,7 +97,7 @@
               <h1 class="page-text124">Total:</h1>
             </div>
             <div class="page-container109">
-              <h1 class="page-text125">@(this.carrinho.Produtos.Sum(produto => produto.Preco))€</h1>
+              <h1 class="page-text125">@(this.carrinho.Produtos.Sum(produto => produto.Quantidade * produto.Preco))€</h1>
             </div>
             <button class="button pay-button" type="submit" style="margin-left: 100px">Pagar</button>
           </div>
@@ -1981,7 +1981,7 @@
 
           var compra = new Compra()
           {
-            Preco = this.dados.Produtos.Sum(produto => produto.Preco),  
+            Preco = this.dados.Produtos.Sum(produto => produto.Quantidade * produto.Preco),  
             DataCompra = DateTime.Now,
             ClienteID = this.clienteID,
             StandFeiranteID = this.StandID,
