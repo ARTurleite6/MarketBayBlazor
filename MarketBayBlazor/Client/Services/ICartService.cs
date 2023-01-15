@@ -9,4 +9,6 @@ public interface ICartService
     Task<bool> AddProduto(Produto produto, decimal preco, int quantidade, int standID);
 
     Task ClearCarrinho(int StandID);
+
+    Task<Carrinho> RemoveCarrinho(LinhaCarrinho linha, int standID);
 }

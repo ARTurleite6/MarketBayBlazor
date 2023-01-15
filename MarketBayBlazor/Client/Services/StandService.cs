@@ -27,4 +27,9 @@ public class StandService : IStandService
         return await this._httpClient.GetFromJsonAsync<StandFeirante>($"api/stand/{ID}");
     }
 
+    public async Task<bool> UpdateProdutoStand(ProdutoStand produto)
+    {
+        var res = await this._httpClient.PutAsJsonAsync($"api/stand/updateproduto/{produto.ProdutoID}", produto);
+        return res.IsSuccessStatusCode;
+    }
 }

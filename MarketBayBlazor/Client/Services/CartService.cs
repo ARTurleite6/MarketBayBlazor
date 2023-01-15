@@ -41,4 +41,34 @@ public class CartService : ICartService
     {
         await this._localStorage.RemoveItemAsync($"carrinho{standID}");     
     }
+
+    public async Task<Carrinho> RemoveCarrinho(LinhaCarrinho linha, int standID)
+    {
+        var carrinho = await this._localStorage.GetItemAsync<Carrinho>($"carrinho{standID}");
+        if(carrinho != null)
+        {
+            int index = -1;
+            for(int i = 0; i < carrinho.Produtos.Count(); ++i)
+            {
+                var produto = carrinho.Produtos[i];
+                if(produto.Produto.ID == linha.Produto.ID && produto.Preco == linha.Preco && produto.Quantidade == linha.Quantidade)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if(index != -1)
+            {
+                carrinho.Produtos.RemoveAt(index);
+                var res = await this._http.PutAsJsonAsync($"api/stand/adicionaproduto/{standID}/{linha.Produto.ID}/{linha.Quantidade}", linha.Quantidade);
+                if(res.IsSuccessStatusCode)
+                {
+                    await this._localStorage.SetItemAsync<Carrinho>($"carrinho{standID}", carrinho);
+                }
+                return carrinho;
+            }
+            return carrinho;
+        }
+        return new Carrinho();
+    }
 }

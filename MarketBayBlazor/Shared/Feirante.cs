@@ -10,7 +10,7 @@ public class Feirante: IUser
     public int ID { get; set; }
     [MaxLength(9)]
     public string NIFempresarial { get; set; } = string.Empty;
-    [MaxLength(200)]
+    [MaxLength(2048)]
     public string Foto { get; set; } = string.Empty;
     public bool Organizador { get; set; } = false;
     

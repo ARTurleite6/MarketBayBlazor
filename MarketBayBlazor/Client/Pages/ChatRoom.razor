@@ -1202,7 +1202,7 @@
     {
         if(proposta.Produto != null)
         {
-            var res = await Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade, standID: StandID);
+            var res = await Cart.AddProduto(proposta.Produto, preco: proposta.Preco / 2.00M, quantidade: proposta.Quantidade, standID: StandID);
             if(res)
             {
                 this.UpdateProposta(proposta, "Resgatada");

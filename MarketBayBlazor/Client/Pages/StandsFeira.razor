@@ -74,14 +74,14 @@
           <div class="feira-container13">
             <div class="feira-container14" onclick="@(() => GoToStand(stand.ID))">
               <img class="feira-image1" alt="image"
-            src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=Mnw5MTMyMXwwfDF8c2VhcmNofDN8fGNvbXB1dGVyfGVufDB8fHx8MTY3MTY0ODk3Nw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=400">
+            src="@stand.Feirante.Foto">
             </div>
             <div class="feira-container15">
               <h1 class="feira-text08">@stand.Feirante.Conta.Nome</h1>
             </div>
           </div>
           <div class="feira-container16">
-            @foreach (var produto in stand.ProdutosStands)
+            @foreach (var produto in stand.ProdutosStands.Where(produto => produto.Quantidade > 0))
             {
               <div class="feira-container17">
                 <h1 class="feira-text09">@produto.Produto.Nome</h1>
@@ -113,7 +113,7 @@
               </div>
             </div>
             <div class="feira-container16">
-              @foreach (var produto in stand.ProdutosStands)
+              @foreach (var produto in stand.ProdutosStands.Where(produto => produto.Quantidade > 0))
               {
                 <div class="feira-container17">
                   <h1 class="feira-text09">@produto.Produto.Nome</h1>
@@ -126,7 +126,7 @@
                 <h1 style="color: white;">Faturou:</h1>
               </div>
               <div class="quantidade-vendeu">
-                <h1>@stand.Vendas.Sum(venda => venda.Preco)</h1>
+                <h1>@stand.Vendas.Sum(venda => venda.Preco)€</h1>
               </div>
               <button class="button kick-button" @onclick="@(() => KickFeirante(stand))">Expulsar</button>
             </div>
@@ -153,7 +153,7 @@
   }
 
   .quantidade-vendeu {
-    width: 65px;
+    width: auto;
     height: 38px;
     display: flex;
     margin-top: 16px;

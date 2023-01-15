@@ -12,9 +12,9 @@ public class Produto
     public int ID { get; set; }
     [MaxLength(50)]
     public string Nome { get; set; } = String.Empty;
-    [MaxLength(200)]
+    [MaxLength(2048)]
     public string Foto { get; set; } = String.Empty;
-    [MaxLength(250)]
+    [MaxLength(200)]
     public string Descricao { get; set; } = String.Empty;
     [Precision(10,2)]
     public decimal PrecoBase { get; set; }

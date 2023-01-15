@@ -98,3 +98,7 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   text-transform: none;
   text-decoration: none;
 }
+
+img {
+  object-fit: contain;
+}

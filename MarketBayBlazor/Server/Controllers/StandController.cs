@@ -80,6 +80,42 @@ namespace MarketBayBlazor.Server.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [HttpPut("adicionaproduto/{standid:int}/{produtoid:int}/{quantidade:int}")]
+        public async Task<ActionResult> AdicionaAoProduto(int standid, int produtoid, int quantidade)
+        {
+            if(!this._context.StandsFeirantes.Any(stand => stand.ID == standid))
+            {
+                return BadRequest("Não existe nenhum stand com este id");
+            }
+            var produto = this._context.ProdutosStands.Where(produtoStand => produtoStand.StandFeiranteID == standid).First(produtoStand => produtoStand.ProdutoID == produtoid);
+            if(produto == null)
+            {
+                return BadRequest("Este feirante não comercializa este produto");
+            }
+
+            produto.Quantidade += quantidade;
+            try {
+                await this._context.SaveChangesAsync();
+                return Ok();
+            } catch(DbUpdateException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPut("updateproduto/{produtoid:int}")]
+        public async Task<ActionResult> UpdateProduto(int produtoID, ProdutoStand produto)
+        {
+            this._context.ProdutosStands.Update(produto);
+            try {
+                await this._context.SaveChangesAsync();
+                return Ok();
+            } catch(DbUpdateException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
 

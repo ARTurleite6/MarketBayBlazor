@@ -6,5 +6,7 @@ namespace MarketBayBlazor.Client.Services
 
         public Task DesativaStand(StandFeirante stand);
 
+        public Task<bool> UpdateProdutoStand(ProdutoStand produto);
+
     }
 }
