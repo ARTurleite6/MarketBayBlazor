@@ -32,7 +32,7 @@
     </div>
     @if(!ShowCart)
     {
-    @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Produto.Nome.IndexOf(this.filterParam,
+    @foreach (var produto in this.stand.ProdutosStands.Where(produto => produto.Quantidade > 0 && produto.Produto.Nome.IndexOf(this.filterParam,
     StringComparison.OrdinalIgnoreCase) >= 0))
     {
         <div class="stand-container13">
@@ -60,7 +60,7 @@
                                 <div class="stand-container19">
                                     <h1 class="stand-text13">Quantidade:</h1>
                                 </div>
-                                        <input class="stand-container20" type="number" id="@($"quantidade-produto-{produto.ProdutoID}")" style="width: 140px; font-size:25px; font-weight: 700; text-align: center" min="0" value="0"/>
+                                        <input class="stand-container20" type="number" id="@($"quantidade-produto-{produto.ProdutoID}")" style="width: 140px; font-size:25px; font-weight: 700; text-align: center" min="0" value="0" max="@produto.Quantidade"/>
                             </div>
                         </AuthorizeView>
                         <AuthorizeView Roles="Feirante">
@@ -75,28 +75,31 @@
                         </AuthorizeView>
                     </div>
                     <div class="stand-container21">
-                        <AuthorizeView Roles="Cliente">
-                            <Authorized>
-                            <div class="stand-container22">
-                                <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
-                            </div>
-                            <div class="stand-container23">
-                                <button class="stand-button2 button"
-                                @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
-                            </div>
-                            </Authorized>
-                            <NotAuthorized>
-                                    @if (!context.User.Identity?.IsAuthenticated ?? false || context.User.IsInRole("Cliente"))
-                                    {
-                                            <div class="stand-container22">
-                                                <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
-                                            </div>
-                                            <div class="stand-container23">
-                                                <button class="stand-button2 button" @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
-                                            </div>
-                                    }
-                            </NotAuthorized>
-                        </AuthorizeView>
+                        @if(feira.DataInicio <= DateTime.Now)
+                        {
+                            <AuthorizeView Roles="Cliente">
+                                <Authorized>
+                                <div class="stand-container22">
+                                    <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
+                                </div>
+                                <div class="stand-container23">
+                                    <button class="stand-button2 button"
+                                    @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
+                                </div>
+                                </Authorized>
+                                <NotAuthorized>
+                                        @if (!context.User.Identity?.IsAuthenticated ?? false || context.User.IsInRole("Cliente"))
+                                        {
+                                                <div class="stand-container22">
+                                                    <button class="stand-button1 button" @onclick="@(() => AddToCart(produto))">Adicionar ao Carrinho</button>
+                                                </div>
+                                                <div class="stand-container23">
+                                                    <button class="stand-button2 button" @onclick="@(() => GoToNegotiation(@produto.ProdutoID))">Regatear</button>
+                                                </div>
+                                        }
+                                </NotAuthorized>
+                            </AuthorizeView>
+                        }
                         <AuthorizeView Roles="Feirante">
                             @if(stand.FeiranteID == Int32.Parse(context.User.FindFirst(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value ?? "-1"))
                             {
@@ -163,10 +166,7 @@
 </div>
 <div class="stand-container24">
     <AuthorizeView Roles="Cliente">
-        @if(this.ShowCart)
-        {
-            <button class="button">Pagar</button>
-        }
+        <button class="button stand-button1" style="width: 90px;" @onclick="@(() => GoToPay())">Pagar</button>
     </AuthorizeView>
 
     <button class="button stand-container25" @onclick="@(() => GoToChatRoom())">
@@ -1231,18 +1231,33 @@
         {
         if (this.module is not null)
         {
+            Console.WriteLine("id do produto " + produto.ProdutoID);
             int quantidade = await JS.InvokeAsync<int>("getProductQuantity", produto.ProdutoID);
             if (quantidade > 0)
             {
-                await Cart.AddProduto(produto.Produto, preco: produto.Preco, quantidade);
-                await JS.InvokeVoidAsync("alert", "Produto adicionado com sucesso ao carrinho");
-                this.cart = await Cart.Carrinho ?? new Carrinho();
+                var res = await Cart.AddProduto(produto.Produto, preco: produto.Preco, quantidade, stand.ID);
+                if(res)
+                {
+                        await JS.InvokeVoidAsync("alert", "Produto adicionado com sucesso ao carrinho");
+                        this.cart = await Cart.GetCarrinho(this.stand.ID) ?? new Carrinho();
+                        produto.Quantidade -= quantidade;
+                        StateHasChanged();
+                }
+                else
+                {
+                    await JS.InvokeVoidAsync("alert", "Erro a adicionar produto ao carrinho");
+                }
             }
             else{
                 await JS.InvokeVoidAsync("alert", "Deve incluir alguma quantidade para adicionar produto ao carrinho");
             }
         }
         }
+    }
+
+    private void GoToPay()
+    {
+        Navigator.NavigateTo($"/carrinhocompra/{this.stand.ID}");
     }
 
 }

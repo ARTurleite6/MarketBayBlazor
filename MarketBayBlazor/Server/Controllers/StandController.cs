@@ -51,6 +51,35 @@ namespace MarketBayBlazor.Server.Controllers
             await this._context.SaveChangesAsync();
             return Ok();
         }
+
+        [HttpPut("reservaproduto/{standid:int}/{produtoid:int}/{quantidade:int}")]
+        public async Task<ActionResult> ReservaProduto(int standid, int produtoid, int quantidade)
+        {
+            if(!this._context.StandsFeirantes.Any(stand => stand.ID == standid))
+            {
+                return BadRequest("Não existe nenhum stand com este id");
+            }
+            var produto = this._context.ProdutosStands.Where(produtoStand => produtoStand.StandFeiranteID == standid).First(produtoStand => produtoStand.ProdutoID == produtoid);
+            if(produto == null)
+            {
+                return BadRequest("Este feirante não comercializa este produto");
+            }
+            if(produto.Quantidade - quantidade < 0)
+            {
+                return BadRequest("O feirante não possui esta quantidade em stock");
+            } 
+
+            produto.Quantidade -= quantidade;
+            Console.Write(quantidade);
+            Console.WriteLine(produto.Quantidade);
+            try {
+                this._context.SaveChanges();
+                return Ok();
+            } catch(DbUpdateException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
 

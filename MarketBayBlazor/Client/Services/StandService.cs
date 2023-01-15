@@ -26,4 +26,5 @@ public class StandService : IStandService
     {
         return await this._httpClient.GetFromJsonAsync<StandFeirante>($"api/stand/{ID}");
     }
+
 }

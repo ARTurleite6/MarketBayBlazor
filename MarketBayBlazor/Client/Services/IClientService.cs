@@ -11,6 +11,8 @@ namespace MarketBayBlazor.Client.Services
         public Task RegistaCliente(ClienteEntry cliente);
 
         public Task<bool> UpdateCliente(Cliente cliente);
+
+        public Task<bool> RegistaCompra(Compra compra);
     }
 }
 

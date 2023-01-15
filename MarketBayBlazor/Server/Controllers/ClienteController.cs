@@ -87,6 +87,28 @@ namespace MarketBayBlazor.Server.Controllers
             return Ok(cliente);
     	}
 
+        [HttpPost("compra")]
+        public async Task<ActionResult> RegistaCompra(Compra compra)
+        {
+            if(!this._context.StandsFeirantes.Any(stand => stand.ID == compra.StandFeiranteID))
+            {
+                return BadRequest("Não existe nenhum stand feirante com o id passado");
+            }
+            if(!this._context.Clientes.Any(cliente => cliente.ID == compra.ClienteID))
+            {
+                return BadRequest("Não existe nenhum cliente com o id passado");
+            }
+
+            this._context.Compras.Add(compra);
+            try {
+                await this._context.SaveChangesAsync();
+                return Ok();
+            } catch(DbUpdateException ex)
+            {
+                return BadRequest("Erro a dar o registo à compra");
+            }
+        }
+
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using(var hmac = new HMACSHA512())

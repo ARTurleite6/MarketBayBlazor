@@ -27,6 +27,12 @@ namespace MarketBayBlazor.Client.Services
             await _httpClient.PostAsJsonAsync("api/Cliente", cliente);
         }
 
+        public async Task<bool> RegistaCompra(Compra compra)
+        {
+            var res = await _httpClient.PostAsJsonAsync("api/cliente/compra", compra);
+            return res.IsSuccessStatusCode;
+        }
+
         public async Task<bool> UpdateCliente(Cliente cliente)
         {
             var res = await this._httpClient.PutAsJsonAsync("api/cliente", cliente);

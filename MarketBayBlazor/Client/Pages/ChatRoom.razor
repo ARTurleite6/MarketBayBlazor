@@ -1201,7 +1201,7 @@
     {
         if(proposta.Produto != null)
         {
-            var carrinho = Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade);
+            var carrinho = Cart.AddProduto(proposta.Produto, preco: proposta.Preco, quantidade: proposta.Quantidade, standID: StandID);
             this.UpdateProposta(proposta, "Resgatada");
         }
     }

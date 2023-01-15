@@ -20,7 +20,11 @@ function getProductQuantity(produtoID) {
     {
         return -1;
     }
-    else return quantidade.value;
+    else {
+        const value = parseInt(quantidade.value);
+        console.log(typeof(value))
+        return value;
+    }
 }
 
 function estaDestacado(produtoID) {

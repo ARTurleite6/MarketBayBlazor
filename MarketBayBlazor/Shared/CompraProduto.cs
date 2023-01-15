@@ -11,7 +11,7 @@ public class CompraProduto
     public int CompraID { get; set; }
     [ForeignKey("Produto")]
     public int ProdutoID { get; set; }
-    public virtual Produto Produto { get; set; }
+    public virtual Produto? Produto { get; set; }
     
     public int Quantidade { get; set; }
     [Precision(10, 2)]
