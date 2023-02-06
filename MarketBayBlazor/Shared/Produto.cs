@@ -21,5 +21,5 @@ public class Produto
     
     [ForeignKey("Categoria")]
     public int CategoriaID { get; set; }
-    public virtual Categoria Categoria { get; set; }
+    public virtual Categoria? Categoria { get; set; }
 }
